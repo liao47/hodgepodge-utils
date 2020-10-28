@@ -2,6 +2,7 @@ package com.liao47.validator;
 
 import com.liao47.able.EnumPatternAble;
 import com.liao47.annotation.EnumPattern;
+import com.liao47.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.ConstraintValidator;
@@ -12,14 +13,14 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * 枚举限定校验器
+ * 枚举限制校验器
  * @author liao47
  * @date 2020/10/27 15:13
  */
 public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Object> {
 
     /**
-     * 限定值
+     * 限制值
      */
     private Set<Object> values;
 
@@ -43,7 +44,7 @@ public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Ob
                     values.add(method.invoke(anEnum));
                 }
             } catch (Exception e) {
-                throw new IllegalArgumentException(String.format("Fail to invoke filed[%s] getter in [%s]",
+                throw new CustomException(String.format("Fail to invoke filed[%s] getter in [%s]",
                         constraintAnnotation.fieldName(), enumClass.getCanonicalName()), e);
             }
         }

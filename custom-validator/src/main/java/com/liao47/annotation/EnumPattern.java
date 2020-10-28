@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * 枚举限定校验
+ * 枚举限制校验
  * @author liao47
  * @date 2020/10/27 15:12
  */
@@ -39,7 +39,7 @@ public @interface EnumPattern {
     String fieldName() default "";
 
     /**
-     * 是否忽略枚举限定校验能力接口<br>
+     * 是否忽略枚举限制校验能力接口<br>
      *     是否忽略枚举实现的com.liao47.able.EnumPatternAble接口，强制使用fieldName控制获取值
      * @return
      */

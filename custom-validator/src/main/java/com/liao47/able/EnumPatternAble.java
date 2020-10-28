@@ -1,7 +1,7 @@
 package com.liao47.able;
 
 /**
- * 枚举限定校验能力
+ * 枚举限制校验能力
  * @author liao47
  * @date 2020/10/27 15:11
  */

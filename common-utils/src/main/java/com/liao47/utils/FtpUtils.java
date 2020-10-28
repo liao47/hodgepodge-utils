@@ -1,7 +1,5 @@
 package com.liao47.utils;
 
-
-
 import com.liao47.config.FtpConfig;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,7 @@ import java.util.List;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FtpUtil {
+public class FtpUtils {
     /**
      * FTP文件路径分隔符
      */
