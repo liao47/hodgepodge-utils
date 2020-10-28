@@ -1,6 +1,6 @@
 package com.liao47.utils;
 
-import com.liao47.exception.CustomException;
+import com.liao47.common.exception.CustomException;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

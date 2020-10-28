@@ -1,8 +1,8 @@
 package com.liao47.validator;
 
-import com.liao47.able.EnumPatternAble;
-import com.liao47.annotation.EnumPattern;
-import com.liao47.exception.CustomException;
+import com.liao47.validator.able.EnumPatternAble;
+import com.liao47.validator.annotation.EnumPattern;
+import com.liao47.common.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.ConstraintValidator;

@@ -1,4 +1,4 @@
-package com.liao47.exception;
+package com.liao47.common.exception;
 
 /**
  * 自定义异常类

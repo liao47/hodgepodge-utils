@@ -1,7 +1,7 @@
-package com.liao47.utils;
+package com.liao47.apt.utils;
 
+import com.liao47.common.constants.OrderConstants;
 import com.sun.tools.javac.tree.JCTree;
-import com.liao47.constants.OrderConstants;
 
 import java.util.Comparator;
 import java.util.HashMap;

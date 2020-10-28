@@ -1,9 +1,9 @@
-package com.liao47.processor;
+package com.liao47.apt.processor;
 
-import com.liao47.annotation.Mask;
-import com.liao47.annotation.ToString;
-import com.liao47.utils.Binaries;
-import com.liao47.utils.VarComparator;
+import com.liao47.apt.annotation.Mask;
+import com.liao47.apt.annotation.ToString;
+import com.liao47.apt.utils.Binaries;
+import com.liao47.apt.utils.VarComparator;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.api.JavacTrees;
 import com.sun.tools.javac.code.Flags;
@@ -339,7 +339,7 @@ public class ToStringProcessor extends AbstractProcessor {
             value = treeMaker.Apply(List.of(memberAccess(Object.class.getCanonicalName()),
                     memberAccess(Integer.class.getCanonicalName()), memberAccess(Integer.class.getCanonicalName()),
                     memberAccess(String.class.getCanonicalName())),
-                    memberAccess("com.liao47.common.com.liao47.utils.MaskUtils.mask"),
+                    memberAccess("com.liao47.apt.utils.MaskUtils.mask"),
                     List.of(value, treeMaker.Literal(mask.prefix()), treeMaker.Literal(mask.suffix()), treeMaker
                             .Literal(String.valueOf(mask.maskChar()))));
         }

@@ -1,4 +1,4 @@
-package com.liao47.able;
+package com.liao47.validator.able;
 
 /**
  * 枚举限制校验能力

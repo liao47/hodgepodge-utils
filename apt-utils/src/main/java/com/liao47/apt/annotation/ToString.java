@@ -1,6 +1,6 @@
-package com.liao47.annotation;
+package com.liao47.apt.annotation;
 
-import com.liao47.enums.Brackets;
+import com.liao47.common.enums.Brackets;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -65,7 +65,7 @@ public @interface ToString {
     /**
      * 排序字段<br>
      *     layer = true 分层的情况下，只对本类字段进行排序，不会影响父类toString
-     *     com.liao47.constants.OrderConstants
+     *     com.liao47.common.constants.OrderConstants
      *     常量指定不在列表内其他字段的排序位置和排序方式，填写多个常量以第一个为准，其他忽略，例：
      *         类中包含字段：c, a, b, y, x，则：orders =
      *         {"x", OrderConstants.DEFAULT, "y"} → {"x", "c", "a", "b", "y"}

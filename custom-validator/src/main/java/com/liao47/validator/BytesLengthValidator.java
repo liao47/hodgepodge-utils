@@ -1,6 +1,6 @@
 package com.liao47.validator;
 
-import com.liao47.annotation.BytesLength;
+import com.liao47.validator.annotation.BytesLength;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

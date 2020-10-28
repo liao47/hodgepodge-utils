@@ -1,4 +1,4 @@
-package com.liao47.constants;
+package com.liao47.common.constants;
 
 /**
  * 排序常量值

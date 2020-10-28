@@ -1,4 +1,4 @@
-package com.liao47.annotation;
+package com.liao47.apt.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

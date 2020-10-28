@@ -1,4 +1,4 @@
-package com.liao47.utils;
+package com.liao47.apt.utils;
 
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeMaker;

@@ -1,4 +1,4 @@
-package com.liao47.utils;
+package com.liao47.apt.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

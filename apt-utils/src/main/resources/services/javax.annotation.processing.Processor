@@ -1,1 +1,1 @@
-com.liao47.processor.ToStringProcessor
+com.liao47.apt.processor.ToStringProcessor

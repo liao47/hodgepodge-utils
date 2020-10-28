@@ -10,20 +10,25 @@
         <relativePath>../utils-parent</relativePath>
     </parent>
 
-    <artifactId>apt-utils</artifactId>
+    <artifactId>common</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.liao47</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>tools</artifactId>
-            <version>${runtime.version}</version>
-            <scope>system</scope>
-            <systemPath>${java.home}/../lib/tools.jar</systemPath>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

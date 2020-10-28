@@ -3,6 +3,8 @@
 > 大杂烩工具类
 # utils-parent
 > 父pom
+# common
+> 公共包
 # apt-utils
 > annotation processing tool utils  
 > 注解处理器，在编译期修改语法树的工具类
@@ -17,7 +19,7 @@
 >> * brackets 括号
 >> * orders 排序字段  
 layer = true 分层的情况下，只对本类字段进行排序，不会影响父类toString；  
-com.liao47.constants.OrderConstants常量指定不在列表内其他字段的排序位置和排序方式，填写多个常量以第一个为准，其他忽略，例：  
+com.liao47.common.constants.OrderConstants常量指定不在列表内其他字段的排序位置和排序方式，填写多个常量以第一个为准，其他忽略，例：  
 类中包含字段：c, a, b, y, x，则：orders =  
 {"x", OrderConstants.DEFAULT, "y"} → {"x", "c", "a", "b", "y"}  
 {OrderConstants.ASC, "x", "y"} → {"a", "b", "c", "x", "y"}  
