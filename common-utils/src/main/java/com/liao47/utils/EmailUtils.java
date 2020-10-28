@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 邮件发送工具类
@@ -21,13 +22,16 @@ import java.util.*;
 @Slf4j
 @Getter
 public class EmailUtils {
+
+	private static final Map<Properties, EmailUtils> INSTANCES = new ConcurrentHashMap<>();
+
 	private final Properties properties;
 
 	private final Session session;
 
 	private final ThreadLocal<Map<Message.RecipientType, List<String>>> recipients;
 
-	public EmailUtils(Properties properties) {
+	private EmailUtils(Properties properties) {
 		this.properties = properties;
 		this.recipients = new ThreadLocal<>();
 
@@ -42,6 +46,15 @@ public class EmailUtils {
 	}
 
 	/**
+	 * 通过配置获取实例
+	 * @param properties
+	 * @return
+	 */
+	public static EmailUtils getInstance(Properties properties) {
+		return INSTANCES.computeIfAbsent(properties, s -> new EmailUtils(properties));
+	}
+
+	/**
 	 * 通过配置路径获取实例
 	 * @param configPath
 	 * @return
@@ -51,7 +64,7 @@ public class EmailUtils {
 			InputStream in = EmailUtils.class.getResourceAsStream(configPath);
 			Properties properties = new Properties();
 			properties.load(in);
-			return new EmailUtils(properties);
+			return getInstance(properties);
 		} catch (IOException e) {
 			log.error("Get EMailUtil instance error, cause:", e);
 			throw new CustomException("Get EMailUtil instance failure", e);
@@ -61,17 +74,17 @@ public class EmailUtils {
 	/**
 	 * 添加接收者
 	 * @param type
-	 * @param recipients
+	 * @param recipientArr
 	 * @return
 	 */
-	public EmailUtils addRecipients(Message.RecipientType type, String... recipients) {
+	public EmailUtils addRecipients(Message.RecipientType type, String... recipientArr) {
 		Map<Message.RecipientType, List<String>> map = this.recipients.get();
 		if (map == null) {
 			map = new HashMap<>(3);
 			this.recipients.set(map);
 		}
 		List<String> list = map.computeIfAbsent(type, s -> new ArrayList<>());
-		list.addAll(Arrays.asList(recipients));
+		list.addAll(Arrays.asList(recipientArr));
 		return this;
 	}
 
@@ -81,8 +94,8 @@ public class EmailUtils {
 	 * @param content
 	 */
 	public void send(String title, String content) {
-		Map<Message.RecipientType, List<String>> recipientMap = this.recipients.get();
-		this.recipients.remove();
+		Map<Message.RecipientType, List<String>> recipientMap = recipients.get();
+		recipients.remove();
 		if (recipientMap == null || recipientMap.isEmpty()) {
 			throw new CustomException("Recipients is empty");
 		}
