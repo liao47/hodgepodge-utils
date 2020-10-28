@@ -120,7 +120,6 @@ public class EmailUtils {
 			Transport.send(message);
 			log.info("Send email [{}] successfully", title);
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error("Send email [{}] error, cause:", title, e);
 		}
 	}
