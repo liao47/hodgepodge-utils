@@ -123,11 +123,4 @@ public class EmailUtils {
 			log.error("Send email [{}] error, cause:", title, e);
 		}
 	}
-
-	public static void main(String[] args) {
-		EmailUtils.getInstance("/email.properties")
-				.addRecipients(Message.RecipientType.TO, "liao647@foxmail.com")
-				.addRecipients(Message.RecipientType.CC, "liao_47@163.com")
-				.send("Hello", "Hello, This is a test mail");
-	}
 }

@@ -11,10 +11,15 @@
     <description>大杂烩工具类</description>
 
     <modules>
+        <module>../common</module>
         <module>../apt-utils</module>
         <module>../custom-validator</module>
         <module>../common-utils</module>
     </modules>
+
+    <properties>
+        <runtime.version>1.8</runtime.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -36,7 +41,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>RELEASE</version>
+                <version>4.13.1</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -50,10 +55,23 @@
                 <version>3.8.1</version>
                 <configuration>
                     <skip>true</skip>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${runtime.version}</source>
+                    <target>${runtime.version}</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
