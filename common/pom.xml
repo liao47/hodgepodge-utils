@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.liao47</groupId>
         <artifactId>hodgepodge-utils</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../utils-parent</relativePath>
     </parent>
 
