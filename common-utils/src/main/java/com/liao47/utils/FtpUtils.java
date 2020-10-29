@@ -142,38 +142,15 @@ public class FtpUtils {
     }
 
     /**
-     * 上传文件
-     * @param ftpClient
-     * @param remoteDir
-     * @param localDir
-     * @param fileName
-     * @return
-     */
-    public static boolean upload(FTPClient ftpClient, String remoteDir, String localDir, String fileName) {
-        if (ftpClient == null) {
-            return false;
-        }
-
-        try (InputStream is = new FileInputStream(localDir + File.separator + fileName)) {
-            Boolean success = ftpClient.storeFile(fileName, is);
-            log.info("Upload file[{}{}{}] result:[success:{}]", remoteDir, SEPARATOR, fileName, success);
-            return true;
-        } catch (IOException e) {
-            log.error("Upload file[{}{}{}] error, cause:", remoteDir, SEPARATOR, fileName, e);
-        }
-        return false;
-    }
-
-    /**
      * 上传多个文件
      *
      * @param ftpConfig
      * @param fileNames
      * @return 成功的记录
      */
-    public static List<String> batchUpload(FtpConfig ftpConfig, List<String> fileNames) {
+    public static List<String> batchUpload(FtpConfig ftpConfig, String... fileNames) {
         FTPClient ftpClient = connect(ftpConfig);
-        if (ftpClient == null) {
+        if (ftpClient == null || fileNames == null || fileNames.length == 0) {
             return Collections.emptyList();
         }
 
@@ -185,7 +162,7 @@ public class FtpUtils {
             }
 
             for (String fileName : fileNames) {
-                if (upload(ftpClient, ftpConfig.getFtpDir(), ftpConfig.getLocalDir(), fileName)) {
+                if (upload(ftpClient, ftpConfig.getLocalDir(), fileName)) {
                     successfulList.add(fileName);
                 }
             }
@@ -196,6 +173,27 @@ public class FtpUtils {
             disconnect(ftpClient);
         }
         return successfulList;
+    }
+
+    /**
+     * 上传文件
+     * @param ftpClient
+     * @param localDir
+     * @param fileName
+     * @return
+     */
+    private static boolean upload(FTPClient ftpClient, String localDir, String fileName) {
+        if (ftpClient == null) {
+            return false;
+        }
+        try (InputStream is = new FileInputStream(StringUtils.trimToEmpty(localDir) + File.separator + fileName)) {
+            Boolean success = ftpClient.storeFile(fileName, is);
+            log.info("Upload file[{}] result:[success:{}]", fileName, success);
+            return true;
+        } catch (IOException e) {
+            log.error("Upload file[{}] error, cause:", fileName, e);
+        }
+        return false;
     }
 
     /**

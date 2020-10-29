@@ -1,7 +1,14 @@
 package com.liao47.utils.config;
 
+import com.liao47.common.constants.FtpKeyConstants;
+import com.liao47.common.exception.CustomException;
+import com.liao47.utils.EmailUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * FTP配置
@@ -54,6 +61,40 @@ public class FtpConfig {
 
     public static FtpConfig create() {
         return new FtpConfig();
+    }
+
+    /**
+     * 通过Properties获取配置
+     * @param properties
+     * @return
+     */
+    public static FtpConfig of(Properties properties) {
+        return create()
+                .hostname(properties.getProperty(FtpKeyConstants.HOSTNAME))
+                .port(Integer.parseInt(properties.getProperty(FtpKeyConstants.PORT)))
+                .username(properties.getProperty(FtpKeyConstants.USERNAME))
+                .password(properties.getProperty(FtpKeyConstants.PASSWORD))
+                .connectTimeout(Integer.parseInt(properties.getProperty(FtpKeyConstants.CONNECT_TIMEOUT)))
+                .encoding(properties.getProperty(FtpKeyConstants.ENCODING))
+                .ftpDir(properties.getProperty(FtpKeyConstants.FTP_DIR))
+                .localDir(properties.getProperty(FtpKeyConstants.LOCAL_DIR));
+    }
+
+    /**
+     * 通过Properties路径获取配置
+     * @param configPath
+     * @return
+     */
+    public static FtpConfig of(String configPath) {
+        try {
+            InputStream in = EmailUtils.class.getResourceAsStream(configPath);
+            Properties properties = new Properties();
+            properties.load(in);
+            return of(properties);
+        } catch (IOException e) {
+            log.error("Get FtpConfig error, cause:", e);
+            throw new CustomException("Get FtpConfig failure", e);
+        }
     }
 
     public FtpConfig hostname(String hostname) {
