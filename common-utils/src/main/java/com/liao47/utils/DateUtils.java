@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -36,6 +34,15 @@ public class DateUtils {
     }
 
     /**
+     * timestamp to LocalDateTime
+     * @param timestamp
+     * @return
+     */
+    public static LocalDateTime toLocalDateTime(long timestamp) {
+        return Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    /**
      * Date to LocalDate
      * @param date
      * @return
@@ -45,6 +52,15 @@ public class DateUtils {
             return null;
         }
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * timestamp to LocalDate
+     * @param timestamp
+     * @return
+     */
+    public static LocalDate toLocalDate(long timestamp) {
+        return Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     /**
@@ -69,6 +85,24 @@ public class DateUtils {
             return null;
         }
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * Get timestamp
+     * @param localDateTime
+     * @return
+     */
+    public static long getTime(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    }
+
+    /**
+     * Get timestamp
+     * @param localDate
+     * @return
+     */
+    public static long getTime(LocalDate localDate) {
+        return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }
 
     /**
@@ -126,7 +160,7 @@ public class DateUtils {
         if (StringUtils.isEmpty(pattern)) {
             return StringUtils.EMPTY;
         }
-        return localDate.format(DateTimeFormatter.ofPattern(pattern));
+        return LocalDateTime.of(localDate, LocalTime.MIN).format(DateTimeFormatter.ofPattern(pattern));
     }
 
     /**
