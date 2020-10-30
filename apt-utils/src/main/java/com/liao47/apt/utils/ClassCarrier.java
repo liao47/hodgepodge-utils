@@ -19,6 +19,7 @@ public class ClassCarrier {
 
     /**
      * 类搬运
+     * 编译时可将类拷贝到工程下，防止工程对外提供包时无依赖报错
      * @param tClass
      * @return
      */
