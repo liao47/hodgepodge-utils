@@ -12,13 +12,17 @@ public class MaskUtils {
 
     /**
      * Mask String by maskStr
-     * @param str
+     * @param obj
      * @param prefix
      * @param suffix
      * @param maskStr
      * @return
      */
-    public static String mask(String str, int prefix, int suffix, String maskStr) {
+    public static String mask(Object obj, int prefix, int suffix, String maskStr) {
+        if (obj == null) {
+            return null;
+        }
+        String str = obj.toString();
         try {
             if (StringUtils.isEmpty(str) || prefix + suffix >= str.length()) {
                 return str;
@@ -35,63 +39,5 @@ public class MaskUtils {
         } catch (Exception e) {
             return str;
         }
-    }
-
-    /**
-     * Mask String by maskChar
-     * @param str
-     * @param prefix
-     * @param suffix
-     * @param maskChar
-     * @return
-     */
-    public static String mask(String str, int prefix, int suffix, char maskChar) {
-        return mask(str, prefix, suffix, String.valueOf(maskChar));
-    }
-
-    /**
-     * Mask String by '*'
-     * @param str
-     * @param prefix
-     * @param suffix
-     * @return
-     */
-    public static String mask(String str, int prefix, int suffix) {
-        return mask(str, prefix, suffix, '*');
-    }
-
-    /**
-     * Mask Object by maskStr
-     * @param obj
-     * @param prefix
-     * @param suffix
-     * @param maskStr
-     * @return
-     */
-    public static String mask(Object obj, int prefix, int suffix, String maskStr) {
-        return obj == null ? null : mask(obj.toString(), prefix, suffix, maskStr);
-    }
-
-    /**
-     * Mask Object by maskChar
-     * @param obj
-     * @param prefix
-     * @param suffix
-     * @param maskChar
-     * @return
-     */
-    public static String mask(Object obj, int prefix, int suffix, char maskChar) {
-        return mask(obj, prefix, suffix, String.valueOf(maskChar));
-    }
-
-    /**
-     * Mask Object by '*'
-     * @param obj
-     * @param prefix
-     * @param suffix
-     * @return
-     */
-    public static String mask(Object obj, int prefix, int suffix) {
-        return mask(obj, prefix, suffix, '*');
     }
 }

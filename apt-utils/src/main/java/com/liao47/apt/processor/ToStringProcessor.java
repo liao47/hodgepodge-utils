@@ -3,6 +3,8 @@ package com.liao47.apt.processor;
 import com.liao47.apt.annotation.Mask;
 import com.liao47.apt.annotation.ToString;
 import com.liao47.apt.utils.Binaries;
+import com.liao47.apt.utils.ClassCarrier;
+import com.liao47.apt.utils.MaskUtils;
 import com.liao47.apt.utils.VarComparator;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.api.JavacTrees;
@@ -281,6 +283,14 @@ public class ToStringProcessor extends AbstractProcessor {
                 javax.lang.model.element.Name  enclosingName = ((TypeElement) enclosingElement).getQualifiedName();
                 Map<String, Mask> map = maskMap.computeIfAbsent(enclosingName, k -> new HashMap<>());
                 map.put(element.getSimpleName().toString(), element.getAnnotation(Mask.class));
+            }
+        }
+
+        //编译时将MaskUtils拷贝到工程下，防止工程对外提供包时无依赖报错
+        if (!maskMap.isEmpty()) {
+            String msg = ClassCarrier.carryClass(MaskUtils.class);
+            if (StringUtils.isNotEmpty(msg)) {
+                messager.printMessage(Diagnostic.Kind.WARNING, msg);
             }
         }
         return maskMap;
