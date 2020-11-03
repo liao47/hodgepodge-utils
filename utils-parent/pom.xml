@@ -19,6 +19,7 @@
     </modules>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <runtime.version>1.8</runtime.version>
     </properties>
 
