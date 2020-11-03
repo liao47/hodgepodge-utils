@@ -29,6 +29,22 @@ public class HandyUtils {
     }
 
     /**
+     * 不抛异常调用
+     * @param t
+     * @param function
+     * @param <T>
+     * @param <R>
+     * @return
+     */
+    public static <T, R> R nonEx(T t, Function<T, R> function) {
+        try {
+            return function.apply(t);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
      * 如果值为null，则返回默认值
      * @param t
      * @param defaultVal

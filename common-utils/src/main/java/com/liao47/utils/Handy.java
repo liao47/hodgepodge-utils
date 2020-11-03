@@ -37,6 +37,16 @@ public class Handy<T> {
     }
 
     /**
+     * 不抛异常调用
+     * @param function
+     * @param <R>
+     * @return
+     */
+    public <R> R nonEx(Function<T, R> function) {
+        return HandyUtils.nonEx(this.payload, function);
+    }
+
+    /**
      * 如果值为null，则返回默认值
      * @param defaultVal
      * @return

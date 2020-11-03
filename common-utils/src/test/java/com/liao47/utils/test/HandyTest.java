@@ -20,16 +20,19 @@ public class HandyTest {
         Handy<ClassA> handy = Handy.of(a);
         String name = handy.nonNPE(t -> t.getB().getName().trim());
         Long amount = handy.nonNPE(ClassA::getFieldLong);
-        System.out.println("1. " + name);
-        System.out.println("2. " + amount);
+        System.out.println(name);
+        System.out.println(amount);
 
         a.setB(null);
         name = HandyUtils.nonNPE(a, t -> t.getB().getName().trim());
-        System.out.println("3. " + name);
+        System.out.println("-------------------------------");
+        System.out.println(name);
+        System.out.println((String) handy.nonEx(t -> t.getB().getName().replace(".", "")));
 
-        System.out.println("4. " + HandyUtils.defaultIfNull(name, "IsNull"));
-        System.out.println("5. " + handy.defaultIfEmpty(ClassA::getFieldStr, "Empty"));
-        System.out.println("6. " + Handy.of((ClassA) null).nonNPE(t -> t.getB().getName().trim()));
+        System.out.println("-------------------------------");
+        System.out.println(HandyUtils.defaultIfNull(name, "IsNull"));
+        System.out.println(handy.defaultIfEmpty(ClassA::getFieldStr, "Empty"));
+        System.out.println((String) Handy.of((ClassA) null).nonNPE(t -> t.getB().getName().trim()));
 
         Assert.assertNotNull(handy.nonNPE(t -> t.getFieldStr().trim()));
     }
