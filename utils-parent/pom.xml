@@ -12,9 +12,10 @@
 
     <modules>
         <module>../common</module>
+        <module>../common-utils</module>
         <module>../apt-utils</module>
         <module>../custom-validator</module>
-        <module>../common-utils</module>
+        <module>../extra-utils</module>
     </modules>
 
     <properties>
