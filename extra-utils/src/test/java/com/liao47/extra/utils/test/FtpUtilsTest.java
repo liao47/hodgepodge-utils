@@ -1,7 +1,7 @@
-package com.liao47.utils.test;
+package com.liao47.extra.utils.test;
 
-import com.liao47.utils.FtpUtils;
-import com.liao47.utils.config.FtpConfig;
+import com.liao47.extra.utils.FtpUtils;
+import com.liao47.extra.utils.config.FtpConfig;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

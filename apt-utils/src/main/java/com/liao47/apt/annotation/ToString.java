@@ -11,9 +11,11 @@ import java.lang.annotation.Target;
  * 生成toString<br>
  *     使用后会替换lombok或者手写的toString，
  *     可配合@Mask做掩码操作
+ *     可配置@Format格式化
  * @author liao47
  * @date 2020/10/27 11:45
  * @see Mask
+ * @see Format
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.SOURCE)

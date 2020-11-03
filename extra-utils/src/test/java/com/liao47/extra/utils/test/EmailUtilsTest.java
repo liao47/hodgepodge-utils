@@ -1,7 +1,7 @@
-package com.liao47.utils.test;
+package com.liao47.extra.utils.test;
 
 import com.liao47.common.exception.CustomException;
-import com.liao47.utils.EmailUtils;
+import com.liao47.extra.utils.EmailUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

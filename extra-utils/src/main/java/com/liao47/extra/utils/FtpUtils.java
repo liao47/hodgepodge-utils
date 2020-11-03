@@ -1,6 +1,6 @@
-package com.liao47.utils;
+package com.liao47.extra.utils;
 
-import com.liao47.utils.config.FtpConfig;
+import com.liao47.extra.utils.config.FtpConfig;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

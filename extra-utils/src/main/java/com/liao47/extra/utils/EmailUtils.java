@@ -1,4 +1,4 @@
-package com.liao47.utils;
+package com.liao47.extra.utils;
 
 import com.liao47.common.exception.CustomException;
 import lombok.Getter;

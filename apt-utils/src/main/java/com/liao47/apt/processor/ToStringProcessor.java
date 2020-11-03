@@ -1,8 +1,11 @@
 package com.liao47.apt.processor;
 
+import com.liao47.apt.annotation.Format;
 import com.liao47.apt.annotation.Mask;
 import com.liao47.apt.annotation.ToString;
+import com.liao47.apt.utils.Annotations;
 import com.liao47.apt.utils.Binaries;
+import com.liao47.apt.utils.Formatter;
 import com.liao47.apt.utils.VarComparator;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.api.JavacTrees;
@@ -52,10 +55,8 @@ public class ToStringProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        //获取掩码注解
-        final Map<javax.lang.model.element.Name, Map<String, Mask>> maskMap = getMaskMap(roundEnv
-                .getElementsAnnotatedWith(Mask.class));
-
+        //字段注解缓存初始化
+        Annotations.init(roundEnv);
         //处理ToString注解
         Set<? extends Element> set = roundEnv.getElementsAnnotatedWith(ToString.class);
         for (final Element element : set) {
@@ -81,8 +82,7 @@ public class ToStringProcessor extends AbstractProcessor {
                     }
                     jcVariableDeclList.addAll(variableList);
                     jcClassDecl.defs = removeExistsMethod(jcClassDecl.defs)
-                            .append(makeToStringMethod(jcVariableDeclList, typeElement, maskMap.get(typeElement
-                                    .getQualifiedName())));
+                            .append(makeToStringMethod(jcVariableDeclList, typeElement));
                     super.visitClassDef(jcClassDecl);
 
                     messager.printMessage(Diagnostic.Kind.NOTE, String.format("Generated %s.toString successful.",
@@ -175,13 +175,13 @@ public class ToStringProcessor extends AbstractProcessor {
 
     /**
      * 生成toString
+     *
      * @param jcVariableDeclList
      * @param element
-     * @param maskMap
      * @return
      */
-    private JCTree.JCMethodDecl makeToStringMethod(java.util.List<JCTree.JCVariableDecl> jcVariableDeclList, TypeElement
-            element, Map<String, Mask> maskMap) {
+    private JCTree.JCMethodDecl makeToStringMethod(java.util.List<JCTree.JCVariableDecl> jcVariableDeclList,
+                                                   TypeElement element) {
         final ToString annotation = element.getAnnotation(ToString.class);
         if (annotation.orders().length > 0) {
             jcVariableDeclList.sort(new VarComparator(annotation.orders()));
@@ -217,8 +217,7 @@ public class ToStringProcessor extends AbstractProcessor {
             }
             binaries.plus(tempStr.toString());
 
-            Mask mask = maskMap == null ? null : maskMap.get(jcVariableDecl.getName().toString());
-            binaries.plus(this.getFieldValue(jcVariableDecl, !annotation.doNotUseGetters(), mask));
+            binaries.plus(this.getFieldValue(element, jcVariableDecl, !annotation.doNotUseGetters()));
 
             hasFront = true;
             tempStr = new StringBuilder();
@@ -269,24 +268,6 @@ public class ToStringProcessor extends AbstractProcessor {
     }
 
     /**
-     * 获取掩码注解
-     * @param maskElements
-     * @return
-     */
-    private Map<javax.lang.model.element.Name, Map<String, Mask>> getMaskMap(Set<? extends Element> maskElements) {
-        final Map<javax.lang.model.element.Name, Map<String, Mask>> maskMap = new HashMap<>();
-        for (Element element : maskElements) {
-            Element enclosingElement = element.getEnclosingElement();
-            if (enclosingElement instanceof TypeElement) {
-                javax.lang.model.element.Name  enclosingName = ((TypeElement) enclosingElement).getQualifiedName();
-                Map<String, Mask> map = maskMap.computeIfAbsent(enclosingName, k -> new HashMap<>());
-                map.put(element.getSimpleName().toString(), element.getAnnotation(Mask.class));
-            }
-        }
-        return maskMap;
-    }
-
-    /**
      * 去除已有的toString方法
      * @param defs
      * @return
@@ -321,25 +302,37 @@ public class ToStringProcessor extends AbstractProcessor {
 
     /**
      * 获取字段值
+     * @param element
      * @param var
      * @param useGetters
-     * @param mask
      * @return
      */
-    private JCTree.JCExpression getFieldValue(JCTree.JCVariableDecl var, boolean useGetters, Mask mask) {
+    private JCTree.JCExpression getFieldValue(TypeElement element, JCTree.JCVariableDecl var, boolean useGetters) {
         JCTree.JCExpression value;
         if (useGetters) {
             value = treeMaker.Apply(List.nil(), this.accessGetter(var), List.nil());
         } else {
             value = treeMaker.Select(treeMaker.Ident(names.fromString("this")), var.getName());
         }
+
+        //格式化
+        Format format = Annotations.get(Format.class, element.getQualifiedName(), var.getName().toString());
+        if (format != null) {
+            value = treeMaker.Apply(List.of(memberAccess(Object.class.getCanonicalName()),
+                            memberAccess(String.class.getCanonicalName())),
+                    memberAccess(Formatter.class.getCanonicalName() + ".format"),
+                    List.of(value, treeMaker.Literal(format.pattern())));
+        }
+
         //掩码处理
+        Mask mask = Annotations.get(Mask.class, element.getQualifiedName(), var.getName().toString());
         if (mask != null) {
             //maskChar使用Character有兼容性问题，暂使用String处理
             value = treeMaker.Apply(List.of(memberAccess(Object.class.getCanonicalName()),
-                    memberAccess(Integer.class.getCanonicalName()), memberAccess(Integer.class.getCanonicalName()),
-                    memberAccess(String.class.getCanonicalName())),
-                    memberAccess("com.liao47.apt.utils.MaskUtils.mask"),
+                            memberAccess(Integer.class.getCanonicalName()),
+                            memberAccess(Integer.class.getCanonicalName()),
+                            memberAccess(String.class.getCanonicalName())),
+                    memberAccess(Formatter.class.getCanonicalName() + ".mask"),
                     List.of(value, treeMaker.Literal(mask.prefix()), treeMaker.Literal(mask.suffix()), treeMaker
                             .Literal(String.valueOf(mask.maskChar()))));
         }

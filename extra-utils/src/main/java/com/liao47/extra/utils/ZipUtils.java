@@ -1,4 +1,4 @@
-package com.liao47.utils;
+package com.liao47.extra.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -1,8 +1,8 @@
-package com.liao47.utils.config;
+package com.liao47.extra.utils.config;
 
 import com.liao47.common.constants.FtpKeyConstants;
 import com.liao47.common.exception.CustomException;
-import com.liao47.utils.EmailUtils;
+import com.liao47.extra.utils.EmailUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
