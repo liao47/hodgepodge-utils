@@ -7,9 +7,11 @@
 > 公共包
 # apt-utils
 > annotation processing tool utils  
-> 注解处理器，在编译期修改语法树的工具类
+> 注解处理器，在编译期修改语法树的工具类  
+> 此功能在编译期生成代码，所以本模块应先编译好以jar包形式引入到使用的工程中才会起作用
 > ## ToString
->> 生成toString，使用后会替换lombok或者手写的toString，可配合@Mask做掩码操作
+>> 生成toString，使用后会替换lombok或者手写的toString，  
+>> 可配合@Mask做掩码操作，可配合@Format格式化
 >> * includeFieldNames 是否包含字段名
 >> * exclude 排除字段，如果of与exclude同时不为空，则以of为准，exclude不生效
 >> * of 使用的字段
