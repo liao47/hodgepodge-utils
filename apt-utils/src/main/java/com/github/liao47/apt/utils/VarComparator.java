@@ -20,7 +20,7 @@ public class VarComparator implements Comparator<JCTree.JCVariableDecl> {
     private final Map<String, Integer> orderMap;
 
     /**
-     * 排序标识：0-默认，1-正序，-1-倒序
+     * 排序标识：0:默认，1:正序，-1:倒序
      */
     private int order;
 

@@ -82,7 +82,7 @@ public class ToStringProcessor extends AbstractProcessor {
                     }
                     jcVariableDeclList.addAll(variableList);
                     jcClassDecl.defs = removeExistsMethod(jcClassDecl.defs)
-                            .append(makeToStringMethod(jcVariableDeclList, typeElement));
+                            .append(makeToStringMethod(typeElement, jcVariableDeclList));
                     super.visitClassDef(jcClassDecl);
 
                     messager.printMessage(Diagnostic.Kind.NOTE, String.format("Generated %s.toString successful.",
@@ -176,12 +176,12 @@ public class ToStringProcessor extends AbstractProcessor {
     /**
      * 生成toString
      *
-     * @param jcVariableDeclList
      * @param element
+     * @param jcVariableDeclList
      * @return
      */
-    private JCTree.JCMethodDecl makeToStringMethod(java.util.List<JCTree.JCVariableDecl> jcVariableDeclList,
-                                                   TypeElement element) {
+    private JCTree.JCMethodDecl makeToStringMethod(TypeElement element,
+                                                   java.util.List<JCTree.JCVariableDecl> jcVariableDeclList) {
         final ToString annotation = element.getAnnotation(ToString.class);
         if (annotation.orders().length > 0) {
             jcVariableDeclList.sort(new VarComparator(annotation.orders()));
