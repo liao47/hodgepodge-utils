@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -77,9 +78,10 @@ public class ZipUtils {
      * @param src 要压缩的文件或文件夹路径
      * @param dest 压缩文件存放路径
      * @param password 压缩使用的密码
+     * @param excludeRootDir 是否不包含根路径，仅src为文件夹时有效
      * @return
      */
-    public static String zip(String src, String dest, String password) {
+    public static String zip(String src, String dest, String password, boolean excludeRootDir) {
         File srcFile = new File(src);
         String destPath = buildDestZipFilePath(srcFile, dest);
         ZipParameters parameters = new ZipParameters();
@@ -95,7 +97,15 @@ public class ZipUtils {
                 zipFile.setPassword(password.toCharArray());
             }
             if (srcFile.isDirectory()) {
-                zipFile.addFolder(srcFile, parameters);
+                if (excludeRootDir) {
+                    File[] subFiles = srcFile.listFiles();
+                    if (subFiles == null || subFiles.length == 0) {
+                        throw new CustomException("The Dest directory is empty");
+                    }
+                    zipFile.addFiles(Arrays.asList(subFiles), parameters);
+                } else {
+                    zipFile.addFolder(srcFile, parameters);
+                }
             } else {
                 zipFile.addFile(srcFile, parameters);
             }

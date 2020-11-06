@@ -28,15 +28,15 @@ public class ZipUtilsTest {
     public void zip() {
         String src = "C:\\home\\test\\test_zip";
         String dest = "";
-        String zipPath = ZipUtils.zip(src, dest, null);
+        String zipPath = ZipUtils.zip(src, dest, null, false);
         assertTrue(StringUtils.isNotEmpty(zipPath));
 
         dest = "C:\\home\\test\\zipFiles\\";
-        zipPath = ZipUtils.zip(src, dest, null);
+        zipPath = ZipUtils.zip(src, dest, null, false);
         assertTrue(StringUtils.isNotEmpty(zipPath));
 
         dest = "C:\\home\\test\\zipFiles\\a.zip";
-        zipPath = ZipUtils.zip(src, dest, "pwd233");
+        zipPath = ZipUtils.zip(src, dest, "pwd233", true);
         assertTrue(StringUtils.isNotEmpty(zipPath));
     }
 }
