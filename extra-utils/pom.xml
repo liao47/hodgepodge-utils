@@ -16,7 +16,6 @@
         <dependency>
             <groupId>com.github.liao47</groupId>
             <artifactId>common</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-net</groupId>
