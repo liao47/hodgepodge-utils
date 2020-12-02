@@ -23,6 +23,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface IDCard {
 
     /**
+     * 描述详情键
+     */
+    String DETAIL_KEY = "{detail}";
+
+    /**
      * 是否弱校验<br>
      *     只校验格式
      * @return
@@ -33,7 +38,7 @@ public @interface IDCard {
      * 描述
      * @return
      */
-    String message() default "身份证号码校验不通过:" + IDCardValidator.DETAIL_MSG_KEY;
+    String message() default "身份证号码校验不通过:" + DETAIL_KEY;
 
     Class<?>[] groups() default {};
 

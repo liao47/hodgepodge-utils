@@ -13,10 +13,6 @@ import java.util.regex.Pattern;
  * @date 2020/11/30 10:35
  */
 public class IDCardValidator implements ConstraintValidator<IDCard, CharSequence> {
-    /**
-     * 校验失败详情变量
-     */
-    public static final String DETAIL_MSG_KEY = "{detail}";
 
     /**
      * 18位身份证号码正则
@@ -84,9 +80,9 @@ public class IDCardValidator implements ConstraintValidator<IDCard, CharSequence
      */
     private void buildMsg(ConstraintValidatorContext context, String msg) {
         String defaultMsg = context.getDefaultConstraintMessageTemplate();
-        if (StringUtils.contains(defaultMsg, DETAIL_MSG_KEY)) {
+        if (StringUtils.contains(defaultMsg, IDCard.DETAIL_KEY)) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(defaultMsg.replace(DETAIL_MSG_KEY, msg))
+            context.buildConstraintViolationWithTemplate(defaultMsg.replace(IDCard.DETAIL_KEY, msg))
                     .addConstraintViolation();
         }
     }
