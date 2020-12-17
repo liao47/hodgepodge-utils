@@ -53,8 +53,7 @@ public class LeetCode0049 {
     }
 
     public List<List<String>> groupAnagrams2(String[] strs) {
-        int[] prime = new int[]{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79,
-                83, 89, 97, 101};
+        int[] prime = generatePrimeArr(26);
 
         Map<Long, List<String>> map = new HashMap<>();
         for (String str : strs) {
@@ -66,5 +65,25 @@ public class LeetCode0049 {
             list.add(str);
         }
         return new ArrayList<>(map.values());
+    }
+
+    public int[] generatePrimeArr(int length) {
+        int[] arr = new int[length];
+        int item = 2;
+        int index = 0;
+        while (index < length) {
+            boolean isPrime = true;
+            for (int i = 0; i < index; i++) {
+                if (item % arr[i] == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) {
+                arr[index++] = item;
+            }
+            item++;
+        }
+        return arr;
     }
 }
