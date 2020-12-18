@@ -1,0 +1,21 @@
+import com.github.liao47.leetcode.LeetCode0389;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ * @author liao47
+ * @date 2020/12/18 9:16
+ */
+public class LeetCode0380To0389Test {
+    @Test
+    public void test0389() {
+        LeetCode0389 solver = new LeetCode0389();
+
+        assertEquals('e', solver.findTheDifference("abcd", "abcde"));
+        assertEquals('y', solver.findTheDifference("", "y"));
+        assertEquals('a', solver.findTheDifference("a", "aa"));
+        assertEquals('a', solver.findTheDifference("ae", "aea"));
+        assertEquals('f', solver.findTheDifference("abcde", "abcfde"));
+    }
+}

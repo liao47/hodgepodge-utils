@@ -18,5 +18,6 @@ public class LeetCode0840To0849Test {
         System.out.println(solver.splitIntoFibonacci("17522"));
         System.out.println(solver.splitIntoFibonacci("0123"));
         System.out.println(solver.splitIntoFibonacci("214748364721474836422147483641"));
+        System.out.println(solver.splitIntoFibonacci("12324"));
     }
 }
