@@ -1,5 +1,5 @@
 import com.github.liao47.leetcode.LeetCode0049;
-import com.github.liao47.leetcode.T0048RotateImage;
+import com.github.liao47.leetcode.P0048RotateImage;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class LeetCode0041To0049Test {
     @Test
     public void test0048() {
-        T0048RotateImage solver = new T0048RotateImage();
+        P0048RotateImage solver = new P0048RotateImage();
 
         int[][] arr = {
                 {1, 2, 3},

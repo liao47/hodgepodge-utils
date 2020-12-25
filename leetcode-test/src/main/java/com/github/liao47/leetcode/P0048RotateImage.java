@@ -50,7 +50,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/21 15:42
  */
-public class T0048RotateImage {
+public class P0048RotateImage {
     public void rotate(int[][] matrix) {
         for (int i = 0; i < matrix.length / 2; i++) {
             for (int j = i; j < matrix.length - i - 1; j++) {

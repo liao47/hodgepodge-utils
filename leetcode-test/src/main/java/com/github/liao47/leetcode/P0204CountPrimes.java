@@ -1,5 +1,8 @@
 package com.github.liao47.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 204. 计数质数
  *
@@ -24,7 +27,7 @@ package com.github.liao47.leetcode;
  *
  * 提示：
  *
- * 0 <= n <= 5 * 106
+ * 0 <= n <= 5 * 10^6
  *
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/count-primes
@@ -32,7 +35,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/3 15:56
  */
-public class LeetCode0204 {
+public class P0204CountPrimes {
 
     public int countPrimes(int n) {
         int count = 0;
@@ -49,5 +52,24 @@ public class LeetCode0204 {
             }
         }
         return count;
+    }
+
+    public int countPrimes2(int n) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 2; i < n; i++) {
+            boolean isPrime = true;
+            for (Integer j : list) {
+                if (i % j == 0) {
+                    isPrime = false;
+                }
+                if (!isPrime || j * j > i) {
+                    break;
+                }
+            }
+            if (isPrime) {
+                list.add(i);
+            }
+        }
+        return list.size();
     }
 }

@@ -1,4 +1,5 @@
 import com.github.liao47.leetcode.LeetCode0389;
+import com.github.liao47.leetcode.P0387FirstUniqueCharacterInAString;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,6 +9,14 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/18 9:16
  */
 public class LeetCode0380To0389Test {
+    @Test
+    public void test0387() {
+        P0387FirstUniqueCharacterInAString solver = new P0387FirstUniqueCharacterInAString();
+        assertEquals(0, solver.firstUniqChar("leetcode"));
+        assertEquals(2, solver.firstUniqChar("loveleetcode"));
+        assertEquals(-1, solver.firstUniqChar("aabbccc"));
+    }
+
     @Test
     public void test0389() {
         LeetCode0389 solver = new LeetCode0389();
