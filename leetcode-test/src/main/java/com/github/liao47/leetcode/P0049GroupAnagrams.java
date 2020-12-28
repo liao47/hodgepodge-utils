@@ -27,7 +27,7 @@ import java.util.*;
  * @author liao47
  * @date 2020/12/14 15:54
  */
-public class LeetCode0049 {
+public class P0049GroupAnagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null || strs.length == 0) {
             return Collections.emptyList();

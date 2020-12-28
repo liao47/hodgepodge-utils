@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0049;
+import com.github.liao47.leetcode.P0049GroupAnagrams;
 import com.github.liao47.leetcode.P0048RotateImage;
 import org.junit.Test;
 
@@ -46,7 +46,7 @@ public class LeetCode0041To0049Test {
 
     @Test
     public void test0049() {
-        LeetCode0049 solver = new LeetCode0049();
+        P0049GroupAnagrams solver = new P0049GroupAnagrams();
 
         String[] strArr = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
         System.out.println(solver.groupAnagrams(strArr));

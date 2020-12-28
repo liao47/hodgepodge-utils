@@ -30,7 +30,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/21 9:18
  */
-public class LeetCode0746 {
+public class P0746MinCostClimbingStairs {
     public int minCostClimbingStairs1(int[] cost) {
         int prev = 0;
         int current = 0;

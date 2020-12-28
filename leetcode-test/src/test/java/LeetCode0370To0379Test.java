@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0376;
+import com.github.liao47.leetcode.P0376WiggleSubsequence;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class LeetCode0370To0379Test {
     @Test
     public void test0376() {
-        LeetCode0376 solver = new LeetCode0376();
+        P0376WiggleSubsequence solver = new P0376WiggleSubsequence();
         assertEquals(6, solver.wiggleMaxLength(new int[]{1, 7, 4, 9, 2, 5}));
         assertEquals(7, solver.wiggleMaxLength(new int[]{1, 17, 5, 10, 13, 15, 10, 5, 16, 8}));
         assertEquals(2, solver.wiggleMaxLength(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}));

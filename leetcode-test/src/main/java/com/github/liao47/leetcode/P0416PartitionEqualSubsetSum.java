@@ -34,7 +34,7 @@ import java.util.Arrays;
  * @author liao47
  * @date 2020/12/15 17:30
  */
-public class LeetCode0416 {
+public class P0416PartitionEqualSubsetSum {
     public boolean canPartition(int[] nums) {
         if (nums == null || nums.length < 2) {
             return false;

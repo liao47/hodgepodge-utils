@@ -40,7 +40,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/11 16:34
  */
-public class LeetCode0003 {
+public class P0003LongestSubstringWithoutRepeatingCharacters {
     public int lengthOfLongestSubstring(String s) {
         int maxLength = 0;
         int length;

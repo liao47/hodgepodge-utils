@@ -34,7 +34,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/10 16:21
  */
-public class LeetCode0861 {
+public class P0861ScoreAfterFlippingMatrix {
 
     public int matrixScore(int[][] a) {
         for (int i = 0; i < a.length; i++) {

@@ -21,7 +21,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/11 16:51
  */
-public class LeetCode0005 {
+public class P0005LongestPalindromicSubstring {
     public String longestPalindrome(String s) {
         if (null == s || s.length() <= 1) {
             return s;

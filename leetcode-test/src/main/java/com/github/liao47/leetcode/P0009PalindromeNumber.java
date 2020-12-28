@@ -29,7 +29,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/11 17:00
  */
-public class LeetCode0009 {
+public class P0009PalindromeNumber {
     public boolean isPalindrome(int x) {
         String str = String.valueOf(x);
         return new StringBuilder(str).reverse().toString().equals(str);

@@ -30,7 +30,7 @@ import java.util.List;
  * @author liao47
  * @date 2020/12/15 9:47
  */
-public class LeetCode0738 {
+public class P0738MonotoneIncreasingDigits {
     public int monotoneIncreasingDigits(int n) {
         List<Integer> list = new ArrayList<>();
         while (n != 0) {

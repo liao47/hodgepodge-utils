@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.Interview0101;
+import com.github.liao47.leetcode.I0101IsUniquelcci;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -12,7 +12,7 @@ public class Interview01Test {
 
     @Test
     public void test0101() {
-        Interview0101 solver = new Interview0101();
+        I0101IsUniquelcci solver = new I0101IsUniquelcci();
         assertFalse(solver.isUnique("leetcode"));
         assertTrue(solver.isUnique("abc"));
     }

@@ -54,7 +54,7 @@ import java.util.*;
  * @author liao47
  * @date 2020/12/11 9:17
  */
-public class LeetCode0649 {
+public class P0649Dota2Senate {
     public String predictPartyVictory(String senate) {
         char[] chars = senate.toCharArray();
         StringBuilder survivor = new StringBuilder();

@@ -46,7 +46,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/10 15:11
  */
-public class LeetCode0062 {
+public class P0062UniquePaths {
 
     public int uniquePaths(int m, int n) {
         long x = 1;

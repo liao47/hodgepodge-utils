@@ -41,8 +41,8 @@ import java.util.*;
  * @author liao47
  * @date 2020/12/11 14:33
  */
-public class LeetCode0895 {
-    private LeetCode0895() {}
+public class P0895MaximumFrequencyStack {
+    private P0895MaximumFrequencyStack() {}
 
     public static class FreqStack {
         Map<Integer, Integer> map;

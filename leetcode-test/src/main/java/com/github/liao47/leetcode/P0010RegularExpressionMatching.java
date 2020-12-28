@@ -54,7 +54,7 @@ import java.util.List;
  * @author liao47
  * @date 2020/12/12 13:42
  */
-public class LeetCode0010_2 {
+public class P0010RegularExpressionMatching {
     public boolean isMatch(String s, String p) {
         if (p.isEmpty()) {
             return s.isEmpty();

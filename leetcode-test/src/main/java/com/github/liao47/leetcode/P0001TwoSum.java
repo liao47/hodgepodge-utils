@@ -25,7 +25,7 @@ import java.util.HashMap;
  * @author liao47
  * @date 2020/12/11 16:02
  */
-public class LeetCode0001 {
+public class P0001TwoSum {
     public int[] twoSum(int[] nums, int target) {
         if (nums == null) {
             return null;

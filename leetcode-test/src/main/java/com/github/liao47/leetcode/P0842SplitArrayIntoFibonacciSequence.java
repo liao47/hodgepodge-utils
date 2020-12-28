@@ -56,7 +56,7 @@ import java.util.List;
  * @author liao47
  * @date 2020/12/17 15:05
  */
-public class LeetCode0842 {
+public class P0842SplitArrayIntoFibonacciSequence {
     public List<Integer> splitIntoFibonacci(String s) {
         int firstMaxLen = s.charAt(0) == '0' ? 1 : s.length() / 2;
         for (int i = 1; i <= firstMaxLen; i++) {

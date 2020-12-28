@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0290;
+import com.github.liao47.leetcode.P0290WordPattern;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class LeetCode0290To0299Test {
     @Test
     public void test0290() {
-        LeetCode0290 solver = new LeetCode0290();
+        P0290WordPattern solver = new P0290WordPattern();
 
         assertTrue(solver.wordPattern("abba", "dog cat cat dog"));
         assertFalse(solver.wordPattern("abba", "dog cat cat fish"));

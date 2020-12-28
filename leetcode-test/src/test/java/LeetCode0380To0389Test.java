@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0389;
+import com.github.liao47.leetcode.P0389FindTheDifference;
 import com.github.liao47.leetcode.P0387FirstUniqueCharacterInAString;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class LeetCode0380To0389Test {
 
     @Test
     public void test0389() {
-        LeetCode0389 solver = new LeetCode0389();
+        P0389FindTheDifference solver = new P0389FindTheDifference();
 
         assertEquals('e', solver.findTheDifference("abcd", "abcde"));
         assertEquals('y', solver.findTheDifference("", "y"));

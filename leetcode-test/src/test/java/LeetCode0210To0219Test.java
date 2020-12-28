@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0217;
+import com.github.liao47.leetcode.P0217ContainsDuplicate;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class LeetCode0210To0219Test {
     @Test
     public void test0217() {
-        LeetCode0217 solver = new LeetCode0217();
+        P0217ContainsDuplicate solver = new P0217ContainsDuplicate();
 
         int[] arr = new int[100000];
         for (int i = 0; i < arr.length; i++) {

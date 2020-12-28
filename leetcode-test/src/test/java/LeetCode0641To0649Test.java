@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0649;
+import com.github.liao47.leetcode.P0649Dota2Senate;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,7 +11,7 @@ public class LeetCode0641To0649Test {
 
     @Test
     public void test0649() {
-        LeetCode0649 solver = new LeetCode0649();
+        P0649Dota2Senate solver = new P0649Dota2Senate();
 
         assertEquals("Radiant", solver.predictPartyVictory("RD"));
         assertEquals("Dire", solver.predictPartyVictory("RDD"));

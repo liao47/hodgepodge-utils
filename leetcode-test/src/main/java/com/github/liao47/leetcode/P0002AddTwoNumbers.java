@@ -21,7 +21,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/11 16:10
  */
-public class LeetCode0002 {
+public class P0002AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode cur1 = l1;
         ListNode cur2 = l2;

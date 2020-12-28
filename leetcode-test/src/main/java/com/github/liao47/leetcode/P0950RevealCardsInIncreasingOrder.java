@@ -49,7 +49,7 @@ import java.util.*;
  * @author liao47
  * @date 2020/12/18 10:19
  */
-public class LeetCode0950 {
+public class P0950RevealCardsInIncreasingOrder {
     public int[] deckRevealedIncreasing(int[] deck) {
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < deck.length; i++) {

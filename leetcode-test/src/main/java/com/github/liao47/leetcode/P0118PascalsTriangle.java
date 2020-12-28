@@ -30,7 +30,7 @@ import java.util.List;
  * @author liao47
  * @date 2020/12/11 13:43
  */
-public class LeetCode0118 {
+public class P0118PascalsTriangle {
 
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> result = new ArrayList<>();

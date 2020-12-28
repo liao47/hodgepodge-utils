@@ -1,5 +1,5 @@
-import com.github.liao47.leetcode.LeetCode0010_timeout;
-import com.github.liao47.leetcode.LeetCode0010_2;
+import com.github.liao47.leetcode.P0010RegularExpressionMatching_timeout;
+import com.github.liao47.leetcode.P0010RegularExpressionMatching;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 public class LeetCode0010To0019Test {
     @Test
     public void test0010() {
-        LeetCode0010_timeout solver = new LeetCode0010_timeout();
+        P0010RegularExpressionMatching_timeout solver = new P0010RegularExpressionMatching_timeout();
 
         assertFalse(solver.isMatch("aa", "a"));
         assertTrue(solver.isMatch("aa", "a*"));
@@ -29,7 +29,7 @@ public class LeetCode0010To0019Test {
 
     @Test
     public void test0010_2() {
-        LeetCode0010_2 solver = new LeetCode0010_2();
+        P0010RegularExpressionMatching solver = new P0010RegularExpressionMatching();
 
         assertFalse(solver.isMatch("aa", "a"));
         assertTrue(solver.isMatch("aa", "a*"));

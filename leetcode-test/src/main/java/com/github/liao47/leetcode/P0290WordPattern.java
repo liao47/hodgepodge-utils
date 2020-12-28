@@ -35,7 +35,7 @@ import java.util.Map;
  * @author liao47
  * @date 2020/12/16 14:59
  */
-public class LeetCode0290 {
+public class P0290WordPattern {
     public boolean wordPattern(String pattern, String s) {
         if (pattern == null || pattern.isEmpty()) {
             return s == null || s.isEmpty();

@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0950;
+import com.github.liao47.leetcode.P0950RevealCardsInIncreasingOrder;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class LeetCode0950To0959Test {
     @Test
     public void test0950() {
-        LeetCode0950 solver = new LeetCode0950();
+        P0950RevealCardsInIncreasingOrder solver = new P0950RevealCardsInIncreasingOrder();
 
         int[] arr = {17, 13, 11, 2, 3, 5, 7};
         assertEquals("[2, 13, 3, 11, 5, 17, 7]", Arrays.toString(solver.deckRevealedIncreasing(arr)));

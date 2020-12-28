@@ -24,7 +24,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/18 14:19
  */
-public class Interview0101 {
+public class I0101IsUniquelcci {
     /**
      * 题目并未说明字符范围，尝试只有小写字母可通过。
      * 思考：范围是ASCII、Unicode怎么处理

@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0416;
+import com.github.liao47.leetcode.P0416PartitionEqualSubsetSum;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class LeetCode0410To0419Test {
     @Test
     public void test0416() {
-        LeetCode0416 solver = new LeetCode0416();
+        P0416PartitionEqualSubsetSum solver = new P0416PartitionEqualSubsetSum();
         long start = System.currentTimeMillis();
 
         int[] arr = {1, 5, 11, 5};

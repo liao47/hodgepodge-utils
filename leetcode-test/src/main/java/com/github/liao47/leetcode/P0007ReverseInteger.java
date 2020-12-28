@@ -26,7 +26,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/3 14:55
  */
-public class LeetCode0007 {
+public class P0007ReverseInteger {
 
     public int reverse(int x) {
         long rev = 0;

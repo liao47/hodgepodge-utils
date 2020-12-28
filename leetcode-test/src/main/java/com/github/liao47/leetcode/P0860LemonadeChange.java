@@ -52,7 +52,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/10 9:18
  */
-public class LeetCode0860 {
+public class P0860LemonadeChange {
 
     public boolean lemonadeChange(int[] bills) {
         if (bills == null || bills.length == 0) {

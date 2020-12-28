@@ -34,7 +34,7 @@ import java.util.List;
  * @author liao47
  * @date 2020/12/12 9:26
  */
-public class LeetCode0376 {
+public class P0376WiggleSubsequence {
 
     public int wiggleMaxLength(int[] nums) {
         if (nums.length <= 1) {

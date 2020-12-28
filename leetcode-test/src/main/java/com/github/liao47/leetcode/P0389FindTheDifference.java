@@ -42,7 +42,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/18 9:12
  */
-public class LeetCode0389 {
+public class P0389FindTheDifference {
     public char findTheDifference(String s, String t) {
         int[] arr = new int[26];
         for (char c : s.toCharArray()) {

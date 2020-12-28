@@ -37,7 +37,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/15 13:46
  */
-public class LeetCode0483 {
+public class P0483SmallestGoodBase {
     public String smallestGoodBase(String n) {
         if (n == null || n.isEmpty()) {
             return n;

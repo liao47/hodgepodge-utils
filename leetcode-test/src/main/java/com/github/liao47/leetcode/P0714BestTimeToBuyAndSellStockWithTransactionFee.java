@@ -33,7 +33,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/17 9:35
  */
-public class LeetCode0714 {
+public class P0714BestTimeToBuyAndSellStockWithTransactionFee {
     public int maxProfit2(int[] prices, int fee) {
         if (prices.length <= 1) {
             return 0;

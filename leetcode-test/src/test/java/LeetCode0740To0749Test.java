@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0746;
+import com.github.liao47.leetcode.P0746MinCostClimbingStairs;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class LeetCode0740To0749Test {
     @Test
     public void test0746() {
-        LeetCode0746 solver = new LeetCode0746();
+        P0746MinCostClimbingStairs solver = new P0746MinCostClimbingStairs();
 
         assertEquals(15, solver.minCostClimbingStairs(new int[]{10, 15, 20}));
         assertEquals(6, solver.minCostClimbingStairs(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));

@@ -36,7 +36,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/3 14:06
  */
-public class LeetCode0006 {
+public class P0006ZigzagConversion {
 
     public String convert(String s, int numRows) {
         if (numRows <= 1 || s == null || s.length() <= numRows) {

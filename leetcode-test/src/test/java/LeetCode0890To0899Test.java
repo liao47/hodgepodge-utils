@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0895;
+import com.github.liao47.leetcode.P0895MaximumFrequencyStack;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class LeetCode0890To0899Test {
     @Test
     public void test0895() {
-        LeetCode0895.FreqStack freqStack = new LeetCode0895.FreqStack();
+        P0895MaximumFrequencyStack.FreqStack freqStack = new P0895MaximumFrequencyStack.FreqStack();
         freqStack.push(5);
         freqStack.push(7);
         freqStack.push(5);
@@ -23,7 +23,7 @@ public class LeetCode0890To0899Test {
         assertEquals(4, freqStack.pop());
 
 
-        LeetCode0895.FreqStack2 freqStack2 = new LeetCode0895.FreqStack2();
+        P0895MaximumFrequencyStack.FreqStack2 freqStack2 = new P0895MaximumFrequencyStack.FreqStack2();
         freqStack2.push(5);
         freqStack2.push(7);
         freqStack2.push(5);

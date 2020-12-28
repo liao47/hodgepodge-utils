@@ -54,7 +54,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/10 10:13
  */
-public class LeetCode0008 {
+public class P0008StringToIntegerAtoi {
     public int myAtoi(String s) {
         if (s == null) {
             return 0;

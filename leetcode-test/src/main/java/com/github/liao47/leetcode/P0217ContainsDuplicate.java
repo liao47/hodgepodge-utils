@@ -32,7 +32,7 @@ import java.util.Set;
  * @author liao47
  * @date 2020/12/17 13:50
  */
-public class LeetCode0217 {
+public class P0217ContainsDuplicate {
     public boolean containsDuplicate(int[] nums) {
         if (nums == null || nums.length < 2) {
             return false;

@@ -49,7 +49,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2020/12/11 16:42
  */
-public class LeetCode0004 {
+public class P0004MedianOfTwoSortedArrays {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int n = nums1.length;
         int m = nums2.length;

@@ -1,4 +1,4 @@
-import com.github.liao47.leetcode.LeetCode0483;
+import com.github.liao47.leetcode.P0483SmallestGoodBase;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class LeetCode0481To0489Test {
     @Test
     public void test0483() {
-        LeetCode0483 solver = new LeetCode0483();
+        P0483SmallestGoodBase solver = new P0483SmallestGoodBase();
         long start = System.currentTimeMillis();
 
         assertEquals("3", solver.smallestGoodBase("13"));
