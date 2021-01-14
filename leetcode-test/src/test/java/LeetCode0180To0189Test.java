@@ -1,6 +1,10 @@
 import com.github.liao47.leetcode.P0188BestTimeToBuyAndSellStockIV;
+import com.github.liao47.leetcode.P0189RotateArray;
 import org.junit.Test;
 
+import java.util.Arrays;
+
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -25,5 +29,29 @@ public class LeetCode0180To0189Test {
         assertEquals(16, solver.maxProfit(2, new int[]{1, 9, 6, 9, 1, 7, 1, 1, 5, 9, 9, 9}));
         assertEquals(12, solver.maxProfit(2, new int[]{5, 2, 3, 0, 3, 5, 6, 8, 1, 5}));
         assertEquals(13, solver.maxProfit(2, new int[]{3, 5, 3, 4, 1, 4, 5, 0, 7, 8, 5, 6, 9, 4, 1}));
+    }
+
+    @Test
+    public void test0189() {
+        P0189RotateArray solver = new P0189RotateArray();
+        int[] nums = {1, 2, 3, 4, 5, 6, 7};
+        solver.rotate(nums, 3);
+        assertArrayEquals(new int[]{5, 6, 7, 1, 2, 3, 4}, nums);
+
+        nums = new int[]{-1, -100, 3, 99};
+        solver.rotate(nums, 2);
+        assertArrayEquals(new int[]{3, 99, -1, -100}, nums);
+
+        nums = new int[]{1, 2, 3, 4, 5, 6};
+        solver.rotate(nums, 4);
+        assertArrayEquals(new int[]{3, 4, 5, 6, 1, 2}, nums);
+
+        nums = new int[]{1, 2, 3, 4, 5, 6, 7};
+        solver.rotate(nums, 1);
+        assertArrayEquals(new int[]{7, 1, 2, 3, 4, 5, 6}, nums);
+
+        nums = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
+        solver.rotate(nums, 4);
+        assertArrayEquals(new int[]{5, 6, 7, 8, 1, 2, 3, 4}, nums);
     }
 }
