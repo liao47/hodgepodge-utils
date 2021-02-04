@@ -36,7 +36,7 @@ package com.github.liao47.leetcode;
  * @author liao47
  * @date 2021/1/7 16:02
  */
-public class P1362NumberOfProvinces {
+public class P1362ClosestDivisors {
     public int[] closestDivisors1(int num) {
         int i = (int) Math.sqrt(num + 2.0);
         int j = i;

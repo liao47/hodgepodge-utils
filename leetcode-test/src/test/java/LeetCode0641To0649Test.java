@@ -1,3 +1,4 @@
+import com.github.liao47.leetcode.P0643MaximumAverageSubarrayI;
 import com.github.liao47.leetcode.P0649Dota2Senate;
 import org.junit.Test;
 
@@ -8,6 +9,12 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/11 9:56
  */
 public class LeetCode0641To0649Test {
+
+    @Test
+    public void test0643() {
+        P0643MaximumAverageSubarrayI solver = new P0643MaximumAverageSubarrayI();
+        assertEquals(12.75, solver.findMaxAverage(new int[]{1, 12, -5, -6, 50, 3}, 4), 0.00);
+    }
 
     @Test
     public void test0649() {

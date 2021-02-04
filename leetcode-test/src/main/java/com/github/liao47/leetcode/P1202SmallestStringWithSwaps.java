@@ -1,5 +1,7 @@
 package com.github.liao47.leetcode;
 
+import com.github.liao47.leetcode.utils.UnionFind;
+
 import java.util.*;
 
 /**
@@ -101,37 +103,5 @@ public class P1202SmallestStringWithSwaps {
             sb.append(map.get(unionFind.find(i)).poll());
         }
         return sb.toString();
-    }
-
-    private class UnionFind {
-        private int[] parent;
-
-        public UnionFind(int length) {
-            parent = new int[length];
-            for (int i = 0; i < length; i++) {
-                parent[i] = i;
-            }
-        }
-
-        public void union(int x, int y) {
-            int parentX = find(x);
-            int parentY = find(y);
-            if (parentX == parentY) {
-                return;
-            }
-
-            if (parentX < parentY) {
-                parent[parentX] = parentY;
-            } else {
-                parent[parentY] = parentX;
-            }
-        }
-
-        public int find(int i) {
-            if (parent[i] != i) {
-                parent[i] = find(parent[i]);
-            }
-            return parent[i];
-        }
     }
 }
