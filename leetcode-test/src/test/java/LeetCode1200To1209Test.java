@@ -1,6 +1,7 @@
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.github.liao47.leetcode.P1202SmallestStringWithSwaps;
+import com.github.liao47.leetcode.P1208GetEqualSubstringsWithinBudget;
 import org.junit.Test;
 
 import java.lang.reflect.Type;
@@ -480,5 +481,14 @@ public class LeetCode1200To1209Test {
                         "[6942,2568],[28,6604],[2583,1246],[2060,426],[3407,6724],[3202,2179],[9718,5304],[5790," +
                         "8811],[8143,2469]]", type));
         System.out.println(System.currentTimeMillis() - start);
+    }
+
+    @Test
+    public void test1208() {
+        P1208GetEqualSubstringsWithinBudget solver = new P1208GetEqualSubstringsWithinBudget();
+        assertEquals(3, solver.equalSubstring("abcd", "bcdf", 3));
+        assertEquals(1, solver.equalSubstring("abcd", "cdef", 3));
+        assertEquals(1, solver.equalSubstring("abcd", "acde", 0));
+        assertEquals(4, solver.equalSubstring("abcdefg", "cdbceek", 3));
     }
 }
