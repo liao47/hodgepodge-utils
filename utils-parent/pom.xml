@@ -16,6 +16,7 @@
         <module>../apt-utils</module>
         <module>../custom-validator</module>
         <module>../extra-utils</module>
+        <module>../unionpay-sdk</module>
     </modules>
 
     <properties>
