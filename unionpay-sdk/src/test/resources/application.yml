@@ -1,10 +1,10 @@
 union:
   url: https://gateway.test.95516.com
   #url: https://gateway.95516.com
-  payUrl: http://uc2-dev.perfect99.com/pay/notify/unionPay
-  frontUrl: http://uc2-dev.perfect99.com/pay/notify/union/webnotify
-  notifyUrl: http://uc2-dev.perfect99.com/pay/notify/union/paynotify
-  refundNotifyUrl: http://uc2-dev.perfect99.com/pay/notify/union/refundnotify
+  payUrl: http://liao47.com/pay/notify/unionPay
+  frontUrl: http://liao47.com/pay/notify/union/webnotify
+  notifyUrl: http://liao47.com/pay/notify/union/paynotify
+  refundNotifyUrl: http://liao47.com/pay/notify/union/refundnotify
   downloadUrl: https://filedownload.95516.com/
   encryptCertPath: acp_test_enc.cer
   middleCertPath: acp_test_middle.cer
