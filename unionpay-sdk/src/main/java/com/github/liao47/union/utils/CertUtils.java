@@ -1,5 +1,6 @@
 package com.github.liao47.union.utils;
 
+import com.github.liao47.union.SpringUtils;
 import com.github.liao47.union.config.UnionConfig;
 import com.github.liao47.union.config.UnionProp;
 import lombok.AccessLevel;
@@ -30,18 +31,14 @@ public class CertUtils {
      * 签名证书类型，固定不需要修改
      */
     private static final String SIGN_CERT_TYPE = "PKCS12";
-    //TODO fixme
-    private static final UnionConfig UNION_CONFIG = new UnionConfig();
+
+    private static final UnionConfig UNION_CONFIG = SpringUtils.getBean(UnionConfig.class);
 
     /**
      * 证书容器集合，存储对商户请求报文签名私钥证书.
      */
     private static final Map<String, KeyStore> KEY_STORE_MAP = new HashMap<>(64);
 
-    /**
-     * 敏感信息加密公钥证书
-     */
-    private static X509Certificate encryptCert;
     /**
      * 验签中级证书
      */
@@ -150,7 +147,6 @@ public class CertUtils {
     private static void initEncryptCert() {
         log.info("加载敏感信息加密证书==>{}", UNION_CONFIG.getEncryptCertPath());
         if (!StringUtils.isEmpty(UNION_CONFIG.getEncryptCertPath())) {
-            encryptCert = initCert(UNION_CONFIG.getEncryptCertPath());
             log.info("Load EncryptCert Successful");
         } else {
             log.warn("EncryptCert path is empty");

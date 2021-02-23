@@ -1,5 +1,6 @@
 package com.github.liao47.union.model.req;
 
+import com.github.liao47.common.constants.UnionUriConstants;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -85,7 +86,7 @@ public class PayReq extends BaseReq {
 
     @Override
     public String getReqUrl() {
-        return "/gateway/api/frontTransReq.do";
+        return UnionUriConstants.PAY;
     }
 
     @Override

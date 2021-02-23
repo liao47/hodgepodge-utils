@@ -21,17 +21,17 @@ public class HttpClient {
     /**
      * 连接地址
      */
-    private URL url;
+    private final URL url;
 
     /**
      * 连接超时时间
      */
-    private int connectTimeout;
+    private final int connectTimeout;
 
     /**
      * 读超时时间
      */
-    private int readTimeout;
+    private final int readTimeout;
 
     /**
      * 连接

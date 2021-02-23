@@ -30,6 +30,19 @@ public class AcpUtils {
     private static final String SIGNATURE = "signature";
 
     /**
+     * 请求报文签名(使用配置文件中配置的私钥证书或者对称密钥签名)<br>
+     * 功能：对请求报文进行签名,并计算赋值certid,signature字段并返回<br>
+     *
+     * @param reqData 请求报文map<br>
+     * @return　签名后的map对象<br>
+     */
+    public static Map<String, String> sign(Map<String, String> reqData, UnionProp unionProp) {
+        reqData = filterBlank(reqData);
+        signV510(reqData, StandardCharsets.UTF_8.toString(), unionProp);
+        return reqData;
+    }
+
+    /**
      * 根据signMethod的值，(版本5.1.0算法)
      *
      * @param data     待签名数据Map键值对形式

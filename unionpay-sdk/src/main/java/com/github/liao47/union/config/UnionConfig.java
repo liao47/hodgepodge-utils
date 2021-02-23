@@ -1,6 +1,8 @@
 package com.github.liao47.union.config;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 银联基本配置
@@ -8,6 +10,8 @@ import lombok.Data;
  * @date 2020/9/23 11:12
  */
 @Data
+@Configuration
+@ConfigurationProperties(prefix = "union")
 public class UnionConfig {
     /**
      * 地址
