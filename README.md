@@ -41,4 +41,7 @@ OrderConstants.ASC → {"a", "b", "c", "x", "y"}
 > * EmailUtils
 > * ZipUtils
 # unionpay-sdk
-> 基于Spring Boot开发的银联在线网关支付SDK
+> 基于Spring Boot开发的银联在线网关支付SDK  
+> 使用用例详见：https://github.com/liao47/springboot-test  
+> * com.liao47.controller.UnionPayController  
+> * src/test/java/com/liao47/unionpay.http
