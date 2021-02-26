@@ -5,13 +5,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 银联基本配置
+ * 银联基础配置
  * @author liao47
  * @date 2020/9/23 11:12
  */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "union")
+@ConfigurationProperties(prefix = "unionpay")
 public class UnionConfig {
     /**
      * 地址

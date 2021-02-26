@@ -1,4 +1,4 @@
-union:
+unionpay:
   url: https://gateway.test.95516.com
   #url: https://gateway.95516.com
   payUrl: http://liao47.com/pay/notify/unionPay
