@@ -1,6 +1,7 @@
 package com.github.liao47.union.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * @date 2021/2/23 14:08
  */
 @Configuration
+@ComponentScan("com.github.liao47.union")
 public class AppConfig {
 
     @Bean("restTemplateSsl")

@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class OrderQueryReq extends BaseReq {
+public class QueryReq extends BaseReq {
     private static final long serialVersionUID = 1076560156969354658L;
 
     /**
