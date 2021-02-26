@@ -14,27 +14,22 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "unionpay")
 public class UnionConfig {
     /**
-     * 地址
+     * 银联请求地址
      */
     private String url;
 
     /**
-     * 支付rul
-     */
-    private String payUrl;
-
-    /**
-     * 页面通知url
+     * 支付完成返回商户页面跳转url，非必须
      */
     private String frontUrl;
 
     /**
-     * 后台通知地址
+     * 后台回调通知地址
      */
     private String notifyUrl;
 
     /**
-     * 退款后台通知地址
+     * 退款后台回调通知地址
      */
     private String refundNotifyUrl;
 
@@ -47,11 +42,6 @@ public class UnionConfig {
      * 是否验证验签证书的CN，测试环境请设置false，生产环境请设置true。非false的值默认都当true处理。
      */
     private boolean ifValidateCnName;
-
-    /**
-     * 是否启用APP支付
-     */
-    private boolean enableApp;
 
     /**
      * 支付逾期分钟数

@@ -1,82 +1,143 @@
 package com.github.liao47.union;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
-import com.github.liao47.common.constants.UnionUriConstants;
+import com.github.liao47.common.constants.PatternConstants;
 import com.github.liao47.common.exception.CustomException;
 import com.github.liao47.union.config.UnionConfig;
 import com.github.liao47.union.config.UnionProp;
-import com.github.liao47.union.model.req.BaseReq;
-import com.github.liao47.union.model.resp.BaseResp;
+import com.github.liao47.union.model.PayNotifyDTO;
+import com.github.liao47.union.model.RefundNotifyDTO;
+import com.github.liao47.union.model.req.PayReq;
+import com.github.liao47.union.model.req.QueryReq;
+import com.github.liao47.union.model.req.RefundReq;
 import com.github.liao47.union.model.resp.PayResp;
+import com.github.liao47.union.model.resp.QueryResp;
+import com.github.liao47.union.model.resp.RefundResp;
 import com.github.liao47.union.utils.AcpUtils;
+import com.github.liao47.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 银联支付服务
  * @author liao47
- * @date 2021/2/23 14:05
+ * @date 2021/2/26 15:29
  */
 @Slf4j
 @Component
 public class UnionPayService {
+
+    @Resource
+    private UnionPayRemoteService unionPayRemoteService;
+
     @Resource
     private UnionConfig unionConfig;
 
-    @Resource
-    private RestTemplate restTemplateSsl;
-
     /**
-     * 执行调用
-     * @param baseReq
+     * 支付
+     * @param payReq
      * @param unionProp
      * @return
      */
-    public BaseResp execute(BaseReq baseReq, UnionProp unionProp) {
-        // 组装请求参数
-        Map<String, String> map = JSON.parseObject(JSON.toJSONString(baseReq),
-                new TypeReference<Map<String, String>>() {});
-
-        //报文中certId,signature的值是在signData方法中获取并自动赋值的，只要证书配置正确即可。
-        Map<String, String> paramData = AcpUtils.sign(map, unionProp);
-
-        String url = unionConfig.getUrl() + baseReq.getReqUrl();
-        if (UnionUriConstants.DOWNLOAD.equals(baseReq.getReqUrl())) {
-            url = unionConfig.getDownloadUrl();
+    public PayResp pay(PayReq payReq, UnionProp unionProp) {
+        payReq.setMerId(unionProp.getMerId());
+        //交易时间取订单创建时间
+        if (StringUtils.isEmpty(payReq.getTxnTime())) {
+            payReq.setTxnTime(DateUtils.format(LocalDateTime.now(), PatternConstants.SIMPLE_DATE_TIME));
         }
-        log.info("银联在线网关请求，请求地址:{},请求参数:{}", url, paramData);
+        if (StringUtils.isEmpty(payReq.getPayTimeout())) {
+            payReq.setPayTimeout(DateUtils.format(LocalDateTime.now().plusMinutes(unionConfig.getExpireMinutes()),
+                    PatternConstants.SIMPLE_DATE_TIME));
+        }
+        //页面通知地址
+        payReq.setFrontUrl(StringUtils.defaultIfEmpty(payReq.getFrontUrl(), unionConfig.getFrontUrl()));
+        payReq.setBackUrl(StringUtils.defaultIfEmpty(payReq.getBackUrl(), unionConfig.getNotifyUrl()));
+        if (!StringUtils.startsWith(payReq.getFrontUrl(), "http")) {
+            //地址不是http开头默认加上https
+            payReq.setFrontUrl("https://" + payReq.getFrontUrl());
+        }
+        return (PayResp) unionPayRemoteService.execute(payReq, unionProp);
+    }
 
-        // 下单接口跟其他的不一样
-        if (UnionUriConstants.PAY.equals(baseReq.getReqUrl())) {
-            // 请求参数设置完毕，以下对请求参数进行签名并生成html表单，将表单写入浏览器跳转打开银联页面
-            // 返回from表单给前端渲染页面即可，不用html
-            String html = AcpUtils.createAutoForm(url, paramData);
-            return new PayResp(html);
+    /**
+     * 查询
+     * @param queryReq
+     * @param unionProp
+     * @return
+     */
+    public QueryResp query(QueryReq queryReq, UnionProp unionProp) {
+        queryReq.setMerId(unionProp.getMerId());
+        if (StringUtils.isEmpty(queryReq.getTxnTime())) {
+            queryReq.setTxnTime(DateUtils.format(LocalDateTime.now(), PatternConstants.SIMPLE_DATE_TIME));
+        }
+        return (QueryResp) unionPayRemoteService.execute(queryReq, unionProp);
+    }
+
+    /**
+     * 退款
+     * @param refundReq
+     * @param unionProp
+     * @return
+     */
+    public RefundResp refund(RefundReq refundReq, UnionProp unionProp) {
+        refundReq.setMerId(unionProp.getMerId());
+        if (StringUtils.isEmpty(refundReq.getTxnTime())) {
+            refundReq.setTxnTime(DateUtils.format(LocalDateTime.now(), PatternConstants.SIMPLE_DATE_TIME));
+        }
+        refundReq.setBackUrl(StringUtils.defaultIfEmpty(refundReq.getBackUrl(), unionConfig.getRefundNotifyUrl()));
+
+        return (RefundResp) unionPayRemoteService.execute(refundReq, unionProp);
+    }
+
+    /**
+     * 获取消费回调通知参数
+     * @return
+     */
+    public PayNotifyDTO payNotify() {
+        Map<String, String> paramMap = this.getParamMap();
+        if (!AcpUtils.validate(paramMap)) {
+            throw new CustomException("银联消费回调参数验签失败");
+        }
+        return JSON.parseObject(JSON.toJSONString(paramMap), PayNotifyDTO.class);
+    }
+
+    /**
+     * 获取退款回调通知参数
+     * @return
+     */
+    public RefundNotifyDTO refundNotify() {
+        Map<String, String> paramMap = this.getParamMap();
+        if (!AcpUtils.validate(paramMap)) {
+            throw new CustomException("银联退款回调参数验签失败");
+        }
+        return JSON.parseObject(JSON.toJSONString(paramMap), RefundNotifyDTO.class);
+    }
+
+    /**
+     * 获取回调参数
+     * @return
+     */
+    private Map<String, String> getParamMap() {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attributes == null) {
+            throw new CustomException("获取HttpServletRequest失败");
         }
 
-        MultiValueMap<String, Object> postParameters = new LinkedMultiValueMap<>();
-        for (Map.Entry<String, String> entry : paramData.entrySet()) {
-            postParameters.add(entry.getKey(), entry.getValue());
+        Map<String, String[]> paramMap = attributes.getRequest().getParameterMap();
+        Map<String, String> map = new HashMap<>(paramMap.size());
+        for (Map.Entry<String, String[]> entry : paramMap.entrySet()) {
+            if (entry.getValue().length == 1) {
+                map.put(entry.getKey(), entry.getValue()[0]);
+            }
         }
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("ContentReq-Type", "application/x-www-form-urlencoded");
-        HttpEntity<MultiValueMap<String, Object>> req = new HttpEntity<>(postParameters, headers);
-        String rspStr = restTemplateSsl.postForObject(url, req, String.class);
-        log.info("银联请求:{}，响应:{}", url, rspStr);
-        Map<String, String> respData = AcpUtils.convertResultStringToMap(rspStr);
-        if (!AcpUtils.validate(respData)) {
-            throw new CustomException("银联支付响应结果验签失败");
-        }
-        // 响应报文转换
-        return JSON.parseObject(JSON.toJSONString(respData), baseReq.getRespType());
+        return map;
     }
 }

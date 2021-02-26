@@ -1,7 +1,6 @@
 unionpay:
   url: https://gateway.test.95516.com
   #url: https://gateway.95516.com
-  payUrl: http://liao47.com/pay/notify/unionPay
   frontUrl: http://liao47.com/pay/notify/union/webnotify
   notifyUrl: http://liao47.com/pay/notify/union/paynotify
   refundNotifyUrl: http://liao47.com/pay/notify/union/refundnotify
