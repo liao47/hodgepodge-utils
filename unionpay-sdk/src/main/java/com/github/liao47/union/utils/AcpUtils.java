@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -321,12 +320,13 @@ public class AcpUtils {
      */
     public static Date parseDate(String dateStr) {
         if (StringUtils.isEmpty(dateStr)) {
-            return new Date();
+            return null;
         }
         try {
-            LocalDateTime localDateTime = LocalDateTime.parse(LocalDate.now().format(DateTimeFormatter
-                    .ofPattern("yyyy")) + dateStr, DateTimeFormatter.ofPattern(PatternConstants.SIMPLE_DATE_TIME));
-            if (localDateTime.isAfter(LocalDateTime.now().plusMonths(10L))) {
+            LocalDateTime localDateTime =
+                    DateUtils.parseLocalDateTime(DateUtils.format(LocalDate.now(), "yyyy") + dateStr,
+                            PatternConstants.SIMPLE_DATE_TIME);
+            if (localDateTime != null && localDateTime.isAfter(LocalDateTime.now().plusMonths(10L))) {
                 //跨年比当前时间大几乎一年，则减去一年
                 localDateTime = localDateTime.minusYears(1L);
             }
@@ -334,6 +334,6 @@ public class AcpUtils {
         } catch (Exception e) {
             log.error("Parse date error, cause:", e);
         }
-        return new Date();
+        return null;
     }
 }

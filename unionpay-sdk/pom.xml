@@ -45,6 +45,10 @@
             <artifactId>common-utils</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.github.liao47</groupId>
+            <artifactId>extra-utils</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>

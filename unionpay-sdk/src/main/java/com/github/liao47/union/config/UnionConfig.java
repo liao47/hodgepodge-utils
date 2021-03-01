@@ -62,4 +62,15 @@ public class UnionConfig {
      * 验签根证书路径
      */
     private String rootCertPath;
+
+    /**
+     * 对账文件生成限制小时数<br>
+     *     银联早上9点出对账文件，这里设置超过几点后银联还没有对账文件，则认为当天没有交易
+     */
+    private Integer billExpireHour;
+
+    /**
+     * 对账文件下载路径
+     */
+    private String billDownloadDir;
 }
