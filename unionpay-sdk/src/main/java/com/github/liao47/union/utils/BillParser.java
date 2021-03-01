@@ -59,9 +59,10 @@ public class BillParser {
                     if (dataParser == null) {
                         log.warn("数据不完整，忽略银联对账信息第[{}]行:[{}]", index, lineData);
                     } else {
-                        handler.handle(dataParser.toBillDTO(), index++);
+                        handler.handle(dataParser.toBillDTO(), index);
                     }
                 }
+                index++;
             }
         } catch (FileNotFoundException e) {
             log.error("获取对账文件[{}]失败:", filePath, e);
@@ -109,36 +110,6 @@ public class BillParser {
                 return null;
             }
             return new DataParser(lineData, 0, 0);
-        }
-
-        private String next() {
-            if (index >= LENGTH_ARR.length) {
-                return null;
-            }
-            String data = lineData.substring(begin, Math.min(begin + LENGTH_ARR[index], lineData.length()));
-            begin += LENGTH_ARR[index] + 1;
-            index++;
-            return data;
-        }
-
-        private String nextString() {
-            return StringUtils.trim(this.next());
-        }
-
-        private Long nextLong() {
-            String str = this.nextString();
-            if (StringUtils.isEmpty(str)) {
-                return null;
-            }
-            try {
-                if (StringUtils.isAlphaSpace(String.valueOf(str.charAt(0)))) {
-                    return Long.valueOf(str.substring(1));
-                }
-                return Long.valueOf(str);
-            } catch (Exception e) {
-                log.warn("Parse long failure[{}]:", str, e);
-                return null;
-            }
         }
 
         public BillDTO toBillDTO() {
@@ -190,6 +161,36 @@ public class BillParser {
             billDTO.setReferIndex(nextString());
             billDTO.setReserve(nextString());
             return billDTO;
+        }
+
+        private String next() {
+            if (index >= LENGTH_ARR.length) {
+                return null;
+            }
+            String data = lineData.substring(begin, Math.min(begin + LENGTH_ARR[index], lineData.length()));
+            begin += LENGTH_ARR[index] + 1;
+            index++;
+            return data;
+        }
+
+        private String nextString() {
+            return StringUtils.trim(this.next());
+        }
+
+        private Long nextLong() {
+            String str = this.nextString();
+            if (StringUtils.isEmpty(str)) {
+                return null;
+            }
+            try {
+                if (StringUtils.isAlphaSpace(String.valueOf(str.charAt(0)))) {
+                    return Long.valueOf(str.substring(1));
+                }
+                return Long.valueOf(str);
+            } catch (Exception e) {
+                log.warn("Parse long failure[{}]:", str, e);
+                return null;
+            }
         }
     }
 }

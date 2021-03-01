@@ -138,10 +138,10 @@ public class UnionPayService {
      * 下载对账文件并解析<br>
      *     注：测试环境以777开头的商户号是不能通过文件传输接口获取对账文件的
      *     详见：https://open.unionpay.com/tjweb/support/faq/mchlist?id=433
-     * @param settleDate
-     * @param unionProp
-     * @param handler
-     * @return
+     * @param settleDate 账单日期
+     * @param unionProp 银联商户配置
+     * @param handler 解析后的账单处理器，为空只下载对账文件不解析
+     * @return 是否下载或解析成功
      */
     public boolean download(LocalDate settleDate, UnionProp unionProp, BillParser.Handler handler) {
         String dateStr = DateUtils.format(settleDate, PatternConstants.SIMPLE_DATE);
