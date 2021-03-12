@@ -66,7 +66,7 @@ public class UnionPayServiceTest {
 
     private UnionProp getProp() {
         UnionProp unionProp = new UnionProp();
-        unionProp.setMerId("777290058183840");
+        unionProp.setMerId("777290058186899");
         unionProp.setSignCertPwd("000000");
         unionProp.setSignCertPath("acp_test_sign.pfx");
         return unionProp;
