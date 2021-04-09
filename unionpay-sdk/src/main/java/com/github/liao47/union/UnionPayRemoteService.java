@@ -1,6 +1,7 @@
 package com.github.liao47.union;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.liao47.common.constants.UnionUriConstants;
 import com.github.liao47.common.exception.CustomException;
@@ -57,10 +58,13 @@ public class UnionPayRemoteService {
 
         // 下单接口跟其他的不一样
         if (UnionUriConstants.PAY.equals(baseReq.getReqUrl())) {
+            JSONObject json = new JSONObject();
+            json.put("url", url);
+            json.put("params", paramData);
             // 请求参数设置完毕，以下对请求参数进行签名并生成html表单，将表单写入浏览器跳转打开银联页面
             // 返回from表单给前端渲染页面即可，不用html
             String html = AcpUtils.createAutoForm(url, paramData);
-            return new PayResp(html);
+            return new PayResp(html, json.toJSONString());
         }
 
         MultiValueMap<String, Object> postParameters = new LinkedMultiValueMap<>();

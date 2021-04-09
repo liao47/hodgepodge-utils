@@ -7,6 +7,7 @@ import lombok.ToString;
 
 /**
  * 支付下单响应
+ * html和json可选其中一个使用
  * @author liao47
  * @date 2021/2/23 14:17
  */
@@ -21,4 +22,9 @@ public class PayResp extends BaseResp {
      * 在线支付页面
      */
     private String html;
+
+    /**
+     * json参数
+     */
+    private String json;
 }
