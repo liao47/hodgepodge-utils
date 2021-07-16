@@ -39,6 +39,17 @@ public class DateUtilsTest {
         System.out.println("--------------------------------");
         System.out.println(DateUtils.isLater(date, 0L));
         System.out.println(DateUtils.isEarly(date, 0L));
+
+        System.out.println(DateUtils.toLocalDateTime(1617092003L));
         Assert.assertTrue(DateUtils.isEarly(date, 0L));
+    }
+
+    @Test
+    public void test2() {
+        String str = "1617201910008765";
+        System.out.println(str.substring(0, 10));
+        System.out.println(str.substring(10));
+        System.out.println(new Date(1000000000000L));
+        System.out.println(DateUtils.parseDate("2021-03-31 22:45:11").getTime());
     }
 }
