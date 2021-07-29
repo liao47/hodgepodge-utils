@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -52,14 +53,18 @@ public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Ob
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if (StringUtils.isEmpty(Objects.toString(value, null))) {
+        if (value instanceof Collection) {
+            for (Object val : (Collection<?>) value) {
+                if (!this.isValid(val)) {
+                    return false;
+                }
+            }
             return true;
         }
-        for (Object obj : values) {
-            if (value.equals(obj)) {
-                return true;
-            }
-        }
-        return false;
+        return this.isValid(value);
+    }
+
+    private boolean isValid(Object value) {
+        return StringUtils.isEmpty(Objects.toString(value, null)) || values.contains(value);
     }
 }
