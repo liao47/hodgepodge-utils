@@ -23,7 +23,7 @@ public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Ob
     /**
      * 限制值
      */
-    private Set<Object> values;
+    private Set<String> values;
 
     @Override
     public void initialize(EnumPattern constraintAnnotation) {
@@ -42,7 +42,7 @@ public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Ob
             try {
                 Method method = enumClass.getMethod("get" + StringUtils.capitalize(constraintAnnotation.fieldName()));
                 for (Enum<?> anEnum : enumClass.getEnumConstants()) {
-                    values.add(method.invoke(anEnum));
+                    values.add(Objects.toString(method.invoke(anEnum), null));
                 }
             } catch (Exception e) {
                 throw new CustomException(String.format("Fail to invoke filed[%s] getter in [%s]",
@@ -65,6 +65,6 @@ public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Ob
     }
 
     private boolean isValid(Object value) {
-        return StringUtils.isEmpty(Objects.toString(value, null)) || values.contains(value);
+        return StringUtils.isEmpty(Objects.toString(value, null)) || values.contains(value.toString());
     }
 }
