@@ -1,11 +1,11 @@
 package com.github.liao47.apt.processor;
 
 import com.github.liao47.apt.annotation.Format;
-import com.github.liao47.apt.utils.Formatter;
 import com.github.liao47.apt.annotation.Mask;
 import com.github.liao47.apt.annotation.ToString;
 import com.github.liao47.apt.utils.Annotations;
 import com.github.liao47.apt.utils.Binaries;
+import com.github.liao47.apt.utils.Formatter;
 import com.github.liao47.apt.utils.VarComparator;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.api.JavacTrees;
@@ -14,7 +14,6 @@ import com.sun.tools.javac.processing.JavacProcessingEnvironment;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.tree.TreeTranslator;
-import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,7 +29,10 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * toString processor
@@ -320,7 +322,7 @@ public class ToStringProcessor extends AbstractProcessor {
         if (format != null) {
             value = treeMaker.Apply(List.of(memberAccess(Object.class.getCanonicalName()),
                             memberAccess(String.class.getCanonicalName())),
-                    memberAccess(com.github.liao47.apt.utils.Formatter.class.getCanonicalName() + ".format"),
+                    memberAccess(Formatter.class.getCanonicalName() + ".format"),
                     List.of(value, treeMaker.Literal(format.pattern())));
         }
 
