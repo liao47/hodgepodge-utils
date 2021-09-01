@@ -1,5 +1,6 @@
 import com.github.liao47.leetcode.P0160IntersectionOfTwoLinkedLists;
 import com.github.liao47.leetcode.P0160IntersectionOfTwoLinkedLists.ListNode;
+import com.github.liao47.leetcode.P0165CompareVersionNumbers;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,5 +31,19 @@ public class LeetCode0160To0169Test {
         headB = ListNode.of(1).next(5).head();
         Assert.assertNull(solver.getIntersectionNode(headA, headB));
         Assert.assertNull(solver.getIntersectionNode2(headA, headB));
+    }
+
+    @Test
+    public void test0165() {
+        P0165CompareVersionNumbers solver = new P0165CompareVersionNumbers();
+        Assert.assertEquals(0, solver.compareVersion("1.01", "1.001"));
+        Assert.assertEquals(0, solver.compareVersion("1.0", "1.0.0"));
+        Assert.assertEquals(-1, solver.compareVersion("0.1", "1.1"));
+        Assert.assertEquals(1, solver.compareVersion("1.0.1", "1"));
+        Assert.assertEquals(-1, solver.compareVersion("7.5.2.4", "7.5.3"));
+        Assert.assertEquals(1, solver.compareVersion("1.1", "1.0.1"));
+        Assert.assertEquals(0, solver.compareVersion("01", "1"));
+        Assert.assertEquals(1, solver.compareVersion("1.05", "1.1"));
+        Assert.assertEquals(-1, solver.compareVersion("1.2", "1.10"));
     }
 }
