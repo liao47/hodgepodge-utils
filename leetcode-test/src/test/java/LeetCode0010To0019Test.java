@@ -1,6 +1,4 @@
-import com.github.liao47.leetcode.P0010RegularExpressionMatching_timeout;
-import com.github.liao47.leetcode.P0010RegularExpressionMatching;
-import com.github.liao47.leetcode.P0011ContainerWithMostWater;
+import com.github.liao47.leetcode.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -55,5 +53,25 @@ public class LeetCode0010To0019Test {
         Assert.assertEquals(1, solver.maxArea(new int[]{1, 1}));
         Assert.assertEquals(16, solver.maxArea(new int[]{4, 3, 2, 1, 4}));
         Assert.assertEquals(2, solver.maxArea(new int[]{1, 2, 1}));
+    }
+
+    @Test
+    public void test0012() {
+        P0012IntegerToRoman solver = new P0012IntegerToRoman();
+        Assert.assertEquals("III", solver.intToRoman(3));
+        Assert.assertEquals("IV", solver.intToRoman(4));
+        Assert.assertEquals("IX", solver.intToRoman(9));
+        Assert.assertEquals("LVIII", solver.intToRoman(58));
+        Assert.assertEquals("MCMXCIV", solver.intToRoman(1994));
+    }
+
+    @Test
+    public void test0013() {
+        P0013RomanToInteger solver = new P0013RomanToInteger();
+        //Assert.assertEquals(3, solver.romanToInt("III"));
+        Assert.assertEquals(4, solver.romanToInt("IV"));
+        Assert.assertEquals(9, solver.romanToInt("IX"));
+        Assert.assertEquals(58, solver.romanToInt("LVIII"));
+        Assert.assertEquals(1994, solver.romanToInt("MCMXCIV"));
     }
 }
