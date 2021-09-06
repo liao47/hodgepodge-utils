@@ -198,8 +198,8 @@ public class ToStringProcessor extends AbstractProcessor {
             if (annotation.includeFieldNames()) {
                 tempStr.append("super=");
             }
-            binaries.plus(tempStr.toString())
-                    .plus(treeMaker.Apply(List.nil(), memberAccess("super.toString"), List.nil()));
+            binaries.concat(tempStr.toString())
+                    .concat(treeMaker.Apply(List.nil(), memberAccess("super.toString"), List.nil()));
             hasFront = true;
             tempStr = new StringBuilder();
         }
@@ -217,15 +217,15 @@ public class ToStringProcessor extends AbstractProcessor {
             if (annotation.includeFieldNames()) {
                 tempStr.append(jcVariableDecl.getName()).append('=');
             }
-            binaries.plus(tempStr.toString());
+            binaries.concat(tempStr.toString());
 
-            binaries.plus(this.getFieldValue(element, jcVariableDecl, !annotation.doNotUseGetters()));
+            binaries.concat(this.getFieldValue(element, jcVariableDecl, !annotation.doNotUseGetters()));
 
             hasFront = true;
             tempStr = new StringBuilder();
         }
         tempStr.append(annotation.brackets().getClosing());
-        binaries.plus(tempStr.toString());
+        binaries.concat(tempStr.toString());
 
         ListBuffer<JCTree.JCStatement> statements = new ListBuffer<>();
         statements.append(treeMaker.Return(binaries.getExpression()));

@@ -29,11 +29,11 @@ public class Binaries {
     }
 
     /**
-     * 相加
+     * 连接
      * @param expression
      * @return
      */
-    public Binaries plus(JCTree.JCExpression expression) {
+    public Binaries concat(JCTree.JCExpression expression) {
         if (this.expression == null) {
             this.expression = expression;
         } else {
@@ -44,11 +44,11 @@ public class Binaries {
     }
 
     /**
-     * 相加
+     * 连接
      * @param str
      * @return
      */
-    public Binaries plus(String str) {
-        return this.plus(this.treeMaker.Literal(str));
+    public Binaries concat(String str) {
+        return this.concat(this.treeMaker.Literal(str));
     }
 }
