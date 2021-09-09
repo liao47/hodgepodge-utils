@@ -1,5 +1,11 @@
 import com.github.liao47.leetcode.P0062UniquePaths;
+import com.github.liao47.leetcode.P0068TextJustification;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,5 +24,37 @@ public class LeetCode0060To0069Test {
         assertEquals(28, solver.uniquePaths(7, 3));
         assertEquals(6, solver.uniquePaths(3, 3));
         assertEquals(193536720, solver.uniquePaths(23, 12));
+    }
+
+    @Test
+    public void test0068() {
+        P0068TextJustification solver = new P0068TextJustification();
+        List<String> ans;
+
+        ans = solver.fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16);
+        System.out.println(ans);
+        Assert.assertFalse(ans.retainAll(Arrays.asList("This    is    an", "example  of text", "justification.  ")));
+
+        ans = solver.fullJustify(new String[]{"What", "must", "be", "acknowledgment", "shall", "be"}, 16);
+        System.out.println(ans);
+        Assert.assertFalse(ans.retainAll(Arrays.asList("What   must   be", "acknowledgment  ", "shall be        ")));
+
+        ans = solver.fullJustify(new String[]{"Science", "is", "what", "we", "understand", "well", "enough", "to",
+                "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"}, 20);
+        Assert.assertFalse(ans.retainAll(Arrays.asList("Science  is  what we", "understand      well",
+                "enough to explain to", "a  computer.  Art is", "everything  else  we", "do                  ")));
+
+        ans = solver.fullJustify(new String[]{"Listen", "to", "many,", "speak", "to", "a", "few."}, 6);
+        System.out.println(ans);
+        Assert.assertFalse(ans.retainAll(Arrays.asList("Listen","to    ","many, ","speak ","to   a","few.  ")));
+
+        ans = solver.fullJustify(new String[]{"Give", "me", "my", "Romeo;", "and,", "when", "he", "shall", "die,",
+                "Take", "him", "and", "cut", "him", "out", "in", "little", "stars,", "And", "he", "will", "make",
+                "the", "face", "of", "heaven", "so", "fine", "That", "all", "the", "world", "will", "be", "in", "love"
+                , "with", "night", "And", "pay", "no", "worship", "to", "the", "garish", "sun."}, 25);
+        Assert.assertFalse(ans.retainAll(Arrays.asList("Give  me  my  Romeo; and,", "when  he  shall die, Take",
+                "him  and  cut  him out in", "little stars, And he will", "make  the  face of heaven",
+                "so   fine  That  all  the", "world  will  be  in  love", "with  night  And  pay  no",
+                "worship   to  the  garish", "sun.                     ")));
     }
 }
