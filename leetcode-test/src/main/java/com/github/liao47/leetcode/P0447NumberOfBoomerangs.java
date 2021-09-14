@@ -45,11 +45,8 @@ public class P0447NumberOfBoomerangs {
         int count = 0;
         for (int i = 0; i < points.length; i++) {
             for (int j = 0; j < points.length; j++) {
-                for (int k = j + 1; k < points.length && i != j; k++) {
-                    if (k == i) {
-                        continue;
-                    }
-                    if (distance(points[i], points[j]) == distance(points[i], points[k])) {
+                for (int k = j + 1; i != j && k < points.length; k++) {
+                    if (k != i && distance(points[i], points[j]) == distance(points[i], points[k])) {
                         count += 2;
                     }
                 }
@@ -59,6 +56,30 @@ public class P0447NumberOfBoomerangs {
     }
 
     public int numberOfBoomerangs2(int[][] points) {
+        int[][] arr = new int[points.length][points.length];
+        int count = 0;
+        for (int i = 0; i < points.length; i++) {
+            for (int j = 0; j < points.length; j++) {
+                for (int k = j + 1; i != j && k < points.length; k++) {
+                    if (k == i) {
+                        continue;
+                    }
+                    if (arr[i][j] == 0) {
+                        arr[i][j] = arr[j][i] = distance(points[i], points[j]);
+                    }
+                    if (arr[i][k] == 0) {
+                        arr[i][k] = arr[k][i] = distance(points[i], points[k]);
+                    }
+                    if (arr[i][j] == arr[i][k]) {
+                        count += 2;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    public int numberOfBoomerangs3(int[][] points) {
         int count = 0;
         for (int i = 0; i < points.length; i++) {
             for (int j = i + 1; j < points.length; j++) {
@@ -81,7 +102,7 @@ public class P0447NumberOfBoomerangs {
         return count;
     }
 
-    public int numberOfBoomerangs(int[][] points) {
+    public int numberOfBoomerangs4(int[][] points) {
         int result = 0;
         for (int i = 0; i < points.length; i++) {
             Map<Integer, Integer> map = new HashMap<>(points.length);
@@ -89,9 +110,28 @@ public class P0447NumberOfBoomerangs {
                 if (j != i) {
                     int distance = distance(points[i], points[j]);
                     int count = map.getOrDefault(distance, 0);
-                    result += count * 2;
+                    result += count;
                     map.put(distance, ++count);
                 }
+            }
+        }
+        return result * 2;
+    }
+
+    public int numberOfBoomerangs(int[][] points) {
+        int n = points.length;
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            Map<Integer, Integer> map = new HashMap<>(n);
+            for (int j = 0; j < n; j++) {
+                if (j != i) {
+                    int distance = distance(points[i], points[j]);
+                    map.put(distance, map.getOrDefault(distance, 0) + 1);
+                }
+            }
+            for (Integer value : map.values()) {
+                //排列：A(n, 2) = n * (n - 1)
+                result += value * (value - 1);
             }
         }
         return result;
