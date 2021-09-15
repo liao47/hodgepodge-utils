@@ -1,8 +1,11 @@
 import com.github.liao47.leetcode.P0160IntersectionOfTwoLinkedLists;
 import com.github.liao47.leetcode.P0160IntersectionOfTwoLinkedLists.ListNode;
+import com.github.liao47.leetcode.P0162FindPeakElement;
 import com.github.liao47.leetcode.P0165CompareVersionNumbers;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  * @author liaoshiqing
@@ -31,6 +34,19 @@ public class LeetCode0160To0169Test {
         headB = ListNode.of(1).next(5).head();
         Assert.assertNull(solver.getIntersectionNode(headA, headB));
         Assert.assertNull(solver.getIntersectionNode2(headA, headB));
+    }
+
+    @Test
+    public void test0162() {
+        P0162FindPeakElement solver = new P0162FindPeakElement();
+        Assert.assertEquals(2, solver.findPeakElement(new int[]{1, 2, 3, 1}));
+        Assert.assertTrue(Arrays.asList(1, 5).contains(solver.findPeakElement(new int[]{1, 2, 1, 3, 5, 6, 4})));
+        Assert.assertEquals(0, solver.findPeakElement(new int[]{3, 2, 1}));
+        Assert.assertEquals(2, solver.findPeakElement(new int[]{1, 2, 3}));
+        Assert.assertEquals(1, solver.findPeakElement(new int[]{1, 2, 1, 0, 1}));
+        Assert.assertEquals(3, solver.findPeakElement(new int[]{1, 0, 1, 2, 1}));
+        Assert.assertEquals(1, solver.findPeakElement(new int[]{1, 2}));
+        Assert.assertEquals(0, solver.findPeakElement(new int[]{2, 1}));
     }
 
     @Test

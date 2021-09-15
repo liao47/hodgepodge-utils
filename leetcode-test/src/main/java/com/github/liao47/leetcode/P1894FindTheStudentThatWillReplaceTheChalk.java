@@ -91,7 +91,7 @@ public class P1894FindTheStudentThatWillReplaceTheChalk {
         int left = 0;
         int right = arr.length - 1;
         while (left < right) {
-            int mid = (right + left) >> 1;
+            int mid = right + left >>> 1;
             if (arr[mid] <= target) {
                 left = mid + 1;
             } else {
