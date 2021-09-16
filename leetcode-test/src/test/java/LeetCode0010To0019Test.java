@@ -74,4 +74,14 @@ public class LeetCode0010To0019Test {
         Assert.assertEquals(58, solver.romanToInt("LVIII"));
         Assert.assertEquals(1994, solver.romanToInt("MCMXCIV"));
     }
+
+    @Test
+    public void test0014() {
+        P0014LongestCommonPrefix solver = new P0014LongestCommonPrefix();
+        Assert.assertEquals("fl", solver.longestCommonPrefix(new String[]{"flower", "flow", "flight"}));
+        Assert.assertEquals("", solver.longestCommonPrefix(new String[]{"dog","racecar","car"}));
+        Assert.assertEquals("", solver.longestCommonPrefix(new String[]{""}));
+        Assert.assertEquals("a", solver.longestCommonPrefix(new String[]{"a"}));
+        Assert.assertEquals("a", solver.longestCommonPrefix(new String[]{"ab", "a"}));
+    }
 }

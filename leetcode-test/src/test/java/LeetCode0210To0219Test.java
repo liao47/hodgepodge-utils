@@ -1,5 +1,9 @@
+import com.github.liao47.leetcode.P0212WordSearchII;
 import com.github.liao47.leetcode.P0217ContainsDuplicate;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +13,18 @@ import static org.junit.Assert.assertTrue;
  * @date 2020/12/17 13:54
  */
 public class LeetCode0210To0219Test {
+    @Test
+    public void test0212() {
+        P0212WordSearchII solver = new P0212WordSearchII();
+        Assert.assertTrue(Arrays.asList("eat","oath").containsAll(solver.findWords(new char[][]{{'o', 'a', 'a', 'n'},
+                {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}},
+                new String[]{"oath", "pea", "eat", "rain"})));
+        Assert.assertTrue(solver.findWords(new char[][]{{'a','b'}, {'c','d'}}, new String[]{"abcb"}).isEmpty());
+        Assert.assertTrue(solver.findWords(new char[][]{{'o', 'a', 'a', 'n'},
+                        {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}},
+                new String[]{"oateoaan", "pea", "rain"}).isEmpty());
+    }
+
     @Test
     public void test0217() {
         P0217ContainsDuplicate solver = new P0217ContainsDuplicate();
