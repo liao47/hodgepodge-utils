@@ -12,12 +12,12 @@ public class OfferII100To109Test {
     @Test
     public void test107() {
         OII1072bCMpM solver = new OII1072bCMpM();
-    /*    Assert.assertArrayEquals(new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}},
+        Assert.assertArrayEquals(new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}},
                 solver.updateMatrix(new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}));
         Assert.assertArrayEquals(new int[][]{{0, 0, 0}, {0, 1, 0}, {1, 2, 1}},
                 solver.updateMatrix(new int[][]{{0, 0, 0}, {0, 1, 0}, {1, 1, 1}}));
         Assert.assertArrayEquals(new int[][]{{0, 0, 1}, {0, 1, 2}, {1, 2, 3}},
-                solver.updateMatrix(new int[][]{{0, 0, 1}, {0, 1, 1}, {1, 1, 1}}));*/
+                solver.updateMatrix(new int[][]{{0, 0, 1}, {0, 1, 1}, {1, 1, 1}}));
         Assert.assertArrayEquals(new int[][]{{0, 0, 1, 2}, {0, 1, 2, 2}, {1, 2, 2, 1}, {2, 2, 1, 0}},
                 solver.updateMatrix(new int[][]{{0, 0, 1, 1}, {0, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 0}}));
         Assert.assertArrayEquals(new int[][]{
