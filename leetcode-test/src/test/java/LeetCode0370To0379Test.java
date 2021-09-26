@@ -1,4 +1,6 @@
+import com.github.liao47.leetcode.P0371SumOfWwoIntegers;
 import com.github.liao47.leetcode.P0376WiggleSubsequence;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,6 +10,15 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/12 9:45
  */
 public class LeetCode0370To0379Test {
+    @Test
+    public void test0371() {
+        P0371SumOfWwoIntegers solver = new P0371SumOfWwoIntegers();
+        Assert.assertEquals(3, solver.getSum(1, 2));
+        Assert.assertEquals(5, solver.getSum(2, 3));
+        Assert.assertEquals(2, solver.getSum(2, 0));
+        Assert.assertEquals(-5, solver.getSum(-2, -3));
+    }
+
     @Test
     public void test0376() {
         P0376WiggleSubsequence solver = new P0376WiggleSubsequence();
