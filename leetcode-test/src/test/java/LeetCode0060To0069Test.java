@@ -1,4 +1,5 @@
 import com.github.liao47.leetcode.P0062UniquePaths;
+import com.github.liao47.leetcode.P0066PlusOne;
 import com.github.liao47.leetcode.P0068TextJustification;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -25,6 +27,15 @@ public class LeetCode0060To0069Test {
         assertEquals(28, solver.uniquePaths(7, 3));
         assertEquals(6, solver.uniquePaths(3, 3));
         assertEquals(193536720, solver.uniquePaths(23, 12));
+    }
+
+    @Test
+    public void test0066() {
+        P0066PlusOne solver = new P0066PlusOne();
+        assertArrayEquals(new int[]{1, 2, 4}, solver.plusOne(new int[]{1, 2, 3}));
+        assertArrayEquals(new int[]{4, 3, 2, 2}, solver.plusOne(new int[]{4, 3, 2, 1}));
+        assertArrayEquals(new int[]{1}, solver.plusOne(new int[]{0}));
+        assertArrayEquals(new int[]{1, 0}, solver.plusOne(new int[]{9}));
     }
 
     @Test
