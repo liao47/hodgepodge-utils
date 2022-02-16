@@ -26,4 +26,20 @@ public class ReadFileUtils {
         }
         return dataList;
     }
+
+    public static void write(String str, String filename) {
+        try {
+            File file = new File(filename);
+            if (!file.exists() && !file.createNewFile()) {
+                System.out.println("create new file fail");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try (FileOutputStream fos = new FileOutputStream(filename)) {
+            fos.write(str.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

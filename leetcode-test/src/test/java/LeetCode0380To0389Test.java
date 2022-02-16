@@ -1,6 +1,10 @@
+import com.github.liao47.leetcode.P0384ShuffleAnArray;
 import com.github.liao47.leetcode.P0389FindTheDifference;
 import com.github.liao47.leetcode.P0387FirstUniqueCharacterInAString;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +13,18 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/18 9:16
  */
 public class LeetCode0380To0389Test {
+    @Test
+    public void test0384() {
+        P0384ShuffleAnArray.Solution solution = new P0384ShuffleAnArray.Solution(new int[]{1, 2, 3});
+        System.out.println(Arrays.toString(solution.shuffle()));
+        Assert.assertArrayEquals(new int[]{1, 2, 3}, solution.reset());
+        System.out.println(Arrays.toString(solution.shuffle()));
+        System.out.println(Arrays.toString(solution.shuffle()));
+        System.out.println(Arrays.toString(solution.shuffle()));
+        System.out.println(Arrays.toString(solution.shuffle()));
+        System.out.println(Arrays.toString(solution.shuffle()));
+    }
+
     @Test
     public void test0387() {
         P0387FirstUniqueCharacterInAString solver = new P0387FirstUniqueCharacterInAString();
