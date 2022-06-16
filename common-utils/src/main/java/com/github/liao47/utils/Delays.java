@@ -10,7 +10,7 @@ import org.slf4j.MDC;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.*;
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 /**
  * 延时任务处理器
@@ -61,37 +61,35 @@ public class Delays<T extends DelayedTask> {
     /**
      * 延时处理任务
      *
-     * @param function 执行任务方法
+     * @param consumer 执行任务方法
      * @param <T>
      */
-    public void execute(Function<T, Object> function) {
-        this.execute(function, null);
+    public void execute(Consumer<T> consumer) {
+        this.execute(consumer, null);
     }
 
     /**
      * 延时处理任务
      *
-     * @param function 执行任务方法
+     * @param consumer 执行任务方法
      * @param traceKey 日志流水号键
      * @param <T>
      */
-    public void execute(Function<T, Object> function, String traceKey) {
+    public void execute(Consumer<T> consumer, String traceKey) {
         String trace = StringUtils.isEmpty(traceKey) ? null : MDC.get(traceKey);
-        EXECUTOR_MAP.computeIfAbsent(key, k -> {
-            Executors.newSingleThreadExecutor();
-            return new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>(),
-                    r -> {
-                        Thread thread = Executors.defaultThreadFactory().newThread(r);
-                        thread.setName("delay-thread-" + k.toLowerCase());
-                        return thread;
-                    }, new ThreadPoolExecutor.DiscardPolicy());
-        }).execute(() -> {
+        EXECUTOR_MAP.computeIfAbsent(key, k -> new ThreadPoolExecutor(
+                1, 1, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>(),
+                r -> {
+                    Thread thread = Executors.defaultThreadFactory().newThread(r);
+                    thread.setName("delay-thread-" + k.toLowerCase());
+                    return thread;
+                }, new ThreadPoolExecutor.DiscardPolicy())).execute(() -> {
             if (trace != null) {
                 MDC.put(traceKey, trace);
             }
             while (!delayQueue.isEmpty()) {
                 try {
-                    function.apply(delayQueue.take());
+                    consumer.accept(delayQueue.take());
                 } catch (InterruptedException e) {
                     log.error("延时任务[{}]获取失败", key);
                     Thread.currentThread().interrupt();
