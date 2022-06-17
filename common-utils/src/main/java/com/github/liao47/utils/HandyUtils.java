@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -117,7 +118,7 @@ public class HandyUtils {
         sb.append('[');
         for (;;) {
             E e = it.next();
-            sb.append(function == null ? e : function.apply(e));
+            sb.append(function == null || e == null ? e : function.apply(e));
             if (!it.hasNext()) {
                 return sb.append(']').toString();
             }
@@ -128,30 +129,60 @@ public class HandyUtils {
     /**
      * 转换为属性字段list
      * @param list
-     * @param function
+     * @param mapper
      * @param <E>
      * @param <T>
      * @return
      */
-    public static <E, T> List<T> toList(List<E> list, Function<E, T> function) {
+    public static <E, T> List<T> toList(List<E> list, Function<E, T> mapper) {
         if (isEmpty(list)) {
             return Collections.emptyList();
         }
-        return list.stream().map(function).collect(Collectors.toList());
+        return list.stream().map(mapper).collect(Collectors.toList());
     }
 
     /**
      * 按属性字段转换为map
      * @param list
-     * @param function
+     * @param keyMapper
      * @param <K>
      * @param <V>
      * @return
      */
-    public static <K, V> Map<K, V> toMap(List<V> list, Function<V, K> function) {
+    public static <K, V> Map<K, V> toMap(List<V> list, Function<V, K> keyMapper) {
         if (isEmpty(list)) {
             return Collections.emptyMap();
         }
-        return list.stream().collect(Collectors.toMap(function, v -> v, (v1, v2) -> v1));
+        return list.stream().collect(Collectors.toMap(keyMapper, v -> v, (v1, v2) -> v1));
+    }
+
+    /**
+     * 分组
+     * @param list
+     * @param classifier
+     * @param mapFactory
+     * @param <K>
+     * @param <E>
+     * @param <M>
+     * @return
+     */
+    public static <K, E, M extends Map<K, List<E>>> Map<K, List<E>> grouping(List<E> list, Function<E, K> classifier,
+                                                                             Supplier<M> mapFactory) {
+        if (isEmpty(list)) {
+            return Collections.emptyMap();
+        }
+        return list.stream().collect(Collectors.groupingBy(classifier, mapFactory, Collectors.toList()));
+    }
+
+    /**
+     * 分组
+     * @param list
+     * @param classifier
+     * @param <K>
+     * @param <E>
+     * @return
+     */
+    public static <K, E> Map<K, List<E>> grouping(List<E> list, Function<E, K> classifier) {
+        return grouping(list, classifier, HashMap::new);
     }
 }

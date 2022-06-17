@@ -14,4 +14,12 @@ public class ClassA {
     private String fieldStr;
 
     private Long fieldLong;
+
+    public static ClassA of(String name, String fieldStr, Long fieldLong) {
+        ClassA a = new ClassA();
+        a.setB(new ClassB(name));
+        a.setFieldStr(fieldStr);
+        a.setFieldLong(fieldLong);
+        return a;
+    }
 }
