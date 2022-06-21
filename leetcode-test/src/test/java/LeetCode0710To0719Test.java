@@ -1,5 +1,11 @@
+import com.alibaba.fastjson.JSON;
 import com.github.liao47.leetcode.P0714BestTimeToBuyAndSellStockWithTransactionFee;
+import com.github.liao47.leetcode.P0715RangeModule;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -82,5 +88,149 @@ public class LeetCode0710To0719Test {
                 2339, 752, 1428, 4121, 3267, 3518, 4652, 3119, 1818, 4596, 3181, 3159, 4069, 3375, 3762, 1386, 3054,
                 3052, 67, 2246, 1493, 2738, 2835, 4906, 303, 1107, 3111, 1525, 1739, 437, 2941, 545, 1458, 993, 1871, 640, 4047, 2017, 4971, 4917, 701, 4811, 4335, 3221, 4187, 4414, 756, 3069, 3052, 812, 3135, 928, 1264, 3356, 4518, 2136, 2691, 2638, 3156, 4909, 2944, 3920, 4609, 1856, 654, 4643, 2932, 309, 3613, 4479, 4173, 1848, 165, 1171, 592, 3233, 3151, 4009, 3952, 2624, 38, 2616, 2056, 841, 1764, 4667, 1526, 125, 3963, 933, 3951, 2151, 2110, 4666, 1000, 1985, 3868, 2735, 635, 277, 1129, 572, 2136, 980, 2731, 556, 3012, 2900, 2180, 1912, 2799, 1771, 4441, 2666, 3958, 4381, 3677, 4218, 1276, 3512, 4868, 4579, 2307, 3952, 3544, 651, 1300, 218, 489, 2837, 3737, 509, 3421, 879, 4353, 4695};
         assertEquals(595352, solver.maxProfit(arr, 655));
+    }
+
+    @Test
+    public void test0715() {
+        P0715RangeModule.RangeModule rangeModule = new P0715RangeModule.RangeModule();
+        rangeModule.addRange(10, 20);
+        rangeModule.removeRange(14, 16);
+        Assert.assertTrue(rangeModule.queryRange(10, 14));
+        Assert.assertFalse(rangeModule.queryRange(13, 15));
+        Assert.assertTrue(rangeModule.queryRange(16,17));
+        rangeModule.addRange(13, 15);
+        Assert.assertTrue(rangeModule.queryRange(11, 15));
+        Assert.assertFalse(rangeModule.queryRange(11, 16));
+
+        rangeModule = new P0715RangeModule.RangeModule();
+        rangeModule.addRange(10, 180);
+        rangeModule.addRange(150, 200);
+        rangeModule.addRange(250, 500);
+        Assert.assertTrue(rangeModule.queryRange(50, 100));
+        Assert.assertFalse(rangeModule.queryRange(180, 300));
+        Assert.assertFalse(rangeModule.queryRange(600, 1000));
+        rangeModule.removeRange(50, 150);
+        Assert.assertFalse(rangeModule.queryRange(50, 100));
+
+        rangeModule = new P0715RangeModule.RangeModule();
+        rangeModule.addRange(5, 8);
+        Assert.assertFalse(rangeModule.queryRange(3, 4));
+        rangeModule.removeRange(5, 6);
+        rangeModule.removeRange(3, 6);
+        rangeModule.addRange(1, 3);
+        Assert.assertTrue(rangeModule.queryRange(2, 3));
+        rangeModule.addRange(4, 8);
+        Assert.assertTrue(rangeModule.queryRange(2, 3));
+        rangeModule.removeRange(4, 9);
+
+        rangeModule = new P0715RangeModule.RangeModule();
+        rangeModule.addRange(1, 3);
+        rangeModule.addRange(5, 8);
+        Assert.assertFalse(rangeModule.queryRange(4, 5));
+
+        rangeModule = new P0715RangeModule.RangeModule();
+        rangeModule.addRange(8, 9);
+        Assert.assertFalse(rangeModule.queryRange(1, 8));
+        rangeModule.removeRange(1, 8);
+        Assert.assertFalse(rangeModule.queryRange(5, 8));
+        rangeModule.removeRange(3, 9);
+        rangeModule.addRange(8, 9);
+        Assert.assertFalse(rangeModule.queryRange(4, 5));
+        rangeModule.removeRange(2, 9);
+        rangeModule.addRange(5, 6);
+
+        String optStr = "[\"RangeModule\",\"queryRange\",\"queryRange\",\"addRange\",\"addRange\",\"queryRange\"," +
+                "\"queryRange\",\"queryRange\",\"removeRange\",\"addRange\",\"removeRange\",\"addRange\"," +
+                "\"removeRange\",\"removeRange\",\"queryRange\",\"queryRange\",\"queryRange\",\"queryRange\"," +
+                "\"removeRange\",\"addRange\",\"removeRange\",\"queryRange\",\"addRange\",\"addRange\"," +
+                "\"removeRange\",\"queryRange\",\"removeRange\",\"removeRange\",\"removeRange\",\"addRange\"," +
+                "\"removeRange\",\"addRange\",\"queryRange\",\"queryRange\",\"queryRange\",\"queryRange\"," +
+                "\"queryRange\",\"addRange\",\"removeRange\",\"addRange\",\"addRange\",\"addRange\",\"queryRange\"," +
+                "\"removeRange\",\"addRange\",\"queryRange\",\"addRange\",\"queryRange\",\"removeRange\"," +
+                "\"removeRange\",\"addRange\",\"addRange\",\"queryRange\",\"queryRange\",\"addRange\",\"addRange\"," +
+                "\"removeRange\",\"removeRange\",\"removeRange\",\"queryRange\",\"removeRange\",\"removeRange\"," +
+                "\"addRange\",\"queryRange\",\"removeRange\",\"addRange\",\"addRange\",\"queryRange\"," +
+                "\"removeRange\",\"queryRange\",\"addRange\",\"addRange\",\"addRange\",\"addRange\",\"addRange\"," +
+                "\"removeRange\",\"removeRange\",\"addRange\",\"queryRange\",\"queryRange\",\"removeRange\"," +
+                "\"removeRange\",\"removeRange\",\"addRange\",\"queryRange\",\"removeRange\",\"queryRange\"," +
+                "\"addRange\",\"removeRange\",\"removeRange\",\"queryRange\"]";
+        String paramStr = "[[],[21,34],[27,87],[44,53],[69,89],[23,26],[80,84],[11,12],[86,91],[87,94],[34,52],[1," +
+                "59],[62,96],[34,83],[11,59],[59,79],[1,13],[21,23],[9,61],[17,21],[4,8],[19,25],[71,98],[23,94],[58," +
+                "95],[12,78],[46,47],[50,70],[84,91],[51,63],[26,64],[38,87],[41,84],[19,21],[18,56],[23,39],[29,95]," +
+                "[79,100],[76,82],[37,55],[30,97],[1,36],[18,96],[45,86],[74,92],[27,78],[31,35],[87,91],[37,84],[26," +
+                "57],[65,87],[76,91],[37,77],[18,66],[22,97],[2,91],[82,98],[41,46],[6,78],[44,80],[90,94],[37,88]," +
+                "[75,90],[23,37],[18,80],[92,93],[3,80],[68,86],[68,92],[52,91],[43,53],[36,37],[60,74],[4,9],[44," +
+                "80],[85,93],[56,83],[9,26],[59,64],[16,66],[29,36],[51,96],[56,80],[13,87],[42,72],[6,56],[24,53]," +
+                "[43,71],[36,83],[15,45],[10,48]]";
+        String resultStr = "[null,false,false,null,null,false,true,false,null,null,null,null,null,null,false,false," +
+                "true,true,null,null,null,false,null,null,null,false,null,null,null,null,null,null,true,true,false," +
+                "false,false,null,null,null,null,null,true,null,null,false,null,true,null,null,null,null,false,false," +
+                "null,null,null,null,null,false,null,null,null,false,null,null,null,true,null,false,null,null,null," +
+                "null,null,null,null,null,false,false,null,null,null,null,true,null,false,null,null,null,false]";
+        test0715(optStr, paramStr, resultStr);
+
+        optStr = "[\"RangeModule\",\"addRange\",\"removeRange\",\"removeRange\",\"addRange\",\"removeRange\"," +
+                "\"addRange\",\"queryRange\",\"queryRange\",\"queryRange\"]";
+        paramStr = "[[],[6,8],[7,8],[8,9],[8,9],[1,3],[1,8],[2,4],[2,9],[4,6]]";
+        resultStr = "[null,null,null,null,null,null,null,true,true,true]";
+        test0715(optStr, paramStr, resultStr);
+
+        optStr = "[\"RangeModule\",\"addRange\",\"removeRange\",\"queryRange\",\"queryRange\",\"queryRange\"," +
+                "\"removeRange\",\"removeRange\",\"removeRange\",\"addRange\",\"addRange\",\"addRange\"," +
+                "\"removeRange\",\"addRange\",\"queryRange\",\"addRange\",\"addRange\",\"queryRange\",\"queryRange\"," +
+                "\"addRange\",\"removeRange\",\"removeRange\",\"removeRange\",\"queryRange\",\"queryRange\"," +
+                "\"addRange\",\"addRange\",\"queryRange\",\"addRange\",\"addRange\",\"removeRange\",\"addRange\"," +
+                "\"addRange\",\"queryRange\",\"removeRange\",\"queryRange\",\"removeRange\",\"addRange\"," +
+                "\"addRange\",\"queryRange\",\"removeRange\",\"removeRange\",\"addRange\",\"queryRange\"," +
+                "\"queryRange\",\"removeRange\",\"removeRange\",\"removeRange\",\"queryRange\",\"addRange\"," +
+                "\"removeRange\",\"removeRange\",\"queryRange\",\"removeRange\",\"removeRange\",\"queryRange\"," +
+                "\"addRange\",\"addRange\",\"removeRange\",\"queryRange\",\"queryRange\",\"addRange\"," +
+                "\"removeRange\",\"removeRange\",\"addRange\",\"addRange\",\"addRange\",\"addRange\",\"queryRange\"," +
+                "\"removeRange\",\"addRange\",\"addRange\",\"addRange\",\"queryRange\",\"addRange\",\"removeRange\"," +
+                "\"queryRange\",\"removeRange\",\"removeRange\",\"removeRange\",\"queryRange\",\"queryRange\"," +
+                "\"queryRange\",\"queryRange\",\"queryRange\",\"removeRange\",\"queryRange\",\"removeRange\"," +
+                "\"queryRange\",\"addRange\",\"queryRange\"]";
+        paramStr = "[[],[14,100],[1,8],[77,80],[8,43],[4,13],[3,9],[45,49],[41,90],[58,79],[4,83],[34,39],[84,100]," +
+                "[8,9],[32,56],[35,46],[9,100],[85,99],[23,33],[10,31],[15,45],[52,70],[26,42],[30,70],[60,69],[10," +
+                "94],[2,89],[26,39],[46,93],[30,83],[42,48],[47,74],[39,45],[14,64],[3,97],[16,34],[28,100],[19,37]," +
+                "[27,91],[55,62],[64,65],[2,48],[55,78],[21,89],[31,76],[13,32],[2,84],[21,88],[12,31],[89,97],[56," +
+                "72],[16,75],[18,90],[46,60],[20,62],[28,77],[5,78],[58,61],[38,70],[24,73],[72,96],[5,24],[43,49]," +
+                "[2,20],[4,69],[18,98],[26,42],[14,18],[46,58],[16,90],[32,47],[19,36],[26,78],[7,58],[42,54],[42," +
+                "83],[3,83],[54,82],[71,91],[22,37],[38,94],[20,44],[37,89],[15,54],[1,64],[63,65],[55,58],[23,44]," +
+                "[25,87],[38,85],[27,71]]";
+        resultStr = "[null,null,null,true,false,false,null,null,null,null,null,null,null,null,true,null,null,true," +
+                "true,null,null,null,null,false,false,null,null,true,null,null,null,null,null,false,null,false,null," +
+                "null,null,true,null,null,null,false,false,null,null,null,false,null,null,null,false,null,null,false," +
+                "null,null,null,false,false,null,null,null,null,null,null,null,true,null,null,null,null,false,null," +
+                "null,false,null,null,null,false,false,false,false,false,null,false,null,false,null,false]";
+        test0715(optStr, paramStr, resultStr);
+    }
+
+    private void test0715(String optStr, String paramStr, String resultStr) {
+        List<String> opts = JSON.parseArray(optStr, String.class);
+        List<int[]> params = JSON.parseArray(paramStr, int[].class);
+        List<Boolean> results = JSON.parseArray(resultStr, Boolean.class);
+
+        P0715RangeModule.RangeModule rangeModule = new P0715RangeModule.RangeModule();
+        for (int i = 0; i < opts.size(); i++) {
+            String opt = opts.get(i);
+            int[] param = params.get(i);
+            System.out.printf("%s:%d:%s%n", opt, i, Arrays.toString(param));
+            switch (opt) {
+                case "RangeModule":
+                    rangeModule = new P0715RangeModule.RangeModule();
+                    break;
+                case "queryRange":
+                    Assert.assertEquals(rangeModule.queryRange(param[0], param[1]), results.get(i));
+                    break;
+                case "addRange":
+                    rangeModule.addRange(param[0], param[1]);
+                    break;
+                case "removeRange":
+                    rangeModule.removeRange(param[0], param[1]);
+                    break;
+                default:
+            }
+        }
     }
 }
