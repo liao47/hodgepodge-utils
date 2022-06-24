@@ -1,8 +1,11 @@
 import com.github.liao47.leetcode.P0430FlattenAMultilevelDoublyLinkedList;
 import com.github.liao47.leetcode.P0430FlattenAMultilevelDoublyLinkedList.Node;
 import com.github.liao47.leetcode.P0435NonOverlappingIntervals;
+import com.github.liao47.leetcode.P0438FindAllAnagramsInAString;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,5 +43,13 @@ public class LeetCode0430To0439Test {
         assertEquals(0, solver.eraseOverlapIntervals(new int[][]{{1, 2}, {2, 3}}));
         assertEquals(2, solver.eraseOverlapIntervals(new int[][]{{1, 100}, {11, 22}, {1, 11}, {2, 12}}));
         assertEquals(2, solver.eraseOverlapIntervals(new int[][]{{0, 2}, {1, 3}, {2, 4}, {3, 5}, {4, 6}}));
+    }
+
+    @Test
+    public void test0438() {
+        P0438FindAllAnagramsInAString solver = new P0438FindAllAnagramsInAString();
+        assertEquals(Arrays.asList(0, 6), solver.findAnagrams("cbaebabacd", "abc"));
+        assertEquals(Arrays.asList(0, 1, 2), solver.findAnagrams("abab", "ab"));
+        assertEquals(Arrays.asList(3, 4, 6), solver.findAnagrams("abaacbabc", "abc"));
     }
 }
