@@ -1,13 +1,32 @@
+import com.github.liao47.leetcode.P0030SubstringWithConcatenationOfAllWords;
 import com.github.liao47.leetcode.P0034FindFirstAndLastPositionOfElementInSortedArray;
 import com.github.liao47.leetcode.P0036ValidSudoku;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  * @author liaoshiqing
  * @date 2021/7/23 14:23
  */
 public class LeetCode0030To0039Test {
+    @Test
+    public void test0030() {
+        P0030SubstringWithConcatenationOfAllWords solver = new P0030SubstringWithConcatenationOfAllWords();
+        String[] words = new String[]{"foo", "bar"};
+        Assert.assertEquals(Arrays.asList(0, 9), solver.findSubstring("barfoothefoobarman", words));
+
+        words = new String[]{"word", "good", "best", "word"};
+        Assert.assertTrue(solver.findSubstring("wordgoodgoodgoodbestword", words).isEmpty());
+
+        words = new String[]{"bar", "foo", "the"};
+        Assert.assertEquals(Arrays.asList(6, 9, 12), solver.findSubstring("barfoofoobarthefoobarman", words));
+
+        words = new String[]{"to", "to", "to"};
+        Assert.assertEquals(Arrays.asList(2, 4, 6), solver.findSubstring("ottototototo", words));
+    }
+
     @Test
     public void test0034() {
         P0034FindFirstAndLastPositionOfElementInSortedArray solver =

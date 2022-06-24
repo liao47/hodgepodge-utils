@@ -1,5 +1,7 @@
 package com.github.liao47.leetcode;
 
+import com.github.liao47.leetcode.bo.TreeNode;
+
 /**
  * 513. 找树左下角的值
  *
@@ -38,19 +40,6 @@ package com.github.liao47.leetcode;
  * @date 2022/6/22 9:22
  */
 public class P0513FindBottomLeftTreeValue {
-    
-    public static class TreeNode {
-        public int val;
-        public TreeNode left;
-        public TreeNode right;
-        public TreeNode() {}
-        public TreeNode(int val) { this.val = val; }
-        public TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
 
     public int findBottomLeftValue(TreeNode root) {
         return postorderTraversal(root, 0)[1];

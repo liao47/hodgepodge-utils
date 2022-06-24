@@ -1,5 +1,7 @@
 import com.github.liao47.leetcode.P0502Ipo;
+import com.github.liao47.leetcode.P0508MostFrequentSubtreeSum;
 import com.github.liao47.leetcode.P0509FibonacciNumber;
+import com.github.liao47.leetcode.bo.TreeNode;
 import com.github.liao47.leetcode.utils.ReadFileUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,6 +36,13 @@ public class LeetCode0500To0509Test {
         System.out.println("cost:" + cost);
         Assert.assertEquals(100010000, ans);
         Assert.assertTrue(cost < 500);
+    }
+
+    @Test
+    public void test0508() {
+        P0508MostFrequentSubtreeSum solver = new P0508MostFrequentSubtreeSum();
+        Assert.assertArrayEquals(new int[]{2, -3, 4}, solver.findFrequentTreeSum(TreeNode.of(new Integer[]{5, 2, -3})));
+        Assert.assertArrayEquals(new int[]{2}, solver.findFrequentTreeSum(TreeNode.of(new Integer[]{5, 2, -5})));
     }
 
     @Test
