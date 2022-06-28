@@ -1,4 +1,6 @@
 import com.alibaba.fastjson.JSON;
+import com.github.liao47.leetcode.P0710RandomPickWithBlacklist;
+import com.github.liao47.leetcode.P0710RandomPickWithBlacklist.Solution;
 import com.github.liao47.leetcode.P0714BestTimeToBuyAndSellStockWithTransactionFee;
 import com.github.liao47.leetcode.P0715RangeModule;
 import org.junit.Assert;
@@ -14,6 +16,25 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/17 9:53
  */
 public class LeetCode0710To0719Test {
+    @Test
+    public void test0710() {
+        int n = 7;
+        int[] blackList = new int[]{2, 3, 5};
+        Solution solution = new Solution(n, blackList);
+        assert0710(n, blackList, solution.pick());
+        assert0710(n, blackList, solution.pick());
+        assert0710(n, blackList, solution.pick());
+        assert0710(n, blackList, solution.pick());
+
+        n = 3;
+        blackList = new int[]{2};
+        solution = new Solution(n, blackList);
+        assert0710(n, blackList, solution.pick());
+        assert0710(n, blackList, solution.pick());
+        assert0710(n, blackList, solution.pick());
+        assert0710(n, blackList, solution.pick());
+    }
+
     @Test
     public void test0714() {
         P0714BestTimeToBuyAndSellStockWithTransactionFee solver = new P0714BestTimeToBuyAndSellStockWithTransactionFee();
@@ -231,6 +252,13 @@ public class LeetCode0710To0719Test {
                     break;
                 default:
             }
+        }
+    }
+
+    private void assert0710(int n, int[] blackList, int res) {
+        Assert.assertTrue(res < n);
+        for (int i : blackList) {
+            Assert.assertNotEquals(i, res);
         }
     }
 }
