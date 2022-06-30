@@ -1,5 +1,3 @@
-package test;
-
 import com.github.liao47.leetcode.OII091;
 import org.junit.Assert;
 import org.junit.Test;
