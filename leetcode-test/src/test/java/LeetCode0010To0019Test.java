@@ -2,6 +2,11 @@ import com.github.liao47.leetcode.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -83,5 +88,24 @@ public class LeetCode0010To0019Test {
         Assert.assertEquals("", solver.longestCommonPrefix(new String[]{""}));
         Assert.assertEquals("a", solver.longestCommonPrefix(new String[]{"a"}));
         Assert.assertEquals("a", solver.longestCommonPrefix(new String[]{"ab", "a"}));
+    }
+
+    @Test
+    public void test0015() {
+        P0015ThreeSum solver = new P0015ThreeSum();
+        int[] nums = new int[]{-1, 0, 1, 2, -1, -4};
+        List<List<Integer>> list = Arrays.asList(Arrays.asList(-1, -1, 2), Arrays.asList(-1, 0, 1));
+        Assert.assertEquals(list, solver.threeSum(nums));
+
+        nums = new int[0];
+        list = new ArrayList<>();
+        Assert.assertEquals(list, solver.threeSum(nums));
+
+        nums = new int[]{0};
+        Assert.assertEquals(list, solver.threeSum(nums));
+
+        nums = new int[]{0, 0, 0, 0, 0, 0};
+        list = Collections.singletonList(Arrays.asList(0, 0, 0));
+        Assert.assertEquals(list, solver.threeSum(nums));
     }
 }
