@@ -1,10 +1,9 @@
-package com.github.liao47.leetcode.utils;
+package util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.junit.Assert;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;

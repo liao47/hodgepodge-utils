@@ -1,12 +1,9 @@
 import com.github.liao47.leetcode.P0241DifferentWaysToAddParentheses;
-import com.github.liao47.leetcode.utils.AssertUtils;
-import org.junit.Assert;
+import util.AssertUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * @author liaoshiqing
