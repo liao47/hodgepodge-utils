@@ -1,9 +1,12 @@
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.github.liao47.leetcode.P1200MinimumAbsoluteDifference;
 import com.github.liao47.leetcode.P1202SmallestStringWithSwaps;
 import com.github.liao47.leetcode.P1208GetEqualSubstringsWithinBudget;
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +18,23 @@ import static org.junit.Assert.assertEquals;
  * @date 2021/1/11 14:13
  */
 public class LeetCode1200To1209Test {
+    @Test
+    public void test1200() {
+        P1200MinimumAbsoluteDifference solver = new P1200MinimumAbsoluteDifference();
+        Type type = new TypeReference<List<List<Integer>>>(){}.getType();
+        int[] arr = {4, 2, 1, 3};
+        List<List<Integer>> result = JSON.parseObject("[[1,2],[2,3],[3,4]]", type);
+        Assert.assertEquals(result, solver.minimumAbsDifference(arr));
+
+        arr = new int[]{1, 3, 6, 10, 15};
+        result = JSON.parseObject("[[1,3]]", type);
+        Assert.assertEquals(result, solver.minimumAbsDifference(arr));
+
+        arr = new int[]{3, 8, -10, 23, 19, -4, -14, 27};
+        result = JSON.parseObject("[[-14,-10],[19,23],[23,27]]", type);
+        Assert.assertEquals(result, solver.minimumAbsDifference(arr));
+    }
+
     @Test
     public void test1202() {
         P1202SmallestStringWithSwaps solver = new P1202SmallestStringWithSwaps();
