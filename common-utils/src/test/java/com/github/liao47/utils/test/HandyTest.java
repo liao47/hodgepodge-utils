@@ -53,7 +53,7 @@ public class HandyTest {
         Assert.assertTrue(HandyUtils.isEmpty(new Integer[0]));
         Assert.assertFalse(HandyUtils.isEmpty(list));
         Assert.assertTrue(HandyUtils.isEmpty(Collections.emptyMap()));
-        Assert.assertFalse(HandyUtils.isEmpty("233"));
+        Assert.assertTrue(HandyUtils.isNotEmpty("233"));
 
         List<ClassA> aList = Arrays.asList(ClassA.of("A1", "a", 2L),
                 ClassA.of("A2", "a", 1L), ClassA.of("A3", "b", 3L));

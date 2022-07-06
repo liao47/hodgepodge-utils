@@ -89,6 +89,15 @@ public class HandyUtils {
     }
 
     /**
+     * 判断是否不为空
+     * @param obj
+     * @return
+     */
+    public static boolean isNotEmpty(Object obj) {
+        return !isEmpty(obj);
+    }
+
+    /**
      * Iterable toString
      * @param iterable
      * @param function
