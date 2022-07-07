@@ -1,6 +1,11 @@
 import com.github.liao47.leetcode.P0643MaximumAverageSubarrayI;
+import com.github.liao47.leetcode.P0648ReplaceWords;
 import com.github.liao47.leetcode.P0649Dota2Senate;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,12 +13,28 @@ import static org.junit.Assert.assertEquals;
  * @author liaoshiqing
  * @date 2020/12/11 9:56
  */
-public class LeetCode0641To0649Test {
+public class LeetCode0640To0649Test {
 
     @Test
     public void test0643() {
         P0643MaximumAverageSubarrayI solver = new P0643MaximumAverageSubarrayI();
         assertEquals(12.75, solver.findMaxAverage(new int[]{1, 12, -5, -6, 50, 3}, 4), 0.00);
+    }
+
+    @Test
+    public void test0648() {
+        P0648ReplaceWords solver = new P0648ReplaceWords();
+        List<String> dict = Arrays.asList("cat", "bat", "rat");
+        String sentence = "the cattle was rattled by the battery";
+        Assert.assertEquals("the cat was rat by the bat", solver.replaceWords(dict, sentence));
+
+        dict = Arrays.asList("a", "b", "c");
+        sentence = "aadsfasf absbs bbab cadsfafs";
+        Assert.assertEquals("a a b c", solver.replaceWords(dict, sentence));
+
+        dict = Arrays.asList("catt", "cat", "bat", "rat");
+        sentence = "the cattle was rattled by the battery";
+        Assert.assertEquals("the cat was rat by the bat", solver.replaceWords(dict, sentence));
     }
 
     @Test
