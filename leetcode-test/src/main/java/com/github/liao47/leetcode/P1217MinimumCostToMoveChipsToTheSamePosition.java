@@ -52,7 +52,7 @@ package com.github.liao47.leetcode;
  * @date 2022/7/8 13:53
  */
 public class P1217MinimumCostToMoveChipsToTheSamePosition {
-    public int minCostToMoveChips(int[] position) {
+    public int minCostToMoveChips1(int[] position) {
         int odd = 0;
         int even = 0;
         for (int i : position) {
@@ -63,5 +63,13 @@ public class P1217MinimumCostToMoveChipsToTheSamePosition {
             }
         }
         return Math.min(odd, even);
+    }
+
+    public int minCostToMoveChips(int[] position) {
+        int odd = 0;
+        for (int i : position) {
+            odd += i & 1;
+        }
+        return Math.min(odd, position.length - odd);
     }
 }
