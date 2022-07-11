@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("minimum-cost-to-move-chips-to-the-same-position"));
+        System.out.println(humpTitle("implement-magic-dictionary"));
     }
 }

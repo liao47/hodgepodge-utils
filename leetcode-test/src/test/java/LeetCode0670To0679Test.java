@@ -1,4 +1,5 @@
 import com.github.liao47.leetcode.P0673NumberOfLongestIncreasingSubsequence;
+import com.github.liao47.leetcode.P0676ImplementMagicDictionary;
 import com.github.liao47.leetcode.P0678ValidParenthesisString;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,6 +18,32 @@ public class LeetCode0670To0679Test {
         Assert.assertEquals(5, solver.findNumberOfLIS(new int[]{5, 4, 3, 2, 1}));
         Assert.assertEquals(27, solver.findNumberOfLIS(new int[]{1, 1, 1, 2, 2, 2, 3, 3, 3}));
         Assert.assertEquals(10, solver.findNumberOfLIS1(new int[]{1, 2, 3, 1, 2, 3, 1, 2, 3}));
+    }
+
+    @Test
+    public void test0676() {
+        P0676ImplementMagicDictionary.MagicDictionary dictionary = new P0676ImplementMagicDictionary.MagicDictionary();
+        dictionary.buildDict(new String[]{"hello", "leetcode"});
+        Assert.assertFalse(dictionary.search("hello"));
+        Assert.assertTrue(dictionary.search("hhllo"));
+        Assert.assertFalse(dictionary.search("hell"));
+        Assert.assertFalse(dictionary.search("leetcoded"));
+        Assert.assertTrue(dictionary.search("hella"));
+
+        dictionary = new P0676ImplementMagicDictionary.MagicDictionary();
+        dictionary.buildDict(new String[]{"hello", "hallo", "leetcode"});
+        Assert.assertTrue(dictionary.search("hello"));
+        Assert.assertTrue(dictionary.search("hhllo"));
+        Assert.assertFalse(dictionary.search("hell"));
+        Assert.assertFalse(dictionary.search("leetcoded"));
+
+        dictionary = new P0676ImplementMagicDictionary.MagicDictionary();
+        dictionary.buildDict(new String[]{"hello", "hallo", "leetcode", "judge"});
+        Assert.assertTrue(dictionary.search("hello"));
+        Assert.assertTrue(dictionary.search("hallo"));
+        Assert.assertFalse(dictionary.search("hell"));
+        Assert.assertTrue(dictionary.search("leetcodd"));
+        Assert.assertFalse(dictionary.search("judge"));
     }
 
     @Test
