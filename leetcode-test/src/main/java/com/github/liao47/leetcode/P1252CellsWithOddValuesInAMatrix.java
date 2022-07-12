@@ -85,7 +85,7 @@ public class P1252CellsWithOddValuesInAMatrix {
         return odd;
     }
 
-    public int oddCells(int m, int n, int[][] indices) {
+    public int oddCells3(int m, int n, int[][] indices) {
         int[] row = new int[m];
         int[] col = new int[n];
         for (int[] index : indices) {
@@ -101,6 +101,18 @@ public class P1252CellsWithOddValuesInAMatrix {
         for (int i : col) {
             oddC += i & 1;
         }
+        return oddR * (n - oddC) + (m - oddR) * oddC;
+    }
+
+    public int oddCells(int m, int n, int[][] indices) {
+        long row = 0;
+        long col = 0;
+        for (int[] index : indices) {
+            row ^= 1L << index[0];
+            col ^= 1L << index[1];
+        }
+        int oddR = Long.bitCount(row);
+        int oddC = Long.bitCount(col);
         return oddR * (n - oddC) + (m - oddR) * oddC;
     }
 }
