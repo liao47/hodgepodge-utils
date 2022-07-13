@@ -1,4 +1,6 @@
+import com.github.liao47.leetcode.P0735AsteroidCollision;
 import com.github.liao47.leetcode.P0738MonotoneIncreasingDigits;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,6 +10,16 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/15 10:14
  */
 public class LeetCode0730To0739Test {
+    @Test
+    public void test0735() {
+        P0735AsteroidCollision solver = new P0735AsteroidCollision();
+        Assert.assertArrayEquals(new int[]{5, 10}, solver.asteroidCollision(new int[]{5, 10, -5}));
+        Assert.assertArrayEquals(new int[0], solver.asteroidCollision(new int[]{8, -8}));
+        Assert.assertArrayEquals(new int[]{-2, -1, 1, 2}, solver.asteroidCollision(new int[]{-2, -1, 1, 2}));
+        Assert.assertArrayEquals(new int[]{-2, -2, -2}, solver.asteroidCollision(new int[]{-2, -2, 1, -2}));
+        Assert.assertArrayEquals(new int[]{-2, -2, -2}, solver.asteroidCollision(new int[]{1, -2, -2, -2}));
+    }
+
     @Test
     public void test0738() {
         P0738MonotoneIncreasingDigits solver = new P0738MonotoneIncreasingDigits();
