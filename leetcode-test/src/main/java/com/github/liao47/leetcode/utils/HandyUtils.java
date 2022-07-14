@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("cells-with-odd-values-in-a-matrix"));
+        System.out.println(humpTitle("prefix-and-suffix-search"));
     }
 }

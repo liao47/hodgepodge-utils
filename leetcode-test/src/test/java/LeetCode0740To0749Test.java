@@ -1,4 +1,6 @@
+import com.github.liao47.leetcode.P0745PrefixAndSuffixSearch;
 import com.github.liao47.leetcode.P0746MinCostClimbingStairs;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,6 +10,20 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/21 9:23
  */
 public class LeetCode0740To0749Test {
+    @Test
+    public void test0745() {
+        String[] words = new String[]{"apple"};
+        P0745PrefixAndSuffixSearch.WordFilter wordFilter = new P0745PrefixAndSuffixSearch.WordFilter(words);
+        Assert.assertEquals(0, wordFilter.f("a", "e"));
+        Assert.assertEquals(0, wordFilter.f("app", "ple"));
+        Assert.assertEquals(-1, wordFilter.f("a", "a"));
+
+        words = new String[]{"apple", "appke", "appme"};
+        wordFilter = new P0745PrefixAndSuffixSearch.WordFilter(words);
+        Assert.assertEquals(2, wordFilter.f("a", "e"));
+        Assert.assertEquals(1, wordFilter.f("a", "ke"));
+    }
+
     @Test
     public void test0746() {
         P0746MinCostClimbingStairs solver = new P0746MinCostClimbingStairs();
