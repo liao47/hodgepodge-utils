@@ -43,7 +43,7 @@ import java.util.*;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class P0745PrefixAndSuffixSearch {
-    public static class WordFilter {
+    public static class WordFilter1 {
         static class Node {
             Node[] next = new Node[26];
             List<Integer> indices = new ArrayList<>();
@@ -52,7 +52,7 @@ public class P0745PrefixAndSuffixSearch {
         private final Node root;
         private final Node tail;
 
-        public WordFilter(String[] words) {
+        public WordFilter1(String[] words) {
             root = new Node();
             tail = new Node();
             for (int i = 0; i < words.length; i++) {
@@ -152,6 +152,103 @@ public class P0745PrefixAndSuffixSearch {
                 }
             }
             return -1;
+        }
+    }
+
+    public static class WordFilter {
+        static class Node {
+            Node[] next;
+            List<long[]> indices;
+
+            public Node() {
+                this.next = new Node[26];
+                this.indices = new ArrayList<>();
+            }
+        }
+
+        private final Node root;
+        private final Node tail;
+
+        public WordFilter(String[] words) {
+            root = new Node();
+            tail = new Node();
+            for (int i = 0; i < words.length; i++) {
+                Node prefix = root;
+                Node suffix = tail;
+                int index = i / 64;
+                long val = 1L << i % 64;
+                char[] arr = words[i].toCharArray();
+                for (int j = 0; j < arr.length; j++) {
+                    prefix = nextNode(prefix, arr[j], index, val);
+                    suffix = nextNode(suffix, arr[arr.length - j - 1], index, val);
+                }
+            }
+        }
+
+        public int f(String pref, String suff) {
+            Node node = root;
+            for (char c : pref.toCharArray()) {
+                node = node.next[c - 'a'];
+                if (node == null) {
+                    return -1;
+                }
+            }
+            List<long[]> prefixIndices = node.indices;
+
+            node = tail;
+            char[] arr = suff.toCharArray();
+            for (int i = arr.length - 1; i >= 0; i--) {
+                node = node.next[arr[i] - 'a'];
+                if (node == null) {
+                    return -1;
+                }
+            }
+            List<long[]> suffixIndices = node.indices;
+
+            int i = prefixIndices.size() - 1;
+            int j = suffixIndices.size() - 1;
+            while (i >= 0 && j >= 0) {
+                long[] a = prefixIndices.get(i);
+                long[] b = suffixIndices.get(j);
+                if (a[0] == b[0]) {
+                    long val = a[1] & b[1];
+                    if (val != 0) {
+                        int idx = 0;
+                        int k = 32;
+                        while (k != 0) {
+                            if (val >> k != 0) {
+                                idx += k;
+                                val >>= k;
+                            }
+                            k >>= 1;
+                        }
+                        return (int) (64 * a[0] + idx);
+                    }
+                    i--;
+                    j--;
+                } else if (a[0] > b[0]) {
+                    i--;
+                } else {
+                    j--;
+                }
+            }
+            return -1;
+        }
+
+        private Node nextNode(Node node, char c, int index, long val) {
+            int idx = c - 'a';
+            if (node.next[idx] == null) {
+                node.next[idx] = new Node();
+            }
+            node = node.next[idx];
+
+            long[] arr = node.indices.isEmpty() ? null : node.indices.get(node.indices.size() - 1);
+            if (arr != null && arr[0] == index) {
+                arr[1] |= val;
+            } else {
+                node.indices.add(new long[]{index, val});
+            }
+            return node;
         }
     }
 }

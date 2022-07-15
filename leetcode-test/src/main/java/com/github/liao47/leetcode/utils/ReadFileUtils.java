@@ -27,6 +27,15 @@ public class ReadFileUtils {
         return dataList;
     }
 
+    public static String readString(String dir) {
+        List<String> list = read(dir);
+        StringBuilder sb = new StringBuilder();
+        for (String s : list) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+
     public static void write(String str, String filename) {
         try {
             File file = new File(filename);

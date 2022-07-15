@@ -17,6 +17,7 @@
         <module>../custom-validator</module>
         <module>../extra-utils</module>
         <module>../unionpay-sdk</module>
+        <module>../leetcode-test</module>
     </modules>
 
     <properties>

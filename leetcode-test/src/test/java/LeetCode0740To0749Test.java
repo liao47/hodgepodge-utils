@@ -1,5 +1,7 @@
+import com.alibaba.fastjson.JSON;
 import com.github.liao47.leetcode.P0745PrefixAndSuffixSearch;
 import com.github.liao47.leetcode.P0746MinCostClimbingStairs;
+import com.github.liao47.leetcode.utils.ReadFileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,6 +24,10 @@ public class LeetCode0740To0749Test {
         wordFilter = new P0745PrefixAndSuffixSearch.WordFilter(words);
         Assert.assertEquals(2, wordFilter.f("a", "e"));
         Assert.assertEquals(1, wordFilter.f("a", "ke"));
+
+        words = JSON.parseObject(ReadFileUtils.readString("P0745.txt"), String[].class);
+        wordFilter = new P0745PrefixAndSuffixSearch.WordFilter(words);
+        Assert.assertEquals(7404, wordFilter.f("fs", "fs"));
     }
 
     @Test
