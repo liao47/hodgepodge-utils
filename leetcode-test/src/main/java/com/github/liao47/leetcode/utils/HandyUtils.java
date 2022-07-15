@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("prefix-and-suffix-search"));
+        System.out.println(humpTitle("logical-or-of-two-binary-grids-represented-as-quad-trees"));
     }
 }
