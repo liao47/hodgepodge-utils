@@ -145,7 +145,7 @@ public class P0558LogicalOrOfTwoBinaryGridsRepresentedAsQuadTrees {
             List<int[]> list = new ArrayList<>();
             Queue<Node> queue = new ArrayDeque<>();
             queue.offer(root);
-            int idx = -1;
+            int idx = 0;
             Queue<Integer> indexes = new ArrayDeque<>();
             while (!queue.isEmpty()) {
                 if (Objects.equals(idx, indexes.peek())) {
