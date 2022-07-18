@@ -158,11 +158,28 @@ public class P0745PrefixAndSuffixSearch {
     public static class WordFilter {
         static class Node {
             Node[] next;
-            List<long[]> indices;
+            List<Long> indices;
 
             public Node() {
                 this.next = new Node[26];
                 this.indices = new ArrayList<>();
+            }
+
+            public Node next(char c, int index, long val) {
+                Node node = this;
+                int idx = c - 'a';
+                if (node.next[idx] == null) {
+                    node.next[idx] = new Node();
+                }
+                node = node.next[idx];
+
+                Long value = node.indices.isEmpty() ? null : node.indices.get(node.indices.size() - 1);
+                if (value != null && value >>> 56 == index) {
+                    node.indices.set(node.indices.size() - 1, value | val);
+                } else {
+                    node.indices.add(((long) index) << 56 | val);
+                }
+                return node;
             }
         }
 
@@ -175,12 +192,12 @@ public class P0745PrefixAndSuffixSearch {
             for (int i = 0; i < words.length; i++) {
                 Node prefix = root;
                 Node suffix = tail;
-                int index = i / 64;
-                long val = 1L << i % 64;
+                int index = i / 56;
+                long val = 1L << i % 56;
                 char[] arr = words[i].toCharArray();
                 for (int j = 0; j < arr.length; j++) {
-                    prefix = nextNode(prefix, arr[j], index, val);
-                    suffix = nextNode(suffix, arr[arr.length - j - 1], index, val);
+                    prefix = prefix.next( arr[j], index, val);
+                    suffix = suffix.next(arr[arr.length - j - 1], index, val);
                 }
             }
         }
@@ -193,7 +210,7 @@ public class P0745PrefixAndSuffixSearch {
                     return -1;
                 }
             }
-            List<long[]> prefixIndices = node.indices;
+            List<Long> prefixIndices = node.indices;
 
             node = tail;
             char[] arr = suff.toCharArray();
@@ -203,15 +220,15 @@ public class P0745PrefixAndSuffixSearch {
                     return -1;
                 }
             }
-            List<long[]> suffixIndices = node.indices;
+            List<Long> suffixIndices = node.indices;
 
             int i = prefixIndices.size() - 1;
             int j = suffixIndices.size() - 1;
             while (i >= 0 && j >= 0) {
-                long[] a = prefixIndices.get(i);
-                long[] b = suffixIndices.get(j);
-                if (a[0] == b[0]) {
-                    long val = a[1] & b[1];
+                long a = prefixIndices.get(i) >>> 56;
+                long b = suffixIndices.get(j) >>> 56;
+                if (a == b) {
+                    long val = (prefixIndices.get(i) & suffixIndices.get(j)) << 8 >>> 8;
                     if (val != 0) {
                         int idx = 0;
                         int k = 32;
@@ -222,33 +239,17 @@ public class P0745PrefixAndSuffixSearch {
                             }
                             k >>= 1;
                         }
-                        return (int) (64 * a[0] + idx);
+                        return (int) (56 * a + idx);
                     }
                     i--;
                     j--;
-                } else if (a[0] > b[0]) {
+                } else if (a > b) {
                     i--;
                 } else {
                     j--;
                 }
             }
             return -1;
-        }
-
-        private Node nextNode(Node node, char c, int index, long val) {
-            int idx = c - 'a';
-            if (node.next[idx] == null) {
-                node.next[idx] = new Node();
-            }
-            node = node.next[idx];
-
-            long[] arr = node.indices.isEmpty() ? null : node.indices.get(node.indices.size() - 1);
-            if (arr != null && arr[0] == index) {
-                arr[1] |= val;
-            } else {
-                node.indices.add(new long[]{index, val});
-            }
-            return node;
         }
     }
 }
