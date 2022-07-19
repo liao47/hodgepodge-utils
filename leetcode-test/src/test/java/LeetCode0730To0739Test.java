@@ -1,3 +1,4 @@
+import com.github.liao47.leetcode.P0731MyCalendarII;
 import com.github.liao47.leetcode.P0735AsteroidCollision;
 import com.github.liao47.leetcode.P0738MonotoneIncreasingDigits;
 import org.junit.Assert;
@@ -10,6 +11,19 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/15 10:14
  */
 public class LeetCode0730To0739Test {
+    @Test
+    public void test0731() {
+        P0731MyCalendarII.MyCalendarTwo myCalendarTwo = new P0731MyCalendarII.MyCalendarTwo();
+        Assert.assertTrue(myCalendarTwo.book(10, 20));
+        Assert.assertTrue(myCalendarTwo.book(50, 60));
+        Assert.assertTrue(myCalendarTwo.book(10, 40));
+        Assert.assertFalse(myCalendarTwo.book(5, 15));
+        Assert.assertTrue(myCalendarTwo.book(5, 10));
+        Assert.assertTrue(myCalendarTwo.book(25, 55));
+        Assert.assertFalse(myCalendarTwo.book(20, 40));
+        Assert.assertFalse(myCalendarTwo.book(30, 35));
+    }
+
     @Test
     public void test0735() {
         P0735AsteroidCollision solver = new P0735AsteroidCollision();
