@@ -2,8 +2,7 @@ package com.github.liao47.leetcode.bo;
 
 import lombok.Data;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  *
@@ -27,6 +26,27 @@ public class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
+    }
+
+    public List<Integer> toList() {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(this);
+        List<Integer> list = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node == null) {
+                list.add(null);
+            } else {
+                list.add(node.val);
+                queue.offer(node.left);
+                queue.offer(node.right);
+            }
+        }
+        int index = list.size() - 1;
+        while (index >= 0 && list.get(index) == null) {
+            index--;
+        }
+        return list.subList(0, index + 1);
     }
 
     public static TreeNode of(Integer[] params) {
