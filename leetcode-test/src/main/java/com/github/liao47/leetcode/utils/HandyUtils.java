@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("set-intersection-size-at-least-two"));
+        System.out.println(humpTitle("complete-binary-tree-inserter"));
     }
 }
