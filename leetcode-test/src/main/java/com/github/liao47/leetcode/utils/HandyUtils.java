@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("complete-binary-tree-inserter"));
+        System.out.println(humpTitle("generate-a-string-with-characters-that-have-odd-counts"));
     }
 }
