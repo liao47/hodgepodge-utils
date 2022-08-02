@@ -30,20 +30,14 @@ public @interface EnumPattern {
     Class<? extends Enum> value();
 
     /**
-     * 校验的枚举字段值<br>
-     *     如果枚举实现了com.github.liao47.able.EnumPatternAble接口，则忽略此值，取值getPatternValue()
-     *     如果值为空，则取值name()
-     *     否则，通过反射使用getter获取值
+     * 校验的枚举字段名称<br>
+     * 支持多级成员变量名称：person.name
+     * 如为空：
+     *     枚举实现了com.github.liao47.able.EnumPatternAble接口，取值getPatternValue()，
+     *     否则取值name()
      * @return
      */
     String fieldName() default "";
-
-    /**
-     * 是否忽略枚举限制校验能力接口<br>
-     *     是否忽略枚举实现的com.github.liao47.able.EnumPatternAble接口，强制使用fieldName控制获取值
-     * @return
-     */
-    boolean ignorePatternAble() default false;
 
     /**
      * 描述

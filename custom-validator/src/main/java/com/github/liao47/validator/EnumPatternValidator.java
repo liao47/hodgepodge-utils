@@ -1,17 +1,14 @@
 package com.github.liao47.validator;
 
+import com.github.liao47.common.exception.CustomException;
 import com.github.liao47.validator.able.EnumPatternAble;
 import com.github.liao47.validator.annotation.EnumPattern;
-import com.github.liao47.common.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 枚举限制校验器
@@ -21,33 +18,28 @@ import java.util.Set;
 public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Object> {
 
     /**
-     * 限制值
+     * 限制值集合
      */
     private Set<String> values;
 
     @Override
-    public void initialize(EnumPattern constraintAnnotation) {
+    public void initialize(EnumPattern enumPattern) {
         values = new HashSet<>();
-        Class<? extends Enum> enumClass = constraintAnnotation.value();
-        if (!constraintAnnotation.ignorePatternAble() && EnumPatternAble.class.isAssignableFrom(enumClass)) {
-            //枚举实现了EnumPatternAble接口
-            for (Enum<?> anEnum : enumClass.getEnumConstants()) {
-                values.add(((EnumPatternAble) anEnum).getPatternValue());
-            }
-        } else if (StringUtils.isEmpty(constraintAnnotation.fieldName())) {
-            for (Enum<?> anEnum : enumClass.getEnumConstants()) {
-                values.add(anEnum.name());
+        if (StringUtils.isEmpty(enumPattern.fieldName())) {
+            Class<? extends Enum> enumClass = enumPattern.value();
+            if (EnumPatternAble.class.isAssignableFrom(enumClass)) {
+                //枚举实现了EnumPatternAble接口
+                for (Enum<?> anEnum : enumClass.getEnumConstants()) {
+                    values.add(((EnumPatternAble) anEnum).getPatternValue());
+                }
+            } else {
+                for (Enum<?> anEnum : enumClass.getEnumConstants()) {
+                    values.add(anEnum.name());
+                }
             }
         } else {
-            try {
-                Method method = enumClass.getMethod("get" + StringUtils.capitalize(constraintAnnotation.fieldName()));
-                for (Enum<?> anEnum : enumClass.getEnumConstants()) {
-                    values.add(Objects.toString(method.invoke(anEnum), null));
-                }
-            } catch (Exception e) {
-                throw new CustomException(String.format("Fail to invoke filed[%s] getter in [%s]",
-                        constraintAnnotation.fieldName(), enumClass.getCanonicalName()), e);
-            }
+            //反射取值
+            this.reflectGetValues(enumPattern);
         }
     }
 
@@ -66,5 +58,33 @@ public class EnumPatternValidator implements ConstraintValidator<EnumPattern, Ob
 
     private boolean isValid(Object value) {
         return StringUtils.isEmpty(Objects.toString(value, null)) || values.contains(value.toString());
+    }
+
+    /**
+     * 反射取值
+     * @param enumPattern
+     */
+    private void reflectGetValues(EnumPattern enumPattern) {
+        try {
+            String[] arr = enumPattern.fieldName().split("\\.");
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = "get" + StringUtils.capitalize(arr[i]);
+            }
+
+            for (Enum<?> anEnum : enumPattern.value().getEnumConstants()) {
+                Object obj = anEnum;
+                for (String getter : arr) {
+                    Method method = obj.getClass().getMethod(getter);
+                    obj = method.invoke(obj);
+                    if (obj == null) {
+                        break;
+                    }
+                }
+                values.add(Objects.toString(obj, null));
+            }
+        } catch (Exception e) {
+            throw new CustomException(String.format("Failed to invoke filed[%s] getter in [%s]",
+                    enumPattern.fieldName(), enumPattern.value().getCanonicalName()));
+        }
     }
 }
