@@ -55,7 +55,7 @@ public class P0593ValidSquare {
         if (!equalsLength(arr[0], arr[3], arr[1], arr[2])) {
             return false;
         }
-        //随便取两条边是否相等
+        //随便取两条相邻边是否相等
         return equalsLength(arr[0], arr[1], arr[0], arr[2]);
     }
 
