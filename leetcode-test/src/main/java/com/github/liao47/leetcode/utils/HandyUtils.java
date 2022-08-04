@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("fraction-addition-and-subtraction"));
+        System.out.println(humpTitle("minimum-subsequence-in-non-increasing-order"));
     }
 }
