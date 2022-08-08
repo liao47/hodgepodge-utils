@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("maximum-level-sum-of-a-binary-tree"));
+        System.out.println(humpTitle("largest-component-size-by-common-factor"));
     }
 }
