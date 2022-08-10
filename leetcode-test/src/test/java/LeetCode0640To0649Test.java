@@ -1,3 +1,4 @@
+import com.github.liao47.leetcode.P0640SolveTheEquation;
 import com.github.liao47.leetcode.P0643MaximumAverageSubarrayI;
 import com.github.liao47.leetcode.P0648ReplaceWords;
 import com.github.liao47.leetcode.P0649Dota2Senate;
@@ -14,6 +15,17 @@ import static org.junit.Assert.assertEquals;
  * @date 2020/12/11 9:56
  */
 public class LeetCode0640To0649Test {
+    @Test
+    public void test0640() {
+        P0640SolveTheEquation solver = new P0640SolveTheEquation();
+        Assert.assertEquals("x=2",  solver.solveEquation("x+5-3+x=6+x-2"));
+        Assert.assertEquals("Infinite solutions", solver.solveEquation("x=x"));
+        Assert.assertEquals("x=0", solver.solveEquation("2x=x"));
+        Assert.assertEquals("x=1", solver.solveEquation("x+1=2x"));
+        Assert.assertEquals("x=-1", solver.solveEquation("2x+3x-6x=x+2"));
+        Assert.assertEquals("No solution", solver.solveEquation("x=x+2"));
+        Assert.assertEquals("Infinite solutions", solver.solveEquation("0x=0"));
+    }
 
     @Test
     public void test0643() {
