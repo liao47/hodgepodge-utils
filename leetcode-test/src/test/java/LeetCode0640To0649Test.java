@@ -25,6 +25,7 @@ public class LeetCode0640To0649Test {
         Assert.assertEquals("x=-1", solver.solveEquation("2x+3x-6x=x+2"));
         Assert.assertEquals("No solution", solver.solveEquation("x=x+2"));
         Assert.assertEquals("Infinite solutions", solver.solveEquation("0x=0"));
+        Assert.assertEquals("x=22", solver.solveEquation("3x=33+22+11"));
     }
 
     @Test
