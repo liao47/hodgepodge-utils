@@ -14,14 +14,14 @@ import java.util.List;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AssertUtils {
-    public static <T> void assertList(List<T> expected, List<T> actual, Comparator<T> comparator) {
+    public static <E> void assertList(List<E> expected, List<E> actual, Comparator<E> comparator) {
         expected.sort(comparator);
         actual.sort(comparator);
         Assert.assertEquals(expected, actual);
     }
 
-    public static void assertList(List<Integer> expected, List<Integer> actual) {
-        assertList(expected, actual, Comparator.comparingInt(a -> a));
+    public static <E extends Comparable<E>> void assertList(List<E> expected, List<E> actual) {
+        assertList(expected, actual, Comparator.naturalOrder());
     }
 
     public static void assertArray(int[] expected, int[] actual) {
