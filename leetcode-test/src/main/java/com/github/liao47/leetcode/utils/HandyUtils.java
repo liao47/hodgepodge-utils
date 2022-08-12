@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("largest-component-size-by-common-factor"));
+        System.out.println(humpTitle("group-the-people-given-the-group-size-they-belong-to"));
     }
 }
