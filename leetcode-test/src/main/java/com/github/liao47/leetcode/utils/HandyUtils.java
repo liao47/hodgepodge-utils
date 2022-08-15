@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("string-matching-in-an-array"));
+        System.out.println(humpTitle("design-circular-deque"));
     }
 }

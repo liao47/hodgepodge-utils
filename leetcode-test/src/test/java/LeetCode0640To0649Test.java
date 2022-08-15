@@ -1,7 +1,4 @@
-import com.github.liao47.leetcode.P0640SolveTheEquation;
-import com.github.liao47.leetcode.P0643MaximumAverageSubarrayI;
-import com.github.liao47.leetcode.P0648ReplaceWords;
-import com.github.liao47.leetcode.P0649Dota2Senate;
+import com.github.liao47.leetcode.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,6 +23,20 @@ public class LeetCode0640To0649Test {
         Assert.assertEquals("No solution", solver.solveEquation("x=x+2"));
         Assert.assertEquals("Infinite solutions", solver.solveEquation("0x=0"));
         Assert.assertEquals("x=22", solver.solveEquation("3x=33+22+11"));
+    }
+
+    @Test
+    public void test0641() {
+        P0641DesignCircularDeque.MyCircularDeque deque = new P0641DesignCircularDeque.MyCircularDeque(3);
+        Assert.assertTrue(deque.insertLast(1));
+        Assert.assertTrue(deque.insertLast(2));
+        Assert.assertTrue(deque.insertFront(3));
+        Assert.assertFalse(deque.insertFront(4));
+        Assert.assertEquals(2, deque.getRear());
+        Assert.assertTrue(deque.isFull());
+        Assert.assertTrue(deque.deleteLast());
+        Assert.assertTrue(deque.insertFront(4));
+        Assert.assertEquals(4, deque.getFront());
     }
 
     @Test
