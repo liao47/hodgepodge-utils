@@ -113,17 +113,11 @@ public class P0641DesignCircularDeque {
         }
 
         public int getFront() {
-            if (isEmpty()) {
-                return -1;
-            }
-            return arr[head];
+            return isEmpty() ? -1 : arr[head];
         }
 
         public int getRear() {
-            if (isEmpty()) {
-                return -1;
-            }
-            return arr[tail];
+            return isEmpty() ? -1 : arr[tail];
         }
 
         public boolean isEmpty() {
