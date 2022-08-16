@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("maximum-score-after-splitting-a-string"));
+        System.out.println(humpTitle("design-an-ordered-stream"));
     }
 }
