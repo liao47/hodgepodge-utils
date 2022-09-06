@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("max-chunks-to-make-sorted-ii"));
+        System.out.println(humpTitle("count-unique-characters-of-all-substrings-of-a-given-string"));
     }
 }
