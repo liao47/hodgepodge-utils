@@ -108,4 +108,13 @@ public class LeetCode0010To0019Test {
         list = Collections.singletonList(Arrays.asList(0, 0, 0));
         Assert.assertEquals(list, solver.threeSum(nums));
     }
+
+    @Test
+    public void test0016() {
+        P0016ThreeSumClosest solver = new P0016ThreeSumClosest();
+        Assert.assertEquals(2, solver.threeSumClosest(new int[]{-1, 2, 1, -4}, 1));
+        Assert.assertEquals(0, solver.threeSumClosest(new int[]{0, 0, 0}, 1));
+        Assert.assertEquals(3, solver.threeSumClosest(new int[]{0, 1, 2}, 0));
+        Assert.assertEquals(3, solver.threeSumClosest(new int[]{1, 1, 1, 1}, 4));
+    }
 }
