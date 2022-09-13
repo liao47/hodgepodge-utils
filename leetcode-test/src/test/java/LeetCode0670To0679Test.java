@@ -16,7 +16,9 @@ public class LeetCode0670To0679Test {
         Assert.assertEquals(7236, solver.maximumSwap(2736));
         Assert.assertEquals(9973, solver.maximumSwap(9973));
         Assert.assertEquals(9213, solver.maximumSwap(1293));
+        Assert.assertEquals(98765, solver.maximumSwap(98756));
         Assert.assertEquals(9913, solver.maximumSwap(1993));
+        Assert.assertEquals(98576, solver.maximumSwap(96578));
     }
 
     @Test

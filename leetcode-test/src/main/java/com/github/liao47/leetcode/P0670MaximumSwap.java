@@ -25,7 +25,7 @@ package com.github.liao47.leetcode;
  * @date 2022/9/13 10:50
  */
 public class P0670MaximumSwap {
-    public int maximumSwap(int num) {
+    public int maximumSwap1(int num) {
         char[] chars = Integer.toString(num).toCharArray();
         int left = -1;
         int right = -1;
@@ -43,6 +43,28 @@ public class P0670MaximumSwap {
             while (left - 1 >= 0 && chars[left - 1] < chars[right]) {
                 left--;
             }
+            char tmp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = tmp;
+            return Integer.parseInt(new String(chars));
+        }
+        return num;
+    }
+
+    public int maximumSwap(int num) {
+        char[] chars = String.valueOf(num).toCharArray();
+        int max = chars.length - 1;
+        int left = -1;
+        int right = -1;
+        for (int i = chars.length - 1; i >= 0; i--) {
+            if (chars[i] > chars[max]) {
+                max = i;
+            } else if (chars[i] < chars[max]) {
+                left = i;
+                right = max;
+            }
+        }
+        if (left >= 0) {
             char tmp = chars[left];
             chars[left] = chars[right];
             chars[right] = tmp;
