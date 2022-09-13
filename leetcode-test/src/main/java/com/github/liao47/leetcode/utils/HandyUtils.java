@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("rearrange-spaces-between-words"));
+        System.out.println(humpTitle("letter-combinations-of-a-phone-number"));
     }
 }

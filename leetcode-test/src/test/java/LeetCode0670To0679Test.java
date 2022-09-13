@@ -1,3 +1,4 @@
+import com.github.liao47.leetcode.P0670MaximumSwap;
 import com.github.liao47.leetcode.P0673NumberOfLongestIncreasingSubsequence;
 import com.github.liao47.leetcode.P0676ImplementMagicDictionary;
 import com.github.liao47.leetcode.P0678ValidParenthesisString;
@@ -9,6 +10,15 @@ import org.junit.Test;
  * @date 2021/9/13 13:58
  */
 public class LeetCode0670To0679Test {
+    @Test
+    public void test0670() {
+        P0670MaximumSwap solver = new P0670MaximumSwap();
+        Assert.assertEquals(7236, solver.maximumSwap(2736));
+        Assert.assertEquals(9973, solver.maximumSwap(9973));
+        Assert.assertEquals(9213, solver.maximumSwap(1293));
+        Assert.assertEquals(9913, solver.maximumSwap(1993));
+    }
+
     @Test
     public void test0673() {
         P0673NumberOfLongestIncreasingSubsequence solver = new P0673NumberOfLongestIncreasingSubsequence();

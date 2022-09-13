@@ -117,4 +117,15 @@ public class LeetCode0010To0019Test {
         Assert.assertEquals(3, solver.threeSumClosest(new int[]{0, 1, 2}, 0));
         Assert.assertEquals(3, solver.threeSumClosest(new int[]{1, 1, 1, 1}, 4));
     }
+
+    @Test
+    public void test0017() {
+        P0017LetterCombinationsOfAPhoneNumber solver = new P0017LetterCombinationsOfAPhoneNumber();
+        Assert.assertEquals(Arrays.asList("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"),
+                solver.letterCombinations("23"));
+        Assert.assertEquals(Collections.emptyList(), solver.letterCombinations(""));
+        Assert.assertEquals(Arrays.asList("a", "b", "c"), solver.letterCombinations("2"));
+        Assert.assertEquals(Arrays.asList("ap", "aq", "ar", "as", "bp", "bq", "br", "bs", "cp", "cq", "cr", "cs"),
+                solver.letterCombinations("27"));
+    }
 }
