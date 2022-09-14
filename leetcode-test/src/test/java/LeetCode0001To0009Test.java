@@ -45,11 +45,11 @@ public class LeetCode0001To0009Test {
     @Test
     public void test0004() {
         P0004MedianOfTwoSortedArrays solver = new P0004MedianOfTwoSortedArrays();
-        assertEquals(2, solver.findMedianSortedArrays(new int[]{1, 3}, new int[]{2}), 0.00000);
-        assertEquals(2.5, solver.findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}), 0.00000);
-        assertEquals(0, solver.findMedianSortedArrays(new int[]{0, 0}, new int[]{0, 0}), 0.00000);
-        assertEquals(1, solver.findMedianSortedArrays(new int[]{}, new int[]{1}), 0.00000);
-        assertEquals(2, solver.findMedianSortedArrays(new int[]{2}, new int[]{}), 0.00000);
+        assertEquals(2, solver.findMedianSortedArrays(new int[]{1, 3}, new int[]{2}), 0.00001);
+        assertEquals(2.5, solver.findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}), 0.00001);
+        assertEquals(0, solver.findMedianSortedArrays(new int[]{0, 0}, new int[]{0, 0}), 0.00001);
+        assertEquals(1, solver.findMedianSortedArrays(new int[]{}, new int[]{1}), 0.00001);
+        assertEquals(2, solver.findMedianSortedArrays(new int[]{2}, new int[]{}), 0.00001);
     }
 
     @Test

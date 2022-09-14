@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("letter-combinations-of-a-phone-number"));
+        System.out.println(humpTitle("mean-of-array-after-removing-some-elements"));
     }
 }

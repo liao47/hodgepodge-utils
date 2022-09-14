@@ -35,30 +35,30 @@ public class LeetCode0290To0299Test {
         medianFinder.addNum(40);
         medianFinder.addNum(12);
         medianFinder.addNum(16);
-        Assert.assertEquals(16, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(16, medianFinder.findMedian(), 0.01);
 
         medianFinder = new P0295FindMedianFromDataStream.MedianFinder();
         medianFinder.addNum(1);
-        Assert.assertEquals(1, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(1, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(2);
-        Assert.assertEquals(1.5, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(1.5, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(3);
-        Assert.assertEquals(2, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(2, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(4);
-        Assert.assertEquals(2.5, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(2.5, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(5);
-        Assert.assertEquals(3, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(3, medianFinder.findMedian(), 0.01);
 
         medianFinder = new P0295FindMedianFromDataStream.MedianFinder();
         medianFinder.addNum(-1);
-        Assert.assertEquals(-1, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(-1, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(-2);
-        Assert.assertEquals(-1.5, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(-1.5, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(-3);
-        Assert.assertEquals(-2, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(-2, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(-4);
-        Assert.assertEquals(-2.5, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(-2.5, medianFinder.findMedian(), 0.01);
         medianFinder.addNum(-5);
-        Assert.assertEquals(-3, medianFinder.findMedian(), 0.0);
+        Assert.assertEquals(-3, medianFinder.findMedian(), 0.01);
     }
 }
