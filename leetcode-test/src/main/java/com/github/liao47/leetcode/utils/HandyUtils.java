@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("partition-to-k-equal-sum-subsets"));
+        System.out.println(humpTitle("missing-two-lcci"));
     }
 }
