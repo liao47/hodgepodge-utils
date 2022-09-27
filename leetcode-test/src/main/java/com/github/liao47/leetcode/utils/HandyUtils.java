@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("missing-two-lcci"));
+        System.out.println(humpTitle("remove-nth-node-from-end-of-list"));
     }
 }

@@ -1,4 +1,6 @@
 import com.github.liao47.leetcode.*;
+import com.github.liao47.leetcode.bo.ListNode;
+import com.github.liao47.leetcode.bo.Node;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -127,5 +129,16 @@ public class LeetCode0010To0019Test {
         Assert.assertEquals(Arrays.asList("a", "b", "c"), solver.letterCombinations("2"));
         Assert.assertEquals(Arrays.asList("ap", "aq", "ar", "as", "bp", "bq", "br", "bs", "cp", "cq", "cr", "cs"),
                 solver.letterCombinations("27"));
+    }
+
+    @Test
+    public void test0019() {
+        P0019RemoveNthNodeFromEndOfList solver = new P0019RemoveNthNodeFromEndOfList();
+        ListNode head = ListNode.of(new int[]{1, 2, 3, 4, 5});
+        Assert.assertEquals(Arrays.asList(1, 2, 3, 5), ListNode.toList(solver.removeNthFromEnd(head, 2)));
+        head = new ListNode(1);
+        Assert.assertEquals(Collections.emptyList(), ListNode.toList(solver.removeNthFromEnd(head, 1)));
+        head = ListNode.of(new int[]{1, 2});
+        Assert.assertEquals(Collections.singletonList(1), ListNode.toList(solver.removeNthFromEnd(head, 1)));
     }
 }
