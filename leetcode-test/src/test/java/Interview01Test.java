@@ -1,4 +1,6 @@
 import com.github.liao47.leetcode.I0101IsUniquelcci;
+import com.github.liao47.leetcode.I0102CheckPermutationLcci;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -15,5 +17,12 @@ public class Interview01Test {
         I0101IsUniquelcci solver = new I0101IsUniquelcci();
         assertFalse(solver.isUnique("leetcode"));
         assertTrue(solver.isUnique("abc"));
+    }
+
+    @Test
+    public void test0102() {
+        I0102CheckPermutationLcci solver = new I0102CheckPermutationLcci();
+        Assert.assertTrue(solver.CheckPermutation("abc", "bca"));
+        Assert.assertFalse(solver.CheckPermutation("abc", "bad"));
     }
 }
