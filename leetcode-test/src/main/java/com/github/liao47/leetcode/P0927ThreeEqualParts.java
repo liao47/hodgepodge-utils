@@ -60,16 +60,16 @@ public class P0927ThreeEqualParts {
         int cnt = 0;
         for (int i = n - 1; i >= 0; i--) {
             if (arr[i] == 1 && ++cnt % count == 0) {
-                indexes[cnt / count - 1] = i;
+                indexes[3 - cnt / count] = i;
             }
         }
-        int length = n - indexes[0];
+        int length = n - indexes[2];
         for (int i = 0; i < length; i++) {
             if (arr[indexes[0] + i] != arr[indexes[1] + i] || arr[indexes[1] + i] != arr[indexes[2] + i]) {
                 return new int[]{-1, -1};
             }
         }
-        return new int[]{indexes[2] + length - 1, indexes[1] + length};
+        return new int[]{indexes[0] + length - 1, indexes[1] + length};
     }
 
     public int[] threeEqualParts2(int[] arr) {
@@ -91,15 +91,15 @@ public class P0927ThreeEqualParts {
         int third = -1;
         int cnt = 0;
         for (int i = n - 1; i >= 0; i--) {
-            if (arr[i] == 1 && ++cnt % count == 0) {
-                if (third == -1) {
-                    third = i;
-                } else if (second == -1) {
-                    second = i;
-                } else {
-                    first = i;
-                    break;
-                }
+            if (arr[i] != 1 || ++cnt % count != 0) {
+                continue;
+            }
+            if (third == -1) {
+                third = i;
+            } else if (second == -1) {
+                second = i;
+            } else {
+                first = i;
             }
         }
         int length = n - third;
