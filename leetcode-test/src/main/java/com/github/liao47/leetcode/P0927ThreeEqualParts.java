@@ -59,17 +59,17 @@ public class P0927ThreeEqualParts {
         int[] indexes = new int[3];
         int cnt = 0;
         for (int i = n - 1; i >= 0; i--) {
-            if (arr[i] == 1 && ++cnt % count == 0) {
+            cnt += arr[i];
+            if (cnt % count == 0 && arr[i] == 1) {
                 indexes[3 - cnt / count] = i;
             }
         }
-        int length = n - indexes[2];
-        for (int i = 0; i < length; i++) {
-            if (arr[indexes[0] + i] != arr[indexes[1] + i] || arr[indexes[1] + i] != arr[indexes[2] + i]) {
+        while (indexes[2] < n) {
+            if (arr[indexes[0]++] != arr[indexes[1]] || arr[indexes[1]++] != arr[indexes[2]++]) {
                 return new int[]{-1, -1};
             }
         }
-        return new int[]{indexes[0] + length - 1, indexes[1] + length};
+        return new int[]{indexes[0] - 1, indexes[1]};
     }
 
     public int[] threeEqualParts2(int[] arr) {
@@ -90,24 +90,24 @@ public class P0927ThreeEqualParts {
         int second = -1;
         int third = -1;
         int cnt = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            if (arr[i] != 1 || ++cnt % count != 0) {
-                continue;
-            }
-            if (third == -1) {
-                third = i;
-            } else if (second == -1) {
-                second = i;
-            } else {
+        for (int i = 0; i < n; i++) {
+            cnt += arr[i];
+            if (cnt == 1 && first == -1) {
                 first = i;
+            } else if (cnt == count + 1 && second == -1) {
+                second = i;
+            } else if (cnt == 2 * count + 1 && third == -1) {
+                third = i;
             }
         }
-        int length = n - third;
-        for (int i = 0; i < length; i++) {
-            if (arr[third + i] != arr[second + i] || arr[second + i] != arr[first + i]) {
+        while (third < n) {
+            if (arr[third] != arr[second] || arr[second] != arr[first]) {
                 return new int[]{-1, -1};
             }
+            first++;
+            second++;
+            third++;
         }
-        return new int[]{first + length - 1, second + length};
+        return new int[]{first - 1, second};
     }
 }
