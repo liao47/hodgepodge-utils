@@ -85,4 +85,24 @@ public class Handy<T> {
     public String defaultIfBlank(Function<T, String> function, String defaultVal) {
         return StringUtils.defaultIfBlank(this.nonNPE(function), defaultVal);
     }
+
+    /**
+     * 如果值等于val，返回null，否则返回自身
+     * @param val
+     * @return
+     */
+    public T nullIf(T val) {
+        return HandyUtils.nullIf(this.payload, val);
+    }
+
+    /**
+     * 如果取值等于val，返回null，否则返回取值
+     * @param function
+     * @param val
+     * @param <R>
+     * @return
+     */
+    public <R> R nullIf(Function<T, R> function, R val) {
+        return HandyUtils.nullIf(this.nonNPE(function), val);
+    }
 }

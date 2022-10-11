@@ -62,6 +62,17 @@ public class HandyUtils {
     }
 
     /**
+     * 如果值等于val，返回null，否则返回自身
+     * @param t
+     * @param val
+     * @param <T>
+     * @return
+     */
+    public static <T> T nullIf(T t, T val) {
+        return Objects.equals(t, val) ? null : t;
+    }
+
+    /**
      * 判断是否为空
      * @param obj
      * @return
@@ -131,7 +142,7 @@ public class HandyUtils {
             if (!it.hasNext()) {
                 return sb.append(']').toString();
             }
-            sb.append(',').append(' ');
+            sb.append(", ");
         }
     }
 
