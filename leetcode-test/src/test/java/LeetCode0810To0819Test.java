@@ -1,4 +1,6 @@
 import com.github.liao47.leetcode.P0814BinaryTreePruning;
+import com.github.liao47.leetcode.P0817LinkedListComponents;
+import com.github.liao47.leetcode.bo.ListNode;
 import com.github.liao47.leetcode.bo.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,5 +23,14 @@ public class LeetCode0810To0819Test {
 
         root = TreeNode.of(new Integer[]{1, 1, 0, 1, 1, 0, 1, 0});
         Assert.assertEquals(Arrays.asList(1, 1, 0, 1, 1, null, 1), solver.pruneTree(root).toList());
+    }
+
+    @Test
+    public void test0817() {
+        P0817LinkedListComponents solver = new P0817LinkedListComponents();
+        ListNode head = ListNode.of(new int[]{0, 1, 2, 3});
+        Assert.assertEquals(2, solver.numComponents(head, new int[]{0, 1, 3}));
+        head = ListNode.of(new int[]{0, 1, 2, 3, 4});
+        Assert.assertEquals(2, solver.numComponents(head, new int[]{0, 3, 1, 4}));
     }
 }
