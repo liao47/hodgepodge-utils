@@ -3,6 +3,7 @@ package com.github.liao47.utils.bo;
 import lombok.Data;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,50 +34,74 @@ public class ImgDrawTextParams {
     private Position imgPosition = Position.TOP_LEFT;
 
     /**
-     * 全局字体
+     * 文本参数
      */
-    private Font font = new Font("微软雅黑", Font.PLAIN, 20);
+    private List<TextParam> textParams;
+
+    //******** 以下为统一配置：优先取文本参数配置，文本参数未配置对应项，则取统一配置 **********
 
     /**
-     * 全局字体颜色
+     * 字体
      */
-    private Color textColor = Color.DARK_GRAY;
+    private Font font = new Font("微软雅黑", Font.PLAIN, 24);
 
     /**
-     * 边缘全局配置
+     * 字体颜色
+     */
+    private Color color = Color.DARK_GRAY;
+
+    /**
+     * 边缘
      */
     private Integer margin;
 
     /**
-     * 自动换行全局配置
+     * 自动换行
      */
-    private boolean wrap;
+    private Boolean wrap = Boolean.TRUE;
 
     /**
-     * 超出部分隐藏显示全局配置
+     * 超出部分隐藏显示
      * 超出画布范围显示字符，如"..."
      */
     private String overflow;
 
     /**
-     * 行间距全局配置
+     * 行间距
      */
     private Integer spacing = 10;
 
     /**
-     * 文本参数
+     * 添加文本配置
+     * @param textParam
+     * @return
      */
-    private List<TextParam> textParams;
+    public ImgDrawTextParams addText(TextParam textParam) {
+        if (textParam != null) {
+            if (textParams == null) {
+                textParams = new ArrayList<>();
+            }
+            textParams.add(textParam);
+        }
+        return this;
+    }
 
+    /**
+     * 图像位置
+     * @author liaoshiqing
+     * @date 2022/10/25 17:25
+     */
     public enum Position {
         /**
-         * 图像位置
+         * 左上 中上 右上
+         * 左中 中间 右中
+         * 左下 中下 右下
          */
-        TOP_LEFT, TOP_MID, TOP_RIGHT,
-        MID_LEFT, MID, MID_RIGHT,
+        TOP_LEFT,     TOP_MID,      TOP_RIGHT,
+        MID_LEFT,       MID,        MID_RIGHT,
         BOTTOM_LEFT, BOTTOM_MID, BOTTOM_RIGHT;
 
-        public static int[] pointStart(int imgW, int imgH, int w, int h, Position position) {
+        public static int[] startPoint(int imgW, int imgH, int w, int h, Position position) {
             int midX = (w - imgW) >> 1;
             int midY = (h - imgH) >> 1;
             switch (position) {
@@ -102,6 +127,11 @@ public class ImgDrawTextParams {
         }
     }
 
+    /**
+     * 文本配置
+     * @author liaoshiqing
+     * @date 2022/10/25 16:56
+     */
     @Data
     public static class TextParam {
         /**
@@ -147,7 +177,7 @@ public class ImgDrawTextParams {
         /**
          * 自动换行
          */
-        private boolean wrap;
+        private Boolean wrap;
 
         /**
          * 行间距

@@ -25,13 +25,38 @@ import java.util.List;
 public class ImgUtils {
 
     /**
+     * url图片添加文本
+     * @param url
+     * @param params
+     */
+    public static BufferedImage drawTextByUrl(String url, ImgDrawTextParams params) {
+        try {
+            ImageIcon imageIcon = new ImageIcon(new URL(url));
+            return drawText(imageIcon.getImage(), params);
+        } catch (MalformedURLException e) {
+            log.error("图片URL[{}]格式不正确：", url, e);
+            throw new CustomException("图片URL格式不正确");
+        }
+    }
+
+    /**
      * 图片添加文本
-     * @param imageIcon
+     * @param imageData
      * @param params
      * @return
      */
-    public static BufferedImage drawText(ImageIcon imageIcon, ImgDrawTextParams params) {
-        Image image = imageIcon.getImage();
+    public static BufferedImage drawText(byte[] imageData, ImgDrawTextParams params) {
+        ImageIcon imageIcon = new ImageIcon(imageData);
+        return drawText(imageIcon.getImage(), params);
+    }
+
+    /**
+     * 图片添加文本
+     * @param image
+     * @param params
+     * @return
+     */
+    public static BufferedImage drawText(Image image, ImgDrawTextParams params) {
         int imgWidth = image.getWidth(null);
         int imgHeight = image.getHeight(null);
         int width = imgWidth + ObjectUtils.defaultIfNull(params.getExtendWidth(), 0);
@@ -45,31 +70,17 @@ public class ImgUtils {
 
         //画布扩展部分背景
         g.clearRect(0, 0, width, height);
-        int[] point = ImgDrawTextParams.Position.pointStart(imgWidth, imgHeight, width, height,
+        int[] point = ImgDrawTextParams.Position.startPoint(imgWidth, imgHeight, width, height,
                 params.getImgPosition());
         g.drawImage(image, point[0], point[1], null);
 
-        if (params.getTextParams() != null && !params.getTextParams().isEmpty()) {
+        if (HandyUtils.isNotEmpty(params.getTextParams())) {
             for (ImgDrawTextParams.TextParam textParam : params.getTextParams()) {
                 drawText(g, params, textParam, width, height);
             }
         }
         g.dispose();
         return bufferedImage;
-    }
-
-    /**
-     * url图片添加文本
-     * @param url
-     * @param params
-     */
-    public static BufferedImage drawTextByUrl(String url, ImgDrawTextParams params) {
-        try {
-            return drawText(new ImageIcon(new URL(url)), params);
-        } catch (MalformedURLException e) {
-            log.error("图片URL[{}]格式不正确：", url, e);
-            throw new CustomException("图片URL格式不正确");
-        }
     }
 
     /**
@@ -95,37 +106,56 @@ public class ImgUtils {
         int margin = ObjectUtils.defaultIfNull(params.getMargin(), 0);
         int spacing = ObjectUtils.defaultIfNull(textParam.getSpacing(), params.getSpacing());
 
-        int startX = textParam.getStartX() >= 0 ? textParam.getStartX() : width + textParam.getStartX();
-        startX += margin;
-        int startY = textParam.getStartY() >= 0 ? textParam.getStartY() : height + textParam.getStartY();
-        startY += margin;
-
-        int endX = textParam.getEndX() == null ? width : textParam.getEndX() >= 0 ? textParam.getEndX() :
-                width + textParam.getEndX();
-        endX -= margin;
-        int endY = textParam.getEndY() == null ? height : textParam.getEndY() >= 0 ? textParam.getEndY() :
-                height + textParam.getEndY();
-        endY -= margin;
+        int startX = fixed(textParam.getStartX(), width) + margin;
+        int startY = fixed(textParam.getStartY(), height) + margin;
+        int endX = fixed(textParam.getEndX(), width) - margin;
+        int endY = fixed(textParam.getEndY(), height) - margin;
 
         int maxLine = (endY - startY + spacing) / (textHeight + spacing);
         if (maxLine <= 0) {
             return;
         }
+        if (!Boolean.TRUE.equals(ObjectUtils.defaultIfNull(textParam.getWrap(), params.getWrap()))) {
+            maxLine = 1;
+        }
 
+        List<String> texts = wrap(textParam.getText(), fontMetrics, maxLine, endX - startX,
+                ObjectUtils.defaultIfNull(textParam.getOverflow(), params.getOverflow()));
+        for (String text : texts) {
+            //绘制阴影
+            g.setColor(new Color(0, 0, 0, 64));
+            g.drawString(text, startX, startY);
+            //绘制正文
+            g.setColor(ObjectUtils.defaultIfNull(textParam.getColor(), params.getColor()));
+            g.drawString(text, startX, startY);
+            startY += textHeight + spacing;
+        }
+    }
+
+    /**
+     * 分行
+     * @param text
+     * @param fontMetrics
+     * @param maxLine
+     * @param lineWidth
+     * @param overflow
+     * @return
+     */
+    private static List<String> wrap(String text, FontMetrics fontMetrics,
+                                     int maxLine, int lineWidth, String overflow) {
         List<String> texts = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         int wordWidth = 0;
         int line = 0;
-        for (char c : textParam.getText().toCharArray()) {
+        for (char c : text.toCharArray()) {
             int charWidth = fontMetrics.charWidth(c);
             wordWidth += charWidth;
-            if (wordWidth > endX - startX) {
+            if (wordWidth > lineWidth) {
                 if (++line == maxLine) {
-                    String overflow = ObjectUtils.defaultIfNull(textParam.getOverflow(), params.getOverflow());
-                    int ow = fontMetrics.stringWidth(overflow);
-                    int w = 0;
-                    while (w < ow && sb.length() > 0) {
-                        w += fontMetrics.charWidth(sb.charAt(sb.length() - 1));
+                    int overflowWidth = fontMetrics.stringWidth(overflow);
+                    int width = 0;
+                    while (width < overflowWidth && sb.length() > 0) {
+                        width += fontMetrics.charWidth(sb.charAt(sb.length() - 1));
                         sb.deleteCharAt(sb.length() - 1);
                     }
                     sb.append(overflow);
@@ -142,15 +172,20 @@ public class ImgUtils {
         if (sb.length() > 0 && line < maxLine) {
             texts.add(sb.toString());
         }
+        return texts;
+    }
 
-        for (String text : texts) {
-            //绘制阴影
-            g.setColor(new Color(0, 0, 0, 64));
-            g.drawString(text, startX, startY);
-            //绘制正文
-            g.setColor(ObjectUtils.defaultIfNull(textParam.getColor(), params.getTextColor()));
-            g.drawString(text, startX, startY);
-            startY += textHeight + spacing;
+    /**
+     * 绝对位置
+     * @param val
+     * @param limit
+     * @return
+     */
+    private static int fixed(Integer val, int limit) {
+        if (val == null) {
+            //起始位置限制非空，这里直接返回结束位置
+            return limit;
         }
+        return val >= 0 ? val : limit + val;
     }
 }

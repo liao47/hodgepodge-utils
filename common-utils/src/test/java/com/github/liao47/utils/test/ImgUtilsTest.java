@@ -9,8 +9,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author liaoshiqing
@@ -24,34 +22,38 @@ public class ImgUtilsTest {
         params.setExtendHeight(200);
         params.setImgPosition(ImgDrawTextParams.Position.TOP_MID);
         params.setBackground(Color.GRAY);
-        params.setWrap(true);
         params.setOverflow("...");
         params.setMargin(10);
-        params.setFont(new Font("幼圆", Font.PLAIN, 24));
-        List<ImgDrawTextParams.TextParam> list = new ArrayList<>();
-        params.setTextParams(list);
 
         ImgDrawTextParams.TextParam textParam = new ImgDrawTextParams.TextParam();
         textParam.setText("仅代购限制门店使用优惠券，文本有点长，文本有点长，文本有点长，文本有点长，文本有点长，文本有点长，文本有点长");
         textParam.setStartX(100);
         textParam.setStartY(-150);
         textParam.setEndX(-100);
-        list.add(textParam);
+        params.addText(textParam);
 
         textParam = new ImgDrawTextParams.TextParam();
         textParam.setText("第二段文本：在右边显示");
         textParam.setStartX(-100);
         textParam.setStartY(30);
-        list.add(textParam);
+        params.addText(textParam);
 
         textParam = new ImgDrawTextParams.TextParam();
         textParam.setText("第三段文本：在左边显示，这段文本有点长了");
         textParam.setStartX(10);
         textParam.setStartY(30);
         textParam.setEndX(100);
-        textParam.setEndY(300);
-        textParam.setFont(new Font("微软雅黑", Font.PLAIN, 24));
-        list.add(textParam);
+        textParam.setEndY(350);
+        textParam.setFont(new Font("幼圆", Font.PLAIN, 24));
+        params.addText(textParam);
+
+        textParam = new ImgDrawTextParams.TextParam();
+        textParam.setText("第四段文本，不换行，重叠覆盖不讲道理，还特别长，嗯，就是特别长");
+        textParam.setStartX(0);
+        textParam.setStartY(-135);
+        textParam.setWrap(Boolean.FALSE);
+        textParam.setOverflow("");
+        params.addText(textParam);
 
         BufferedImage bufferedImage = ImgUtils.drawTextByUrl("https://test-perfect-oss-uc2.oss-cn-shenzhen.aliyuncs.com/mall-center-member/20221021155751R7hYL.png", params);
         Assert.assertNotNull(bufferedImage);
