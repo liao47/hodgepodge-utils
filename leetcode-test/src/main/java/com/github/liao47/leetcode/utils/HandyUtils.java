@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("swap-adjacent-in-lr-string"));
+        System.out.println(humpTitle("partition-array-into-disjoint-intervals"));
     }
 }

@@ -41,13 +41,23 @@ package com.github.liao47.leetcode;
  * @date 2022/10/20 11:10
  */
 public class P0779KthSymbolInGrammar {
-    public int kthGrammar(int n, int k) {
+    public int kthGrammar1(int n, int k) {
         n = 0;
         k--;
         while (k > 0) {
             if ((k & 1) == 1) {
                 n ^= 1;
             }
+            k >>= 1;
+        }
+        return n;
+    }
+
+    public int kthGrammar(int n, int k) {
+        n = 0;
+        k--;
+        while (k > 0) {
+            n ^= k & 1;
             k >>= 1;
         }
         return n;
