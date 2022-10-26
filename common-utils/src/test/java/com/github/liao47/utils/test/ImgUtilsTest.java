@@ -55,7 +55,7 @@ public class ImgUtilsTest {
         textParam.setOverflow("");
         params.addText(textParam);
 
-        BufferedImage bufferedImage = ImgUtils.drawTextByUrl("https://test-perfect-oss-uc2.oss-cn-shenzhen.aliyuncs.com/mall-center-member/20221021155751R7hYL.png", params);
+        BufferedImage bufferedImage = ImgUtils.drawTextByUrl("https://qrstyle-api.cli.im/create/down?code_tplid=629722344&code_type=3&time=1666747018&publickey=8236a052418a5dccd4a495bb829908a1&cvid=428014408&fkey=1_428014408_171_85_3_629722344_7075da32a5d9c28c80c32d5fb06a8a11.png&file_name=https%253A%252F%252Fgithub.com%252Fliao47%252Fhodgepodge-utils", params);
         Assert.assertNotNull(bufferedImage);
         try (FileOutputStream out = new FileOutputStream("C:\\360极速浏览器X下载\\qrcode.png")) {
             ImageIO.write(bufferedImage, "JPEG", out);

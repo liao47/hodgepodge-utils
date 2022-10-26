@@ -33,8 +33,11 @@ OrderConstants.ASC → {"a", "b", "c", "x", "y"}
 > * EnumPattern 枚举限制校验
 # common-utils
 > 常用工具类
-> * DateUtils
-> * HandyUtils | Handy
+> * DateUtils 日期工具
+> * HandyUtils | Handy 便利工具
+> * Delays 延时任务处理器
+> * EnumUtils 枚举工具
+> * ImgUtils 图片工具
 # extra-utils
 > 外部依赖工具类
 > * FtpUtils
