@@ -22,6 +22,6 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("partition-array-into-disjoint-intervals"));
+        System.out.println(humpTitle("shortest-subarray-with-sum-at-least-k"));
     }
 }
