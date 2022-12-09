@@ -22,7 +22,7 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("check-if-number-is-a-sum-of-powers-of-three"));
+        System.out.println(humpTitle("number-of-different-integers-in-a-string"));
         //bh3Dispatch();
     }
 
