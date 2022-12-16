@@ -1,4 +1,5 @@
 import com.github.liao47.leetcode.P1780CheckIfNumberIsASumOfPowersOfThree;
+import com.github.liao47.leetcode.P1785MinimumElementsToAddToFormAGivenSum;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,5 +16,12 @@ public class LeetCode1780To1789Test {
         Assert.assertFalse(solver.checkPowersOfThree(21));
         Assert.assertFalse(solver.checkPowersOfThree(2));
         Assert.assertTrue(solver.checkPowersOfThree(6574365));
+    }
+
+    @Test
+    public void test1785() {
+        P1785MinimumElementsToAddToFormAGivenSum solver = new P1785MinimumElementsToAddToFormAGivenSum();
+        Assert.assertEquals(2, solver.minElements(new int[]{1, -1, 1}, 3, -4));
+        Assert.assertEquals(1, solver.minElements(new int[]{1, -10, 9, 1}, 100, 0));
     }
 }

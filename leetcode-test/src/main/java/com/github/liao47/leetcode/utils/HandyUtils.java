@@ -22,7 +22,7 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("number-of-different-integers-in-a-string"));
+        System.out.println(humpTitle("minimum-elements-to-add-to-form-a-given-sum"));
         //bh3Dispatch();
     }
 
