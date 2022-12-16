@@ -22,7 +22,7 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("minimum-elements-to-add-to-form-a-given-sum"));
+        System.out.println(humpTitle("checking-existence-of-edge-length-limited-paths"));
         //bh3Dispatch();
     }
 
