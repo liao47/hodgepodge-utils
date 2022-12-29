@@ -22,7 +22,7 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("count-number-of-homogenous-substrings"));
+        System.out.println(humpTitle("largest-merge-of-two-strings"));
         bh3Dispatch();
     }
 
