@@ -16,6 +16,8 @@ public class LeetCode1800To1809Test {
         Assert.assertEquals(7, solver.maxValue(3, 2, 18));
         Assert.assertEquals(1, solver.maxValue(4, 0, 4));
         Assert.assertEquals(271698267, solver.maxValue(3, 0, 815094800));
+        Assert.assertEquals(3, solver.maxValue(4, 2, 8));
+        Assert.assertEquals(2, solver.maxValue(4, 2, 5));
     }
 
     @Test

@@ -35,12 +35,15 @@ package com.github.liao47.leetcode;
  * @date 2023/1/4 10:36
  */
 public class P1802MaximumValueAtAGivenIndexInABoundedArray {
-    public int maxValue1(int n, int index, int maxSum) {
+    public int maxValue(int n, int index, int maxSum) {
         int sum = n;
         int max = 0;
         int interval = 1;
         while (sum <= maxSum) {
             max++;
+            if (interval == n) {
+                return max + (maxSum - sum) / n;
+            }
             sum += interval;
             if (index - max >= 0) {
                 interval++;
@@ -48,17 +51,11 @@ public class P1802MaximumValueAtAGivenIndexInABoundedArray {
             if (index + max < n) {
                 interval++;
             }
-            if (interval == n) {
-                break;
-            }
-        }
-        if (sum < maxSum) {
-            max += (maxSum - sum) / n + 1;
         }
         return max;
     }
 
-    public int maxValue(int n, int index, int maxSum) {
+    public int maxValue2(int n, int index, int maxSum) {
         int left = 1;
         int right = maxSum;
         while (left < right) {
