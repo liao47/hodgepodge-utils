@@ -22,7 +22,7 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("maximum-value-at-a-given-index-in-a-bounded-array"));
+        System.out.println(humpTitle("shortest-path-with-alternating-colors"));
         bh3Dispatch();
     }
 
