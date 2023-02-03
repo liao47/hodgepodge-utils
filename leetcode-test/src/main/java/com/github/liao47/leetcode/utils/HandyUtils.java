@@ -22,7 +22,7 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("shortest-path-with-alternating-colors"));
+        System.out.println(humpTitle("binary-tree-coloring-game"));
         bh3Dispatch();
     }
 
