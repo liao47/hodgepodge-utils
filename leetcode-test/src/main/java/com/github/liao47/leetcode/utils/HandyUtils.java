@@ -22,7 +22,7 @@ public class HandyUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(humpTitle("binary-tree-coloring-game"));
+        System.out.println(humpTitle("maximum-number-of-consecutive-values-you-can-make"));
         bh3Dispatch();
     }
 
