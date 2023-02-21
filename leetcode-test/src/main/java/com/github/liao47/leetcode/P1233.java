@@ -41,13 +41,13 @@ import java.util.*;
  * @date 2023/2/8 10:50
  */
 public class P1233 {
-    public List<String> removeSubfolders1(String[] folder) {
+    public List<String> removeSubfolders(String[] folder) {
         Arrays.sort(folder, Comparator.comparingInt(String::length));
         List<String> res = new ArrayList<>();
         for(String path : folder) {
             boolean valid = true;
             for (String str : res) {
-                if ((path + "/").startsWith(str + "/")) {
+                if (path.startsWith(str + "/")) {
                     valid = false;
                     break;
                 }
@@ -59,7 +59,7 @@ public class P1233 {
         return res;
     }
 
-    public List<String> removeSubfolders(String[] folder) {
+    public List<String> removeSubfolders2(String[] folder) {
         Trie trie = new Trie();
         for (int i = 0; i < folder.length; i++) {
             String[] arr = folder[i].split("/");
@@ -98,6 +98,15 @@ public class P1233 {
         public Trie() {
             end = -1;
             next = new HashMap<>();
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Character> list = Arrays.asList('Q', 'W', 'E', 'R');
+        for (Character c : list) {
+            System.out.println(Integer.toBinaryString(c));
+            int mod = c >> 1 & 3;
+            System.out.println(c + ":" + mod);
         }
     }
 }

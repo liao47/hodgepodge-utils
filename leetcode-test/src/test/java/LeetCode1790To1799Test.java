@@ -1,4 +1,5 @@
 import com.github.liao47.leetcode.P1790CheckIfOneStringSwapCanMakeStringsEqual;
+import com.github.liao47.leetcode.P1792;
 import com.github.liao47.leetcode.P1798MaximumNumberOfConsecutiveValuesYouCanMake;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +17,13 @@ public class LeetCode1790To1799Test {
         Assert.assertTrue(solver.areAlmostEqual("kelb", "kelb"));
         Assert.assertFalse(solver.areAlmostEqual("abcd", "dcba"));
         Assert.assertFalse(solver.areAlmostEqual("aa", "ac"));
+    }
+
+    @Test
+    public void test1792() {
+        P1792 solver = new P1792();
+        Assert.assertEquals(0.78333, solver.maxAverageRatio(new int[][]{{1, 2}, {3, 5}, {2, 2}}, 2), 0.00001);
+        Assert.assertEquals(0.53485, solver.maxAverageRatio(new int[][]{{2, 4}, {3, 9}, {4, 5}, {2, 10}}, 4), 0.00001);
     }
 
     @Test

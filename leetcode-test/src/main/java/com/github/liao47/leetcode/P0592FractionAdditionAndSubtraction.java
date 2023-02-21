@@ -121,22 +121,16 @@ public class P0592FractionAdditionAndSubtraction {
      * @return
      */
     private int gcd(int a, int b) {
-        int remainder = a % b;
-        while (remainder != 0) {
-            a = b;
-            b = remainder;
-            remainder = a % b;
+        if (b == 0) {
+            return a;
         }
-        return b;
+        return gcd(b, a % b);
     }
 
     private long gcd(long a, long b) {
-        long remainder = a % b;
-        while (remainder != 0) {
-            a = b;
-            b = remainder;
-            remainder = a % b;
+        if (b == 0) {
+            return a;
         }
-        return b;
+        return gcd(b, a % b);
     }
 }
