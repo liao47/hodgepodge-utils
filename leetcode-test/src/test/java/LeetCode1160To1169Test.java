@@ -1,4 +1,5 @@
 import com.github.liao47.leetcode.P1161MaximumLevelSumOfABinaryTree;
+import com.github.liao47.leetcode.P1163;
 import com.github.liao47.leetcode.bo.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,5 +76,14 @@ public class LeetCode1160To1169Test {
                 -62563, null, null, null, null, null, null, -46526, 96077, 84181, -37361, 4445, -59048, 68030, null,
                 null, null, null, 65756, null, null, null, null, null, null, null, null, null, 94498, null, -75496, -39578, null, null, null, null, -19322, null, null, 3232, -94333, null, null, null, null, null, null, -45480, null, null, null, null, 8817, 85150, -13311, null, null, null, null, null, null, null, null, null, -94698, null, -39088, -22305, null, -16576, null, null, null, null, null, null, null, null, 697, 2767, null, 70129, -38771, null, 16543, null, null, -67679, null, null, null, null, null, 32869, 16545, null, -84230, null, -99934, null, -50068, null, null, null, 49893, null, null, null, null, null, null, null, null, null, null, -93013, null, null, null, -22006, null, -19965, 1618, null, null, 16424, null, null, 56923, -35000, null, null, 65704, null, null, null, null, null, null, null, -62806, null, null, null, null, -83506, null, null, null, null, null, 20820, 60564, -70903, null, null, null, 65692, null, null, 19398, null, null, null, null, null, -77650, null, null, -25440, 5752, null, -89520, -77808, 77780, 21224, null, null, null, null, null, null, null, null, 70932});
         Assert.assertEquals(9, solver.maxLevelSum(root));
+    }
+
+    @Test
+    public void test1163() {
+        P1163 solver = new P1163();
+        Assert.assertEquals("bab", solver.lastSubstring("abab"));
+        Assert.assertEquals("tcode", solver.lastSubstring("leetcode"));
+        Assert.assertEquals("xxbx", solver.lastSubstring("xxbbxxbx"));
+        Assert.assertEquals("caacaacaa", solver.lastSubstring("caacaacaa"));
     }
 }
