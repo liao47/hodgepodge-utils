@@ -13,20 +13,21 @@ import org.junit.Test;
 public class EnumUtilsTest {
     @Test
     public void test() {
-        Assert.assertEquals(TaskState.DRAFT, EnumUtils.getEnum(TaskState.class, TaskState::getCode, (byte) 0));
-        Assert.assertTrue(EnumUtils.in(TaskState::getCode, (byte) 0, TaskState.DRAFT, TaskState.DISABLE));
-        Assert.assertFalse(EnumUtils.in(TaskState::getCode, (byte) 0, TaskState.ENABLE, TaskState.DISABLE));
-        Assert.assertTrue(EnumUtils.notIn(TaskState::getCode, (byte) 0, TaskState.ENABLE, TaskState.DISABLE));
+        byte code = 0;
+        Assert.assertEquals(TaskState.DRAFT, EnumUtils.get(code, TaskState::getCode, TaskState.class));
+        Assert.assertTrue(EnumUtils.in(code, TaskState::getCode, TaskState.DRAFT, TaskState.DISABLE));
+        Assert.assertFalse(EnumUtils.in(code, TaskState::getCode, TaskState.ENABLE, TaskState.DISABLE));
+        Assert.assertTrue(EnumUtils.notIn(code, TaskState::getCode, TaskState.ENABLE, TaskState.DISABLE));
 
-        Assert.assertEquals(TaskState.DRAFT, EnumUtils.getEnumByCode(TaskState.class, (byte) 0));
-        Assert.assertTrue(EnumUtils.in((byte) 0, TaskState.DRAFT, TaskState.DISABLE));
-        Assert.assertFalse(EnumUtils.in((byte) 0, TaskState.ENABLE, TaskState.DISABLE));
-        Assert.assertTrue(EnumUtils.notIn((byte) 0, TaskState.ENABLE, TaskState.DISABLE));
+        Assert.assertEquals(TaskState.DRAFT, EnumUtils.getByCode(code, TaskState.class));
+        Assert.assertTrue(EnumUtils.codeIn((byte) 0, TaskState.DRAFT, TaskState.DISABLE));
+        Assert.assertFalse(EnumUtils.codeIn((byte) 0, TaskState.ENABLE, TaskState.DISABLE));
+        Assert.assertTrue(EnumUtils.codeNotIn((byte) 0, TaskState.ENABLE, TaskState.DISABLE));
 
-        Assert.assertFalse(EnumUtils.in(TaskState::getCode, TaskState.DRAFT, TaskState.DISABLE, TaskState.ENABLE));
-        Assert.assertFalse(EnumUtils.in(TaskState::getCode, TaskState.DRAFT));
-        Assert.assertTrue(EnumUtils.in((byte) 0, TaskState.DRAFT));
-        Assert.assertNull(EnumUtils.getEnumByCode(TaskState.class, (byte) -1));
-        Assert.assertThrows(CustomException.class, () -> EnumUtils.getEnumByCode(TaskState.class, (byte) -1, "状态值有误"));
+        Assert.assertFalse(EnumUtils.in(TaskState.DRAFT, TaskState::getCode, TaskState.DISABLE, TaskState.ENABLE));
+        Assert.assertFalse(EnumUtils.in(TaskState.DRAFT, TaskState::getCode));
+        Assert.assertTrue(EnumUtils.codeIn((byte) 0, TaskState.DRAFT));
+        Assert.assertNull(EnumUtils.getByCode((byte) -1, TaskState.class));
+        Assert.assertThrows(CustomException.class, () -> EnumUtils.getByCode((byte) -1, TaskState.class, "状态值有误"));
     }
 }

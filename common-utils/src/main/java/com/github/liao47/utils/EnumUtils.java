@@ -20,16 +20,16 @@ import java.util.function.Function;
 public class EnumUtils {
     /**
      * 通过字段值获取枚举
-     * @param enumClass
-     * @param valueMapper
      * @param val
+     * @param valueMapper
+     * @param enumClass
      * @param <E>
      * @param <R>
      * @return
      */
-    public static <E extends Enum<E>, R> E getEnum(Class<E> enumClass, Function<E, R> valueMapper, R val) {
+    public static <E extends Enum<E>, R> E get(R val, Function<E, R> valueMapper, Class<E> enumClass) {
         if (valueMapper == null) {
-            return getEnumByCode(enumClass, val);
+            return getByCode(val, enumClass);
         }
         for (E e : enumClass.getEnumConstants()) {
             if (Objects.equals(val, valueMapper.apply(e))) {
@@ -49,9 +49,9 @@ public class EnumUtils {
      * @param <R>
      * @return
      */
-    public static <E extends Enum<E>, R> E getEnum(Class<E> enumClass, Function<E, R> valueMapper, R val,
-                                                   String nonExistentMsg) {
-        E e = getEnum(enumClass, valueMapper, val);
+    public static <E extends Enum<E>, R> E get(R val, Function<E, R> valueMapper, Class<E> enumClass,
+                                               String nonExistentMsg) {
+        E e = get(val, valueMapper, enumClass);
         if (e == null) {
             throw new CustomException(StringUtils.defaultIfEmpty(nonExistentMsg, "枚举值有误"));
         }
@@ -65,7 +65,7 @@ public class EnumUtils {
      * @param <E>
      * @return
      */
-    public static <E extends Enum<E>> E getEnumByCode(Class<E> enumClass, Object val) {
+    public static <E extends Enum<E>> E getByCode(Object val, Class<E> enumClass) {
         try {
             Method method = enumClass.getMethod("getCode");
             for (E e : enumClass.getEnumConstants()) {
@@ -90,8 +90,8 @@ public class EnumUtils {
      * @param <E>
      * @return
      */
-    public static <E extends Enum<E>> E getEnumByCode(Class<E> enumClass, Object val, String nonExistentMsg) {
-        return getEnum(enumClass, null, val, nonExistentMsg);
+    public static <E extends Enum<E>> E getByCode(Object val, Class<E> enumClass, String nonExistentMsg) {
+        return get(val, null, enumClass, nonExistentMsg);
     }
 
     /**
@@ -103,11 +103,11 @@ public class EnumUtils {
      * @param <R>
      * @return
      */
-    public static <E extends Enum<E>, R> boolean in(Function<E, R> valueMapper, R val, E... enums) {
+    public static <E extends Enum<E>, R> boolean in(R val, Function<E, R> valueMapper, E... enums) {
         if (enums == null || enums.length == 0) {
             return false;
         }
-        E v = getEnum(enums[0].getDeclaringClass(), valueMapper, val);
+        E v = get(val, valueMapper, enums[0].getDeclaringClass());
         if (v == null) {
             return false;
         }
@@ -128,8 +128,8 @@ public class EnumUtils {
      * @param <R>
      * @return
      */
-    public static <E extends Enum<E>, R> boolean notIn(Function<E, R> valueMapper, R val, E... enums) {
-        return !in(valueMapper, val, enums);
+    public static <E extends Enum<E>, R> boolean notIn(R val, Function<E, R> valueMapper, E... enums) {
+        return !in(val, valueMapper, enums);
     }
 
     /**
@@ -139,8 +139,8 @@ public class EnumUtils {
      * @param <E>
      * @return
      */
-    public static <E extends Enum<E>> boolean in(Object val, E... enums) {
-        return in(null, val, enums);
+    public static <E extends Enum<E>> boolean codeIn(Object val, E... enums) {
+        return in(val, null, enums);
     }
 
     /**
@@ -150,7 +150,7 @@ public class EnumUtils {
      * @param <E>
      * @return
      */
-    public static <E extends Enum<E>> boolean notIn(Object val, E... enums) {
-        return !in(val, enums);
+    public static <E extends Enum<E>> boolean codeNotIn(Object val, E... enums) {
+        return !codeIn(val, enums);
     }
 }
