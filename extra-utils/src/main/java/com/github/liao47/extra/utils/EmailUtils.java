@@ -89,6 +89,33 @@ public class EmailUtils {
 	}
 
 	/**
+	 * 添加收件人
+	 * @param recipientArr
+	 * @return
+	 */
+	public EmailUtils to(String... recipientArr) {
+		return addRecipients(Message.RecipientType.TO, recipientArr);
+	}
+
+	/**
+	 * 添加抄送人
+	 * @param recipientArr
+	 * @return
+	 */
+	public EmailUtils cc(String... recipientArr) {
+		return addRecipients(Message.RecipientType.CC, recipientArr);
+	}
+
+	/**
+	 * 添加密送人
+	 * @param recipientArr
+	 * @return
+	 */
+	public EmailUtils bcc(String... recipientArr) {
+		return addRecipients(Message.RecipientType.BCC, recipientArr);
+	}
+
+	/**
 	 * 发送邮件
 	 * @param title
 	 * @param content
