@@ -1,14 +1,14 @@
 package com.github.liao47.validator.able;
 
 /**
- * 枚举限制校验能力
+ * 枚举值校验能力
  * @author liao47
  * @date 2020/10/27 15:11
  */
-public interface EnumPatternAble {
+public interface EnumValueAble {
     /**
      * 校验值
      * @return
      */
-    String getPatternValue();
+    String getEnumValue();
 }

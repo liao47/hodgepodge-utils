@@ -1,7 +1,7 @@
 package com.github.liao47.validator.annotation;
 
 
-import com.github.liao47.validator.EnumPatternValidator;
+import com.github.liao47.validator.EnumValueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,15 +13,15 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * 枚举限制校验
+ * 枚举值校验
  * @author liao47
  * @date 2020/10/27 15:12
  */
 @Documented
-@Constraint(validatedBy = {EnumPatternValidator.class})
+@Constraint(validatedBy = {EnumValueValidator.class})
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
-public @interface EnumPattern {
+public @interface EnumValue {
 
     /**
      * 枚举类
@@ -33,7 +33,7 @@ public @interface EnumPattern {
      * 校验的枚举字段名称<br>
      * 支持多级成员变量名称：person.name
      * 如为空：
-     *     枚举实现了com.github.liao47.able.EnumPatternAble接口，取值getPatternValue()，
+     *     枚举实现了EnumValueAble接口，取值getEnumValue()，
      *     否则取值name()
      * @return
      */

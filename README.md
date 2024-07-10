@@ -30,7 +30,7 @@ OrderConstants.ASC → {"a", "b", "c", "x", "y"}
 # custom-validator
 > 自定义验证器
 > * BytesLength 字节长度校验
-> * EnumPattern 枚举限制校验
+> * EnumValue 枚举值校验
 # common-utils
 > 常用工具类
 > * DateUtils 日期工具
